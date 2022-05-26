@@ -1,0 +1,56 @@
+.sidenav {
+  margin-top: 50px;
+  height: 100%;
+  width: 200px;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  overflow-x: hidden;
+  border-right: 1px solid #0000001a;
+  transition: 0.2s ease;
+}
+
+.sidenav a {
+  text-decoration: none;
+  color: #333333;
+  font-size: 14px;
+  background: linear-gradient(to left, #ffffff 50%, #E4EAEE 50%) right;
+  background-size: 200%;
+  transition: 0.2s ease;
+  padding: 10px 0;
+}
+
+.sidenavExpand {
+  position: relative;
+  display: flex;
+  align-items: center;
+  height: 50px;
+  text-transform: uppercase;
+}
+
+.sidenav a:hover, a:active, a.active {
+  color: #333333;
+  background-position: left;
+}
+
+.sideNavigationUl {
+  list-style: none;
+  padding: 0;
+}
+
+.divider {
+  letter-spacing: 1px;
+  color: #999999;
+  font-size: 12px;
+  padding-left: 1.7rem;
+}
+
+.linkImg {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 32px;
+  height: 32px;
+  margin: 0 17px 0 22px;
+}
