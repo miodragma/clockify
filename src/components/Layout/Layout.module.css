@@ -1,0 +1,6 @@
+.layoutMain {
+  margin-left: 200px;
+  transition: 0.2s ease;
+  min-height: 100vh;
+  background: #f2f6f8;
+}

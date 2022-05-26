@@ -1,0 +1,41 @@
+.navbar {
+  height: 49px;
+  border-bottom: 1px solid #0000001a;
+}
+
+.menuButton {
+  padding: 0 0.7143rem;
+  border: none;
+  background: #ffffff;
+}
+
+.menuButton .menuIcon {
+  background-image: url("data:image/svg+xml,%3csvg viewBox='0 0 30 30' xmlns='http://www.w3.org/2000/svg'%3e%3cpath stroke='%23333333' stroke-width='2' stroke-linecap='butt' stroke-miterlimit='10' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+}
+
+.menuIcon {
+  display: inline-block;
+  width: 27px;
+  height: 27px;
+  vertical-align: middle;
+  content: "";
+  background: no-repeat center center;
+  background-size: 100% 100%;
+}
+
+.logoWrapper {
+  width: 95px;
+  margin-left: 10px;
+  margin-top: 2px;
+}
+
+.logoWrapper img {
+  width: 100%;
+}
+
+.navbarLeftWrapper {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
