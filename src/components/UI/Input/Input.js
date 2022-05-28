@@ -1,20 +1,19 @@
-import { Fragment, useEffect, useState } from 'react';
+import { Fragment, useEffect, useRef, useState } from 'react';
 import { Form } from 'react-bootstrap';
 import PropTypes from 'prop-types';
 
 import classes from './Input.module.css';
 
-let isInitial = true;
-
 const Input = props => {
 
+  const isMounted = useRef(true);
   const [inputVal, setInputVal] = useState('');
 
   const {label, type, placeholder, currentValue, onChangeInputVal, className, isDebounce} = props;
 
   useEffect(() => {
-    if (isInitial) {
-      isInitial = false;
+    if (isMounted.current) {
+      isMounted.current = false;
       if (currentValue) {
         setInputVal(currentValue);
       }
@@ -44,8 +43,12 @@ const Input = props => {
   return (
     <Fragment>
       {label && <Form.Label>{label}</Form.Label>}
-      <Form.Control className={`${classes.input} ${className || ''}`} value={inputVal}
-                    onChange={onChangeInputValHandler} type={type} placeholder={placeholder}/>
+      <Form.Control
+        className={`${classes.input} ${className || ''}`}
+        value={inputVal}
+        onChange={onChangeInputValHandler}
+        type={type}
+        placeholder={placeholder}/>
     </Fragment>
   )
 }
