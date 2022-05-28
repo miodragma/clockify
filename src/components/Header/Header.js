@@ -6,7 +6,7 @@ import classes from './Header.module.css';
 const Header = () => {
 
   return (
-    <Navbar expand="lg" className={classes.navbar}>
+    <Navbar expand="lg" className={classes.navbar} fixed="top">
       <Container fluid>
         <div className={classes.navbarLeftWrapper}>
           <button className={classes.menuButton}><span className={classes.menuIcon}/></button>

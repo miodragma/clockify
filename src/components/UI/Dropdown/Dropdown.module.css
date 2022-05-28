@@ -1,0 +1,8 @@
+.select {
+  min-width: 140px;
+  max-width: 250px;
+  cursor: pointer;
+  padding: 8px 10px;
+  font-size: 14px;
+  color: #666666;
+}
