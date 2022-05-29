@@ -27,14 +27,20 @@ code {
 /*"tab-color": #666666,*/
 /*"tab-background": #E4EAEE*/
 
+* {
+  font-family: 'Roboto', sans-serif;
+}
+
 .primary {
   background-color: #03A9F4 !important;
   color: #ffffff !important;
   border-color: #03A9F4 !important;
 }
 
-* {
-  font-family: 'Roboto', sans-serif;
+.secondary {
+  background-color: #03A9F4 !important;
+  color: #ffffff !important;
+  border-color: #03A9F4 !important;
 }
 
 h1 {

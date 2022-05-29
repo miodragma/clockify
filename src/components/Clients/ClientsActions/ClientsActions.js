@@ -1,44 +1,49 @@
-import { useCallback, useState } from 'react';
-import { Button } from 'react-bootstrap';
-import axios from '../../../axios/axiosConfig';
+import { useCallback, useRef, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 
-import Dropdown from '../../UI/Dropdown/Dropdown';
+import { Button } from 'react-bootstrap';
+
+import DropdownMenu from '../../UI/DropdownMenu/DropdownMenu';
 import Input from '../../UI/Input/Input';
 
 import classes from './ClientsActions.module.css';
 
-import { optionsData } from './OptionsData/OptionsData';
+import { dropdownData } from './DropdownData/DropdownData';
+import { addNewClient, fetchClientsData } from '../store/clients-actions';
 
 const ClientsActions = () => {
 
-  const [newClientVal, setNewClientVal] = useState();
+  const [newClientVal, setNewClientVal] = useState('');
+  const archivedVal = useRef('');
+  const nameVal = useRef('');
 
-  const onShowByHandler = useCallback(val => {
-    console.log(val)
-  }, []);
+  const dispatch = useDispatch();
+  const {activeWorkspace} = useSelector(state => state.user.user);
 
-  const onSearchByNameHandler = useCallback(val => {
-    console.log(val)
-  }, []);
+  const onShowByHandler = useCallback(archived => {
+    archivedVal.current = archived;
+    dispatch(fetchClientsData({workspaceId: activeWorkspace, archived, name: nameVal.current}))
+  }, [dispatch, activeWorkspace]);
+
+  const onSearchByNameHandler = useCallback(name => {
+    nameVal.current = name;
+    dispatch(fetchClientsData({workspaceId: activeWorkspace, archived: archivedVal.current, name}));
+  }, [dispatch, activeWorkspace]);
 
   const onAddNewClientHandler = useCallback(val => {
     setNewClientVal(val)
   }, []);
 
   const onClickAddHandler = () => {
-
-    axios.get('/workspaces/628bef2bd1a377427e49b939/user')
-      .then(res => console.log(res))
-      .catch(err => console.log(err))
+    dispatch(addNewClient({workspaceId: activeWorkspace, name: newClientVal}))
   };
 
   return (
     <section className={classes.section}>
 
       <div className={classes.partSection}>
-        <Dropdown
-          className={classes.dropdownSelect}
-          optionsData={optionsData}
+        <DropdownMenu
+          dropdownMenuData={dropdownData}
           onChangeSelectVal={onShowByHandler}/>
         <Input
           className={classes.inputFiled}
@@ -51,7 +56,8 @@ const ClientsActions = () => {
       <div className={classes.partSection}>
         <Input
           className={classes.inputFiled}
-          isDebounce={false} type='text'
+          isDebounce={false}
+          type='text'
           placeholder='Add new client'
           onChangeInputVal={onAddNewClientHandler}/>
         <Button

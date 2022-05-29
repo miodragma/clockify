@@ -7,7 +7,7 @@ const instance = axios.create({
 instance.defaults.headers.common['X-Api-Key'] = 'OGI1NjAxMjktN2UwZi00NzYwLTg0ODktN2IzNWQ0NDI4M2Vi';
 
 instance.interceptors.request.use(request => {
-  console.log(request);
+  // console.log(request);
   // Edit request config
   return request;
 }, error => {
@@ -16,7 +16,7 @@ instance.interceptors.request.use(request => {
 });
 
 instance.interceptors.response.use(response => {
-  console.log(response);
+  // console.log(response);
   // Edit response config
   return response;
 }, error => {
