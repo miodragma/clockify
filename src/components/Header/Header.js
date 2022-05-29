@@ -2,8 +2,12 @@ import { Container, Navbar } from 'react-bootstrap';
 import logo from '../../assets/logo.png';
 
 import classes from './Header.module.css';
+import Loader from '../UI/Loader/Loader';
+import { useSelector } from 'react-redux';
 
 const Header = () => {
+
+  const isLoader = useSelector(state => state.loader.isLoader);
 
   return (
     <Navbar expand="lg" className={classes.navbar} fixed="top">
@@ -15,6 +19,7 @@ const Header = () => {
           </div>
         </div>
       </Container>
+      {isLoader && <Loader/>}
     </Navbar>
   )
 }

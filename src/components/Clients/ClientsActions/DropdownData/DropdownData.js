@@ -1,4 +1,4 @@
-export const optionsData = [
+export const dropdownData = [
   {
     label: 'Show active',
     value: false
