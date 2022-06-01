@@ -19,6 +19,7 @@
 .colItem div {
   width: 100%;
   padding: 10px;
+  height: 41px;
 }
 
 .border {
@@ -30,6 +31,7 @@
 
 .colItem div p {
   margin: 0;
+  font-size: 14px;
 }
 
 .colActionButtonsWrapper {
@@ -41,10 +43,11 @@
 }
 
 .actionButton {
+  position: relative;
   display: flex;
   align-items: center;
   width: 100%;
-  max-width: 70px;
+  max-width: 60px;
   justify-content: center;
   height: 80%;
 }
@@ -56,4 +59,28 @@
 
 .archivedItem {
   text-decoration: line-through;
+}
+
+.actionsList {
+  padding: 7px 0;
+  z-index: 10;
+  box-shadow: 0 5px 10px #0000001a;
+  border-radius: 2px;
+  position: absolute;
+  top: 40px;
+  background: #ffffff;
+  min-width: 140px;
+  right: 0;
+}
+
+.actionButton p {
+  padding: 10px 20px;
+  font-size: 14px;
+  color: #666666;
+  margin: 0;
+  cursor: pointer;
+}
+
+.actionButton p:hover {
+  background-color: #e4eaee
 }

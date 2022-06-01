@@ -1,8 +1,8 @@
+import { useEffect, useRef, useState } from 'react';
 import { Dropdown, DropdownButton } from 'react-bootstrap';
 import PropTypes from 'prop-types';
 
 import classes from './DropdownMenu.module.css';
-import { useEffect, useRef, useState } from 'react';
 
 const DropdownMenu = props => {
 
@@ -38,7 +38,10 @@ const DropdownMenu = props => {
 
   return (
     <DropdownButton className={classes.dropdownButton} title={activeFilterName}>
-      {options}
+      <div className={classes.optionsWrapper}>
+        {options}
+      </div>
+      {/*{options}*/}
     </DropdownButton>
   )
 };

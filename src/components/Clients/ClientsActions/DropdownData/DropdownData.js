@@ -9,6 +9,6 @@ export const dropdownData = [
   },
   {
     label: 'Show all',
-    value: ''
+    value: 'empty'
   }
 ];
