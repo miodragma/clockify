@@ -3,7 +3,7 @@ import MainCard from '../../components/UI/MainCard/MainCard';
 const Tracker = () => {
   return (
     <MainCard>
-      <h1>Time Tracker</h1>
+      <h1 className='pageTitle'>Time Tracker</h1>
     </MainCard>
   )
 }

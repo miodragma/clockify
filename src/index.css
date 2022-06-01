@@ -45,9 +45,10 @@ code {
   min-width: 100px;
 }
 
-h1 {
-  font-size: 28px !important;
+.pageTitle {
+  font-size: 24px;
   color: #666666;
+  font-weight: 400;
 }
 
 textarea:hover,

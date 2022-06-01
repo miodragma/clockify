@@ -13,13 +13,20 @@ import { deleteClient, updateClient } from '../store/clients-actions';
 
 import { Form } from 'react-bootstrap';
 
+const initialState = {
+  name: '',
+  address: '',
+  note: '',
+  id: ''
+}
+
 const ClientsList = () => {
 
   const filterClients = useSelector(state => state.clients.filterClients);
   const {activeWorkspace} = useSelector(state => state.user.user);
 
   const [showEditModal, setShowEditModal] = useState(false);
-  const [editClientData, setEditClientData] = useState({});
+  const [editClientData, setEditClientData] = useState(initialState);
 
   const [showActionModal, setShowActionModal] = useState(false);
   const [actionModalTitle, setActionModalTitle] = useState('');
@@ -31,8 +38,12 @@ const ClientsList = () => {
   const dispatch = useDispatch();
 
   const onClickEditHandler = useCallback(client => {
+    const newClient = {...client};
+    Object.keys(newClient).forEach(
+      (key) => (newClient[key] === null) ? newClient[key] = '' : newClient[key]
+    );
+    setEditClientData(newClient);
     setShowEditModal(true);
-    setEditClientData(client);
   }, [])
 
   const clients = filterClients.map(client => {
@@ -50,6 +61,7 @@ const ClientsList = () => {
 
   const onHideEditModalHandler = () => {
     setShowEditModal(false);
+    setEditClientData(initialState);
   };
 
   const onClientItemActionHandler = useCallback((action, client) => {

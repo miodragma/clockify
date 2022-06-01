@@ -13,7 +13,7 @@ const ClientEdit = props => {
   const isMounted = useRef(true);
 
   const [inputClientName, setInputClientName] = useState('');
-  const [inputClientAddress, setInputClientAddress] = useState(' ');
+  const [inputClientAddress, setInputClientAddress] = useState('');
   const [inputClientNote, setInputClientNote] = useState('');
   const [isDisabledButton, setIsDisabledButton] = useState(false);
 
@@ -36,15 +36,15 @@ const ClientEdit = props => {
   }, [name, inputClientName, inputClientAddress, address, inputClientNote, note])
 
   const onChangeClientNameHandler = useCallback(clientName => {
-    clientName !== undefined && setInputClientName(clientName)
+    setInputClientName(clientName)
   }, []);
 
   const onChangeClientAddressHandler = useCallback(clientAddress => {
-    clientAddress !== undefined && setInputClientAddress(clientAddress);
+    setInputClientAddress(clientAddress);
   }, []);
 
   const onChangeClientNoteHandler = useCallback(clientNote => {
-    clientNote !== undefined && setInputClientNote(clientNote);
+    setInputClientNote(clientNote);
   }, []);
 
   const onSubmitFormHandler = () => {

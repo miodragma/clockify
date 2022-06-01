@@ -30,7 +30,7 @@ const Clients = () => {
     <MainCard>
       <Row className={classes.titleRow}>
         <Col>
-          <h1>Clients</h1>
+          <h1 className='pageTitle'>Clients</h1>
         </Col>
       </Row>
       <ClientsActions/>

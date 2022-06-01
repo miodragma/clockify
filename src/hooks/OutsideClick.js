@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 
-const useOutsideClick = (props) => {
+const useOutsideClick = props => {
 
   const {actionsRef: ref, onCloseActions} = props;
 

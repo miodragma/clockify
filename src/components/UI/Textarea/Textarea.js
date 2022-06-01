@@ -9,7 +9,7 @@ const Textarea = props => {
   const {label, className, currentValue, placeholder, onChangeTextareaVal} = props;
   const isMounted = useRef(true);
 
-  const [textareaValue, setTextareaValue] = useState();
+  const [textareaValue, setTextareaValue] = useState('');
 
   useEffect(() => {
     if (isMounted.current) {
