@@ -14,7 +14,8 @@ import { addNewClient, fetchClientsData } from '../store/clients-actions';
 const ClientsActions = () => {
 
   const [newClientVal, setNewClientVal] = useState('');
-  const archivedVal = useRef('');
+  const [isNewAdded, setIsNewAdded] = useState(false);
+  const archivedVal = useRef(false);
   const nameVal = useRef('');
 
   const dispatch = useDispatch();
@@ -35,8 +36,13 @@ const ClientsActions = () => {
   }, []);
 
   const onClickAddHandler = () => {
-    dispatch(addNewClient({workspaceId: activeWorkspace, name: newClientVal}))
+    dispatch(addNewClient({workspaceId: activeWorkspace, name: newClientVal}));
+    setIsNewAdded(true);
   };
+
+  const inputValIsEmptyHandler = useCallback(() => {
+    setIsNewAdded(false)
+  }, [])
 
   return (
     <section className={classes.section}>
@@ -57,9 +63,11 @@ const ClientsActions = () => {
         <Input
           className={classes.inputFiled}
           isDebounce={false}
+          isNewAdded={isNewAdded}
           type='text'
           placeholder='Add new client'
-          onChangeInputVal={onAddNewClientHandler}/>
+          onChangeInputVal={onAddNewClientHandler}
+          inputValIsEmpty={inputValIsEmptyHandler}/>
         <Button
           onClick={onClickAddHandler}
           className={`${classes.addButton} primary`}

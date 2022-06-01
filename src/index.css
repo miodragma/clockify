@@ -35,12 +35,14 @@ code {
   background-color: #03A9F4 !important;
   color: #ffffff !important;
   border-color: #03A9F4 !important;
+  min-width: 100px;
 }
 
-.secondary {
-  background-color: #03A9F4 !important;
+.warning {
+  background-color: #f22112 !important;
   color: #ffffff !important;
-  border-color: #03A9F4 !important;
+  border-color: #ea1c0d !important;
+  min-width: 100px;
 }
 
 h1 {
@@ -66,4 +68,8 @@ label:focus,
   outline: 0px !important;
   -webkit-appearance: none;
   box-shadow: none !important;
+}
+
+input:focus, textarea:focus, select:focus {
+  border: 1px solid #90A4AE !important;
 }

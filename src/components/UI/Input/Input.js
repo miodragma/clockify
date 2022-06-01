@@ -9,7 +9,18 @@ const Input = props => {
   const isMounted = useRef(true);
   const [inputVal, setInputVal] = useState('');
 
-  const {label, type, placeholder, currentValue, onChangeInputVal, className, isDebounce} = props;
+  const {
+    label,
+    type,
+    placeholder,
+    currentValue,
+    onChangeInputVal,
+    className,
+    isDebounce,
+    isNewAdded,
+    inputValIsEmpty,
+    autofocus
+  } = props;
 
   useEffect(() => {
     if (isMounted.current) {
@@ -20,20 +31,25 @@ const Input = props => {
       return;
     }
 
+    if (isNewAdded) {
+      setInputVal('');
+      inputValIsEmpty()
+    }
+
     if (isDebounce) {
       const timer = setTimeout(() => {
         onChangeInputVal(inputVal)
       }, 300);
 
       return () => {
-        console.log('CLEAR')
         clearTimeout(timer);
       }
     } else {
       onChangeInputVal(inputVal)
     }
 
-  }, [currentValue, inputVal, isDebounce, onChangeInputVal])
+  }, [currentValue, inputVal, isDebounce, onChangeInputVal, isNewAdded, inputValIsEmpty])
+
 
   const onChangeInputValHandler = e => {
     const val = e.target.value;
@@ -42,13 +58,16 @@ const Input = props => {
 
   return (
     <Fragment>
-      {label && <Form.Label>{label}</Form.Label>}
-      <Form.Control
-        className={`${classes.input} ${className || ''}`}
-        value={inputVal}
-        onChange={onChangeInputValHandler}
-        type={type}
-        placeholder={placeholder}/>
+      <Form.Group>
+        {label && <Form.Label className={classes.label}>{label}</Form.Label>}
+        <Form.Control
+          autoFocus={autofocus}
+          className={`${classes.input} ${className || ''}`}
+          value={inputVal}
+          onChange={onChangeInputValHandler}
+          type={type}
+          placeholder={placeholder}/>
+      </Form.Group>
     </Fragment>
   )
 }

@@ -1,0 +1,31 @@
+.formField {
+  max-width: 100% !important;
+  margin-bottom: 10px;
+}
+
+
+.modalContent {
+  width: 500px;
+  margin: auto;
+}
+
+.modalTitle {
+  color: #666666;
+}
+
+.cancelButton {
+  color: #03a9f4;
+  text-decoration: none;
+  margin-right: 20px;
+  font-size: 14px;
+  transition: 0.2s ease;
+}
+
+.cancelButton:hover {
+  text-decoration: underline;
+  color: #0a58ca;
+}
+
+.submitButton {
+  text-transform: uppercase;
+}
