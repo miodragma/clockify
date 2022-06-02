@@ -3,12 +3,13 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import Actions from '../../Utils/Actions/Actions';
 
+import { addNewTag, fetchTagsData } from '../store/tags-actions';
+
 import { dropdownData } from './DropdownData/DropdownData';
-import { addNewClient, fetchClientsData } from '../store/clients-actions';
 
-const ClientsActions = () => {
+const TagsActions = () => {
 
-  const [newClientVal, setNewClientVal] = useState('');
+  const [newTagVal, setNewTagVal] = useState('');
   const [isNewAdded, setIsNewAdded] = useState(false);
   const archivedVal = useRef(false);
   const nameVal = useRef('');
@@ -18,20 +19,20 @@ const ClientsActions = () => {
 
   const onShowByHandler = useCallback(archived => {
     archivedVal.current = archived;
-    dispatch(fetchClientsData({workspaceId: activeWorkspace, archived, name: nameVal.current}))
+    dispatch(fetchTagsData({workspaceId: activeWorkspace, archived, name: nameVal.current}))
   }, [dispatch, activeWorkspace]);
 
   const onSearchByNameHandler = useCallback(name => {
     nameVal.current = name;
-    dispatch(fetchClientsData({workspaceId: activeWorkspace, archived: archivedVal.current, name}));
+    dispatch(fetchTagsData({workspaceId: activeWorkspace, archived: archivedVal.current, name}));
   }, [dispatch, activeWorkspace]);
 
-  const onAddNewClientHandler = useCallback(val => {
-    setNewClientVal(val)
+  const onAddNewTagHandler = useCallback(val => {
+    setNewTagVal(val)
   }, []);
 
   const onClickAddHandler = () => {
-    dispatch(addNewClient({workspaceId: activeWorkspace, name: newClientVal}));
+    dispatch(addNewTag({workspaceId: activeWorkspace, name: newTagVal}));
     setIsNewAdded(true);
   };
 
@@ -41,17 +42,17 @@ const ClientsActions = () => {
 
   return (
     <Actions
-      addNewLabel='Add new client'
+      addNewLabel='Add new tag'
       dropdownData={dropdownData}
       onShowBy={onShowByHandler}
       onSearchByName={onSearchByNameHandler}
       isNewAdded={isNewAdded}
-      onAddNew={onAddNewClientHandler}
+      onAddNew={onAddNewTagHandler}
       inputValIsEmpty={inputValIsEmptyHandler}
       onClickAdd={onClickAddHandler}
-      isNewVal={newClientVal}
+      isNewVal={newTagVal}
     />
   )
-};
+}
 
-export default ClientsActions;
+export default TagsActions;

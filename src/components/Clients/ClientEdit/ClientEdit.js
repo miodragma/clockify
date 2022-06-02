@@ -2,9 +2,9 @@ import { useCallback, useEffect, useRef, useState } from 'react';
 
 import { Form } from 'react-bootstrap';
 
-import Input from '../UI/Input/Input';
-import Textarea from '../UI/Textarea/Textarea';
-import ModalWrapper from '../UI/ModalWrapper/ModalWrapper';
+import Input from '../../UI/Input/Input';
+import Textarea from '../../UI/Textarea/Textarea';
+import ModalWrapper from '../../UI/ModalWrapper/ModalWrapper';
 
 import classes from './ClientEdit.module.css';
 
@@ -18,7 +18,7 @@ const ClientEdit = props => {
   const [isDisabledButton, setIsDisabledButton] = useState(false);
 
   const {client, submitEditClient, show, onHide} = props;
-  const {name, address, note, id} = client;
+  const {name, address, note, id, archived} = client;
 
   useEffect(() => {
     if (isMounted.current) {
@@ -52,7 +52,7 @@ const ClientEdit = props => {
       address: inputClientAddress,
       name: inputClientName,
       note: inputClientNote,
-      archived: false,
+      archived: archived,
       clientId: id
     };
     submitEditClient(editClientData);

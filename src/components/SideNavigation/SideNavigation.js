@@ -1,11 +1,12 @@
 import { NavLink } from 'react-router-dom';
 
-import classes from './SideNavigation.module.css';
-
 import * as routeConstants from '../../route/RouteConstants';
 
 import timeIcon from '../../assets/time-icon.svg';
 import clientsIcon from '../../assets/clients-icon.svg';
+import tagsIcon from '../../assets/tags-icon.svg';
+
+import classes from './SideNavigation.module.css';
 
 const SideNavigation = () => {
   return (
@@ -33,6 +34,15 @@ const SideNavigation = () => {
                 <img src={clientsIcon} alt=""/>
               </span>
               Clients
+            </NavLink>
+          </li>
+          <li>
+            <NavLink className={classes.sidenavExpand} to={`/${routeConstants.TAGS}`}
+                     activeClassName={classes.active}>
+              <span className={classes.linkImg}>
+                <img src={tagsIcon} alt=""/>
+              </span>
+              Tags
             </NavLink>
           </li>
         </ul>

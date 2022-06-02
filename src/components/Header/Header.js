@@ -1,9 +1,11 @@
+import { useSelector } from 'react-redux';
 import { Container, Navbar } from 'react-bootstrap';
+
+import Loader from '../UI/Loader/Loader';
+
 import logo from '../../assets/logo.png';
 
 import classes from './Header.module.css';
-import Loader from '../UI/Loader/Loader';
-import { useSelector } from 'react-redux';
 
 const Header = () => {
 

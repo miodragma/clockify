@@ -1,18 +1,21 @@
 import { useEffect, useRef, useState } from 'react';
-import useOutsideAlerter from '../../../hooks/OutsideClick';
 
 import { Col, Row } from 'react-bootstrap';
 
-import classes from './ClientsListItem.module.css';
+import useOutsideAlerter from '../../../hooks/OutsideClick';
 
+import noteIcon from '../../../assets/note-icon.svg';
 import editIcon from '../../../assets/edit-icon.svg';
 import ellipsisIcon from '../../../assets/ellipsis-icon.svg';
-import noteIcon from '../../../assets/note-icon.svg';
 
-const ClientsListItem = props => {
+import classes from './ListItem.module.css';
 
-  const {client, onClickEdit, onClientItemAction} = props;
-  const {id, archived, name, address, note} = client;
+/* Clients and Tags list item */
+
+const ListItem = props => {
+
+  const {data, onClickEdit, onItemAction, type} = props;
+  const {id, archived, name, address, note} = data;
 
   const [isOpenActions, setIsOpenActions] = useState(false);
 
@@ -27,12 +30,12 @@ const ClientsListItem = props => {
   }
   outsideClick({actionsRef, onCloseActions})
 
-  const onClientOpenItemActions = () => {
+  const onOpenItemActions = () => {
     setIsOpenActions(true)
   }
 
-  const onClientClickItemAction = action => {
-    onClientItemAction(action);
+  const onClickItemAction = action => {
+    onItemAction(action);
     setIsOpenActions(false)
   }
 
@@ -40,12 +43,12 @@ const ClientsListItem = props => {
   let notArchiveActions = ['Archive'];
 
   const mapActions = actionsData => actionsData.map((action, index) => {
-    return (<p onClick={() => onClientClickItemAction(action)} key={index}>{action}</p>)
+    return (<p onClick={() => onClickItemAction(action)} key={index}>{action}</p>)
   });
 
   let actions;
 
-  if (client.archived) {
+  if (data.archived) {
     actions = mapActions(archiveActions)
   } else {
     actions = mapActions(notArchiveActions)
@@ -53,16 +56,16 @@ const ClientsListItem = props => {
 
   return (
     <Row className={`${classes.rowItem}`}>
-      <Col xs={5} className={classes.colItem}>
+      <Col xs={type === 'clients' ? 5 : null} className={classes.colItem}>
         <div>
           <p className={`${archived && classes.archivedItem}`}>{name}</p>
         </div>
       </Col>
-      <Col xs={5} className={classes.colItem}>
+      {type === 'client' && <Col xs={5} className={classes.colItem}>
         <div className={classes.border}>
           <p>{address}</p>
         </div>
-      </Col>
+      </Col>}
       <Col xs={2} className={classes.colActionButtonsWrapper}>
         {note && <div className={`${classes.actionButton} ${classes.border}`}>
           <img src={noteIcon} alt='note-icon'/>
@@ -71,7 +74,7 @@ const ClientsListItem = props => {
           <img onClick={onClickEdit} src={editIcon} alt='edit-icon'/>
         </div>
         <div className={`${classes.actionButton} ${classes.border}`}>
-          <img onClick={onClientOpenItemActions} src={ellipsisIcon} alt='ellipsis-icon'/>
+          <img onClick={onOpenItemActions} src={ellipsisIcon} alt='ellipsis-icon'/>
           {isOpenActions && <div ref={actionsRef} className={classes.actionsList}>
             {actions}
           </div>}
@@ -81,4 +84,4 @@ const ClientsListItem = props => {
   )
 };
 
-export default ClientsListItem;
+export default ListItem;
