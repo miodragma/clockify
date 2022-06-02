@@ -1,8 +1,10 @@
 import { Fragment, useEffect, useRef, useState } from 'react';
 
 import { Form } from 'react-bootstrap';
-import classes from './Textarea.module.css';
+
 import PropTypes from 'prop-types';
+
+import classes from './Textarea.module.css';
 
 const Textarea = props => {
 

@@ -1,9 +1,14 @@
 import MainCard from '../../components/UI/MainCard/MainCard';
+import { Col, Row } from 'react-bootstrap';
 
 const Tracker = () => {
   return (
     <MainCard>
-      <h1 className='pageTitle'>Time Tracker</h1>
+      <Row className='pageTitleRow'>
+        <Col>
+          <h1 className='pageTitle'>Time Tracker</h1>
+        </Col>
+      </Row>
     </MainCard>
   )
 }

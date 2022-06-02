@@ -1,4 +1,5 @@
 import { Button, Modal } from 'react-bootstrap';
+
 import classes from './ModalWrapper.module.css';
 
 const ModalWrapper = props => {

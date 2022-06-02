@@ -1,17 +1,15 @@
 import { useCallback, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { Form } from 'react-bootstrap';
 
-import ClientsListItem from '../ClientsListItem/ClientsListItem';
 import ClientListHeader from '../ClientListHeader/ClientListHeader';
-import ClientEdit from '../../ClientEdit/ClientEdit';
-
+import ClientEdit from '../ClientEdit/ClientEdit';
+import ListItem from '../../Utils/ListItem/ListItem';
 import ModalWrapper from '../../UI/ModalWrapper/ModalWrapper';
-
-import classes from './ClientsList.module.css';
 
 import { deleteClient, updateClient } from '../store/clients-actions';
 
-import { Form } from 'react-bootstrap';
+import classes from './ClientsList.module.css';
 
 const initialState = {
   name: '',
@@ -47,10 +45,11 @@ const ClientsList = () => {
   }, [])
 
   const clients = filterClients.map(client => {
-    return <ClientsListItem
+    return <ListItem
+      type='client'
       key={client.id}
-      client={client}
-      onClientItemAction={(action) => onClientItemActionHandler(action, client)}
+      data={client}
+      onItemAction={(action) => onClientItemActionHandler(action, client)}
       onClickEdit={() => onClickEditHandler(client)}/>
   })
 

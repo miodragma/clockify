@@ -45,6 +45,10 @@ code {
   min-width: 100px;
 }
 
+.pageTitleRow {
+  margin-bottom: 30px;
+}
+
 .pageTitle {
   font-size: 24px;
   color: #666666;
