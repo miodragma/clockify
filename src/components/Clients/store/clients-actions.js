@@ -17,7 +17,7 @@ export const fetchClientsData = data => {
     }
 
     const fetchClients = async () => {
-      return axiosConfig(`/workspaces/${workspaceId}/clients?archived=${currentArchived}&name=${name}`);
+      return axiosConfig(`/workspaces/${workspaceId}/clients?archived=${currentArchived}&name=${name}&page=1&page-size=50`);
     }
 
     try {

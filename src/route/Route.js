@@ -8,6 +8,7 @@ import Loader from '../components/UI/Loader/Loader';
 const Tracker = React.lazy(() => import('../pages/Tracker/Tracker'));
 const Clients = React.lazy(() => import('../pages/Clients/Clients'));
 const Tags = React.lazy(() => import('../pages/Tags/Tags'));
+const Projects = React.lazy(() => import('../pages/Projects/Projects'));
 
 const Routes = () => {
   return (
@@ -20,6 +21,7 @@ const Routes = () => {
         <Route path={`/${routeConstants.TRACKER}`} component={Tracker}/>
         <Route path={`/${routeConstants.CLIENTS}`} component={Clients}/>
         <Route path={`/${routeConstants.TAGS}`} component={Tags}/>
+        <Route path={`/${routeConstants.PROJECTS}`} component={Projects}/>
       </Switch>
     </Suspense>
   )

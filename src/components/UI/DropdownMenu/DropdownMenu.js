@@ -41,7 +41,6 @@ const DropdownMenu = props => {
       <div className={classes.optionsWrapper}>
         {options}
       </div>
-      {/*{options}*/}
     </DropdownButton>
   )
 };

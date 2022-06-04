@@ -1,11 +1,11 @@
 import { useCallback, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
-import Actions from '../../Utils/Actions/Actions';
+import Actions from '../../Services/Actions/Actions';
 
 import { addNewTag, fetchTagsData } from '../store/tags-actions';
 
-import { dropdownData } from './DropdownData/DropdownData';
+import { dropdownData } from './dropdownData/dropdown-data';
 
 const TagsActions = () => {
 
