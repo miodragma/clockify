@@ -1,13 +1,3 @@
-.rowItem {
-  background-color: #ffffff;
-  border-left: 1px solid #C6D2D9;
-  border-right: 1px solid #C6D2D9;
-  border-bottom: 1px solid #C6D2D9;
-  border-radius: 1px 1px 0 0;
-  margin: 0;
-  height: 60px;
-}
-
 .colItem {
   height: 60px;
   display: flex;

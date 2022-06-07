@@ -27,6 +27,7 @@ export const fetchClientsData = data => {
     } catch (error) {
       console.log(error);
       dispatch(loaderActions.setLoaderData(false));
+      dispatch(loaderActions.showToast({toastMessage: `${error.response.data.message}`, type: 'error'}))
     }
   }
 }

@@ -1,0 +1,23 @@
+.table {
+  background-color: #fff;
+  margin-bottom: 0;
+  border-left: 1px solid #C6D2D9;
+  border-bottom: 1px solid #C6D2D9;
+  border-right: 1px solid #C6D2D9;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+.thead {
+  height: 41px;
+  border-bottom: 1px solid #C6D2D9;
+}
+
+.thead th {
+  text-transform: uppercase;
+  color: #999;
+  font-size: 13px;
+  letter-spacing: 1px;
+  font-weight: 400;
+}
+

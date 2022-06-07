@@ -55,7 +55,7 @@ const ListItem = props => {
   }
 
   return (
-    <Row className={`${classes.rowItem}`}>
+    <Row className='rowItem'>
       <Col xs={type === 'clients' ? 5 : null} className={classes.colItem}>
         <div>
           <p className={`${archived && classes.archivedItem}`}>{name}</p>

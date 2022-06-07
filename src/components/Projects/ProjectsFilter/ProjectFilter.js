@@ -1,85 +1,69 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useHistory, useLocation } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
+import { Button, Col, Row } from 'react-bootstrap';
 
-import { projectsActions, replacer, reviver } from '../store/projects-slice';
+import ProjectArchived from './ProjectArchived/ProjectArchived';
+
+import { reviver } from '../store/projects-slice';
 
 import { mapQueryParams } from '../../Utils/mapQueryParams';
-import { Col, Row } from 'react-bootstrap';
-import classes from '../../Services/ListItem/ListItem.module.css';
-import DropdownMenu from '../../UI/DropdownMenu/DropdownMenu';
-import { dropdownData } from '../../Clients/ClientsActions/dropdownData/dropdown-data';
 
-let isMounted = false;
+import classes from './ProjectFilter.module.css';
 
 const ProjectFilter = () => {
 
-  const {newQueryParams, defaultQueryParams} = useSelector(state => state.projects)
-
-  const dispatch = useDispatch();
+  const {newQueryParams, defaultQueryParams} = useSelector(state => state.projects);
+  const [changedQueryParams, setChangedQueryParams] = useState(new Map());
+  const [isClearFilter, setIsClearFilter] = useState(false);
 
   const history = useHistory();
   const {pathname} = useLocation();
 
   useEffect(() => {
-    if (!isMounted) {
-      isMounted = true;
-      return;
-    }
-    const currentNewQueryParams = JSON.parse(newQueryParams, reviver);
-    const currentDefaultQueryParams = JSON.parse(defaultQueryParams, reviver);
+    setIsClearFilter(newQueryParams !== defaultQueryParams)
+  }, [newQueryParams, defaultQueryParams])
 
-    if (currentNewQueryParams.size === 0) {
-      console.log(mapQueryParams(currentDefaultQueryParams))
-      history.replace({pathname, search: mapQueryParams(currentDefaultQueryParams)})
-    } else {
-      console.log(mapQueryParams(currentNewQueryParams))
-      history.replace({pathname, search: mapQueryParams(currentNewQueryParams)})
-    }
-  }, [defaultQueryParams, newQueryParams, pathname, history])
-
-  const onShowBy = val => {
-    console.log(val)
-    const t = new Map()
-    if (val !== 'empty') {
-      t.set('archived', val)
-    } else {
-      t.set('archived', '')
-    }
-    dispatch(projectsActions.changeNewQueryParams(JSON.stringify(t, replacer)))
+  const changeArchiveValueHandler = archiveVal => {
+    setChangedQueryParams(changedQueryParams.set('archived', archiveVal !== 'empty' ? archiveVal : ''))
   }
 
-  /*TODO remove all unnecessary code, this dropdown below is just for example.*/
+  const applyFilterHandler = () => {
+    const queryParams = new Map(JSON.parse(newQueryParams, reviver));
+    changedQueryParams.forEach((value, key) => queryParams.set(key, value));
+    history.replace({pathname, search: mapQueryParams(queryParams)})
+  };
+
+  const clearFilterHandler = () => {
+    const queryParams = new Map(JSON.parse(defaultQueryParams, reviver));
+    setChangedQueryParams(new Map())
+    history.replace({pathname, search: mapQueryParams(queryParams)})
+  }
 
   return (
     <div>
-      <Row className={`${classes.rowItem}`}>
-        <Col className={classes.colActionButtonsWrapper}>
-
-          <div className={`${classes.actionButton} ${classes.border}`}>
-            <DropdownMenu
-              dropdownMenuData={dropdownData}
-              onChangeSelectVal={onShowBy}/>
+      <Row className={`${classes.rowItemBorder} rowItem`}>
+        <Col xs={4} className={classes.filterActionButtonsWrapper}>
+          <div className={classes.filterTitle}>
+            <p>Filter</p>
           </div>
-          <div className={`${classes.actionButton} ${classes.border}`}>
-            <DropdownMenu
-              dropdownMenuData={dropdownData}
-              onChangeSelectVal={onShowBy}/>
-          </div>
-          <div className={`${classes.actionButton} ${classes.border}`}>
-            <DropdownMenu
-              dropdownMenuData={dropdownData}
-              onChangeSelectVal={onShowBy}/>
-          </div>
-          <div className={`${classes.actionButton} ${classes.border}`}>
-            <DropdownMenu
-              dropdownMenuData={dropdownData}
-              onChangeSelectVal={onShowBy}/>
-          </div>
+          <ProjectArchived
+            className={classes.border}
+            changeArchiveValue={changeArchiveValueHandler}/>
         </Col>
-        <Col>
+        <Col xs={6}>
 
         </Col>
+        <Col xs={2} className={classes.applyFilterButtonCol}>
+          <Button
+            onClick={applyFilterHandler}
+            className='primary'>Apply Filter
+          </Button>
+        </Col>
+      </Row>
+      <Row className={classes.clearFilterButtonRow}>
+        {isClearFilter && <Button className={classes.clearFilterButton} variant="link" onClick={clearFilterHandler}>Clear
+          filters</Button>}
       </Row>
     </div>
   )

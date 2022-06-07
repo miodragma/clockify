@@ -24,14 +24,22 @@ const projectsSlice = createSlice({
   name: 'projects',
   initialState: {
     defaultQueryParams: JSON.stringify(new Map([
-      ['archived', 'ACTIVE'],
-      ['billable', 'NONE'],
-      ['containsClient', 'true'],
-      ['containsUser', 'true'],
-      ['sortColumn', 'DURATION'],
-      ['sortOrder', 'DESCENDING']
+      ['name', ''],
+      ['archived', 'false'],
+      ['billable', ''],
+      ['clients', ''],
+      ['client-status', 'ALL'],
+      ['contains-client', 'true'],
+      ['users', ''],
+      ['user-status', 'ALL'],
+      ['contains-user', 'true'],
+      ['sort-column', 'NAME'],
+      ['sort-order', 'ASCENDING'],
+      ['page', '1'],
+      ['page-size', '50']
     ]), replacer),
-    newQueryParams: JSON.stringify(new Map(), replacer)
+    newQueryParams: JSON.stringify(new Map(), replacer),
+    projects: []
   },
   reducers: {
     changeNewQueryParams(state, action) {
@@ -41,6 +49,26 @@ const projectsSlice = createSlice({
     },
     resetNewQueryParams(state) {
       state.newQueryParams = JSON.stringify(new Map(), replacer);
+    },
+    setProjectsData(state, action) {
+      console.log(action.payload)
+      state.projects = action.payload;
+    },
+    onUpdateProject(state, action) {
+      const currentProjects = [...state.projects];
+      const index = currentProjects.findIndex(project => project.id === action.payload.projectData.id);
+      const currentProject = {...currentProjects.find(project => project.id === action.payload.projectData.id)};
+      if (action.payload.type === 'archived') {
+        console.log(action.payload)
+        currentProject.archived = action.payload.projectData.archived;
+      } else {
+        currentProject.template = !action.payload.projectData.template
+      }
+      currentProjects[index] = currentProject;
+      state.projects = currentProjects;
+    },
+    deleteProject(state, action) {
+      state.projects = state.projects.filter(project => project.id !== action.payload);
     }
   }
 })

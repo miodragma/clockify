@@ -1,0 +1,62 @@
+.filterActionButtonsWrapper {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  padding: 5px 0;
+  height: 100%;
+}
+
+.border {
+  background-image: linear-gradient(#c9d5db 33%, rgba(255, 255, 255, 0) 0%);
+  background-position: left;
+  background-size: 1px 3px;
+  background-repeat: repeat-y;
+  margin-left: 5px;
+}
+
+.rowItemBorder {
+  border-top: 1px solid #C6D2D9;
+}
+
+.filterTitle p {
+  margin: 0;
+  color: #999;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-size: 12px;
+  padding: 0 16px 0 20px;
+}
+
+.applyFilterButtonCol {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.applyFilterButtonCol button {
+  text-transform: uppercase;
+}
+
+.clearFilterButtonRow {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  align-items: center;
+  height: 40px;
+  margin: 0;
+}
+
+.clearFilterButton {
+  color: #03a9f4;
+  text-decoration: none;
+  font-size: 12px;
+  width: 96px;
+  transition: 0.2s ease;
+}
+
+.clearFilterButton:hover {
+  text-decoration: underline;
+  color: #0a58ca;
+}

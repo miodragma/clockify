@@ -1,24 +1,21 @@
 import { useEffect, useMemo } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useHistory, useLocation } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 
 import { Col, Row } from 'react-bootstrap';
 
 import MainCard from '../../components/UI/MainCard/MainCard';
 import Projects from '../../components/Projects';
 
-import { projectsActions, replacer, reviver } from '../../components/Projects/store/projects-slice';
-
-import { mapQueryParams } from '../../components/Utils/mapQueryParams';
-
-let isMounted = false;
+import { reviver } from '../../components/Projects/store/projects-slice';
+import { fetchProjectsData } from '../../components/Projects/store/projects-actions';
 
 const ProjectsPage = () => {
 
-  const {defaultQueryParams} = useSelector(state => state.projects)
+  const {defaultQueryParams} = useSelector(state => state.projects);
+  const {activeWorkspace: workspaceId} = useSelector(state => state.user.user);
 
-  const history = useHistory();
-  const {search, pathname} = useLocation();
+  const {search} = useLocation();
 
   const queryParams = useMemo(() => new URLSearchParams(search), [search]);
 
@@ -26,25 +23,18 @@ const ProjectsPage = () => {
 
   useEffect(() => {
 
-    if (!isMounted) {
+    const initParams = new Map();
+    for (let [key, value] of [...queryParams]) {
+      initParams.set(key, value)
+    }
+    if (initParams.size === 0) {
       const currentDefaultQueryParams = JSON.parse(defaultQueryParams, reviver);
-      const initParams = new Map();
-      for (let [key, value] of [...queryParams]) {
-        initParams.set(key, value)
-      }
-      if (initParams.size === 0) {
-        console.log('PROJECT SIZE 0')
-        history.replace({pathname, search: mapQueryParams(currentDefaultQueryParams)})
-        dispatch(projectsActions.changeNewQueryParams(JSON.stringify(currentDefaultQueryParams, replacer)));
-      } else {
-        console.log('PROJECT SIZE ', initParams.size)
-        dispatch(projectsActions.changeNewQueryParams(JSON.stringify(initParams, replacer)));
-        history.replace({pathname, search: mapQueryParams(initParams)})
-      }
-      isMounted = true;
+      dispatch(fetchProjectsData({queryParams: currentDefaultQueryParams, workspaceId}))
+    } else {
+      dispatch(fetchProjectsData({queryParams: initParams, workspaceId}))
     }
 
-  }, [dispatch, queryParams, defaultQueryParams, history, pathname])
+  }, [dispatch, queryParams, defaultQueryParams, workspaceId])
 
   return (
     <MainCard>

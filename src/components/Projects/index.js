@@ -1,8 +1,14 @@
+import { Fragment } from 'react';
+
 import ProjectFilter from './ProjectsFilter/ProjectFilter';
+import ProjectsList from './ProjectsList/ProjectsList';
 
 const Projects = () => {
   return (
-    <ProjectFilter/>
+    <Fragment>
+      <ProjectFilter/>
+      <ProjectsList/>
+    </Fragment>
   )
 };
 
