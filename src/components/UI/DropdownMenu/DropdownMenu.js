@@ -44,7 +44,8 @@ const DropdownMenu = props => {
   }
 
   return (
-    <DropdownButton className={`${classes.dropdownButton} ${className || ''}`} title={activeFilterName}>
+    <DropdownButton className={`${classes.dropdownButton} ${className || classes.defaultDropdownButton}`}
+                    title={activeFilterName}>
       <div className={classes.optionsWrapper}>
         {options}
       </div>

@@ -1,8 +1,8 @@
-import { useEffect, useRef, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 
 import TableData from '../../../../UI/TableData/TableData';
+import CustomDropdown from '../../../../UI/CustomDropdown/CustomDropdown';
 
-import outsideClick from '../../../../../hooks/OutsideClick';
 import ellipsisIcon from '../../../../../assets/ellipsis-icon.svg';
 
 import classes from './EditItem.module.css';
@@ -13,7 +13,6 @@ const EditItem = props => {
   const {id} = project
 
   const [isOpenActions, setIsOpenActions] = useState(false);
-  const actionsRef = useRef(null);
 
   useEffect(() => {
   }, [id])
@@ -22,10 +21,9 @@ const EditItem = props => {
     setIsOpenActions(true)
   }
 
-  const onCloseActions = () => {
+  const onCloseActions = useCallback(() => {
     setIsOpenActions(false)
-  }
-  outsideClick({actionsRef, onCloseActions})
+  }, [])
 
   const onClickItemAction = (actionType) => {
     editProjectAction({actionType, project})
@@ -54,9 +52,9 @@ const EditItem = props => {
     <TableData tdClassName={className}>
       <div className={classes.editItemIconWrapper}>
         <img onClick={onOpenItemActions} className={classes.editIcon} src={ellipsisIcon} alt="edit-icon"/>
-        {isOpenActions && <div ref={actionsRef} className={classes.actionsList}>
+        <CustomDropdown isOpenDropdown={isOpenActions} closeDropdown={onCloseActions}>
           {actions}
-        </div>}
+        </CustomDropdown>
       </div>
     </TableData>
   )

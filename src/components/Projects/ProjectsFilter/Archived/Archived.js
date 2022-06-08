@@ -5,9 +5,9 @@ import DropdownMenu from '../../../UI/DropdownMenu/DropdownMenu';
 
 import { dropdownData } from './dropdownData/dropdown-data';
 
-import classes from './ProjectArchived.module.css';
+import classes from './Archived.module.css';
 
-const ProjectArchived = props => {
+const Archived = props => {
 
   const {className, changeArchiveValue} = props;
 
@@ -40,4 +40,4 @@ const ProjectArchived = props => {
   )
 };
 
-export default ProjectArchived;
+export default Archived;

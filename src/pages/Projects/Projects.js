@@ -27,11 +27,13 @@ const ProjectsPage = () => {
     for (let [key, value] of [...queryParams]) {
       initParams.set(key, value)
     }
-    if (initParams.size === 0) {
-      const currentDefaultQueryParams = JSON.parse(defaultQueryParams, reviver);
-      dispatch(fetchProjectsData({queryParams: currentDefaultQueryParams, workspaceId}))
-    } else {
-      dispatch(fetchProjectsData({queryParams: initParams, workspaceId}))
+    if (workspaceId) {
+      if (initParams.size === 0) {
+        const currentDefaultQueryParams = JSON.parse(defaultQueryParams, reviver);
+        dispatch(fetchProjectsData({queryParams: currentDefaultQueryParams, workspaceId}))
+      } else {
+        dispatch(fetchProjectsData({queryParams: initParams, workspaceId}))
+      }
     }
 
   }, [dispatch, queryParams, defaultQueryParams, workspaceId])

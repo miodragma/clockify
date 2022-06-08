@@ -1,15 +1,16 @@
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { useHistory, useLocation } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { Button, Col, Row } from 'react-bootstrap';
 
-import ProjectArchived from './ProjectArchived/ProjectArchived';
+import Archived from './Archived/Archived';
 
 import { reviver } from '../store/projects-slice';
 
 import { mapQueryParams } from '../../Utils/mapQueryParams';
 
 import classes from './ProjectFilter.module.css';
+import Billing from './Billing/Billing';
 
 const ProjectFilter = () => {
 
@@ -27,6 +28,10 @@ const ProjectFilter = () => {
   const changeArchiveValueHandler = archiveVal => {
     setChangedQueryParams(changedQueryParams.set('archived', archiveVal !== 'empty' ? archiveVal : ''))
   }
+
+  const changeBillingHandler = useCallback(billing => {
+    setChangedQueryParams(changedQueryParams.set('billable', billing))
+  }, [changedQueryParams]);
 
   const applyFilterHandler = () => {
     const queryParams = new Map(JSON.parse(newQueryParams, reviver));
@@ -47,9 +52,10 @@ const ProjectFilter = () => {
           <div className={classes.filterTitle}>
             <p>Filter</p>
           </div>
-          <ProjectArchived
+          <Archived
             className={classes.border}
             changeArchiveValue={changeArchiveValueHandler}/>
+          <Billing onBillingChange={changeBillingHandler} className={classes.border}/>
         </Col>
         <Col xs={6}>
 
