@@ -27,6 +27,10 @@ const Billing = props => {
       if (key === 'billable') {
         value === 'false' && setIsNonBillable(true);
         value === 'true' && setIsBillable(true);
+        if (value === '') {
+          setIsNonBillable(false);
+          setIsBillable(false);
+        }
       }
     }
   }, [queryParams])
