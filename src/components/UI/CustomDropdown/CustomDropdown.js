@@ -6,7 +6,7 @@ import classes from './CustomDropdown.module.css';
 
 const CustomDropdown = props => {
 
-  const {isOpenDropdown, className, closeDropdown} = props;
+  const {isOpenDropdown, className, closeDropdown, position} = props;
 
   const actionsRef = useRef(null);
 
@@ -16,9 +16,13 @@ const CustomDropdown = props => {
   outsideClick({actionsRef, onCloseDropdown})
 
   return (
-    <Fragment>{isOpenDropdown && <div ref={actionsRef} className={`${className || classes.defaultActionsList}`}>
-      {props.children}
-    </div>}
+    <Fragment>
+      {isOpenDropdown && <div
+        ref={actionsRef}
+        className={`${className || classes.defaultActionsList} ${position ? classes.left : classes.right}`}
+      >
+        {props.children}
+      </div>}
     </Fragment>
   )
 };

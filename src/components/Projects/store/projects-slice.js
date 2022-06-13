@@ -33,8 +33,8 @@ const projectsSlice = createSlice({
       ['users', ''],
       ['user-status', 'ALL'],
       ['contains-user', 'true'],
-      ['sort-column', 'NAME'],
-      ['sort-order', 'ASCENDING'],
+      ['sort-column', 'DURATION'],
+      ['sort-order', 'DESCENDING'],
       ['page', '1'],
       ['page-size', '50']
     ]), replacer),
@@ -51,7 +51,6 @@ const projectsSlice = createSlice({
       state.newQueryParams = JSON.stringify(new Map(), replacer);
     },
     setProjectsData(state, action) {
-      console.log(action.payload)
       state.projects = action.payload;
     },
     onUpdateProject(state, action) {

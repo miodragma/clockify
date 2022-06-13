@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useState } from 'react';
 import { useHistory, useLocation } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { Button, Col, Row } from 'react-bootstrap';
 
 import Archived from './Archived/Archived';
@@ -11,12 +11,19 @@ import { mapQueryParams } from '../../Utils/mapQueryParams';
 
 import classes from './ProjectFilter.module.css';
 import Billing from './Billing/Billing';
+import Client from './Client/Client';
+import { fetchClientsData } from '../../Clients/store/clients-actions';
+import { dropdownArchiveData } from '../../Services/dropdownArchiveData/dropdown-archive-data';
 
 const ProjectFilter = () => {
 
   const {newQueryParams, defaultQueryParams} = useSelector(state => state.projects);
   const [changedQueryParams, setChangedQueryParams] = useState(new Map());
   const [isClearFilter, setIsClearFilter] = useState(false);
+
+  const {activeWorkspace: workspaceId} = useSelector(state => state.user.user);
+
+  const dispatch = useDispatch();
 
   const history = useHistory();
   const {pathname} = useLocation();
@@ -25,13 +32,19 @@ const ProjectFilter = () => {
     setIsClearFilter(newQueryParams !== defaultQueryParams)
   }, [newQueryParams, defaultQueryParams])
 
-  const changeArchiveValueHandler = archiveVal => {
+  const changeArchiveValueHandler = useCallback(archiveVal => {
     setChangedQueryParams(changedQueryParams.set('archived', archiveVal !== 'empty' ? archiveVal : ''))
-  }
+  }, [changedQueryParams]);
 
   const changeBillingHandler = useCallback(billing => {
     setChangedQueryParams(changedQueryParams.set('billable', billing))
   }, [changedQueryParams]);
+
+  const onClientFilterHandler = useCallback(data => {
+    for (const [key, value] of Object.entries(data)) {
+      setChangedQueryParams(changedQueryParams.set(key, value))
+    }
+  }, [changedQueryParams])
 
   const applyFilterHandler = () => {
     const queryParams = new Map(JSON.parse(newQueryParams, reviver));
@@ -42,6 +55,9 @@ const ProjectFilter = () => {
   const clearFilterHandler = () => {
     const queryParams = new Map(JSON.parse(defaultQueryParams, reviver));
     setChangedQueryParams(new Map())
+
+    const archived = dropdownArchiveData.find(data => data.label.toUpperCase() === queryParams.get('client-status')).value;
+    dispatch(fetchClientsData({workspaceId, archived, page: 'projects'}))
     history.replace({pathname, search: mapQueryParams(queryParams)})
   }
 
@@ -55,6 +71,7 @@ const ProjectFilter = () => {
           <Archived
             className={classes.border}
             changeArchiveValue={changeArchiveValueHandler}/>
+          <Client className={classes.border} onClientFiler={onClientFilterHandler}/>
           <Billing onBillingChange={changeBillingHandler} className={classes.border}/>
         </Col>
         <Col xs={6}>

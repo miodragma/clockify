@@ -1,4 +1,4 @@
-import { useEffect, useMemo } from 'react';
+import { useEffect, useMemo, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useLocation } from 'react-router-dom';
 
@@ -9,6 +9,8 @@ import Projects from '../../components/Projects';
 
 import { reviver } from '../../components/Projects/store/projects-slice';
 import { fetchProjectsData } from '../../components/Projects/store/projects-actions';
+import { fetchClientsData } from '../../components/Clients/store/clients-actions';
+import { dropdownArchiveData } from '../../components/Services/dropdownArchiveData/dropdown-archive-data';
 
 const ProjectsPage = () => {
 
@@ -17,7 +19,10 @@ const ProjectsPage = () => {
 
   const {search} = useLocation();
 
+  const isMounted = useRef(true);
+
   const queryParams = useMemo(() => new URLSearchParams(search), [search]);
+  const clientStatus = queryParams.get('client-status');
 
   const dispatch = useDispatch();
 
@@ -37,6 +42,16 @@ const ProjectsPage = () => {
     }
 
   }, [dispatch, queryParams, defaultQueryParams, workspaceId])
+
+  useEffect(() => {
+    if (isMounted.current) {
+      if (workspaceId) {
+        const archived = dropdownArchiveData.find(data => data.label.toUpperCase() === clientStatus).value;
+        dispatch(fetchClientsData({workspaceId, archived, page: 'projects'}))
+        isMounted.current = false;
+      }
+    }
+  }, [clientStatus, dispatch, workspaceId])
 
   return (
     <MainCard>

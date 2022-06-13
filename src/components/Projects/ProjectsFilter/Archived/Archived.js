@@ -3,7 +3,7 @@ import { useLocation } from 'react-router-dom';
 
 import DropdownMenu from '../../../UI/DropdownMenu/DropdownMenu';
 
-import { dropdownData } from './dropdownData/dropdown-data';
+import { dropdownArchiveData } from '../../../Services/dropdownArchiveData/dropdown-archive-data';
 
 import classes from './Archived.module.css';
 
@@ -19,7 +19,7 @@ const Archived = props => {
   useEffect(() => {
     for (let [key, value] of [...queryParams]) {
       if (key === 'archived') {
-        const label = dropdownData.find(data => value === '' ? data.label === 'All' : data.value.toString() === value.toString())?.label;
+        const label = dropdownArchiveData.find(data => value === '' ? data.label === 'All' : data.value.toString() === value.toString())?.label;
         setCurrentDropdownLabelVal(label || '');
       }
     }
@@ -34,7 +34,7 @@ const Archived = props => {
       <DropdownMenu
         currentDropdownLabel={currentDropdownLabelVal}
         className={classes.filterDropdownButton}
-        dropdownMenuData={dropdownData}
+        dropdownMenuData={dropdownArchiveData}
         onChangeSelectVal={onChangeArchived}/>
     </div>
   )

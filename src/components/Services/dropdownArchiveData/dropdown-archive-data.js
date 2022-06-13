@@ -1,4 +1,4 @@
-export const dropdownData = [
+export const dropdownArchiveData = [
   {
     label: 'Active',
     value: false
