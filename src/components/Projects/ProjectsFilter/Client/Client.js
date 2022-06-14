@@ -57,6 +57,10 @@ const Client = props => {
     if (!isSelectAll && !isWithoutClient && clientListIds.includes('without')) {
       clients = clients.filter(client => client !== 'without')
     }
+    if (!nameVal.current && filterClients.length > clientListIds.length && isSelectAll) {
+      setIsSelectAll(false);
+      setIsWithoutClient(false)
+    }
 
     const data = {
       'contains-client': containsClient,
@@ -64,7 +68,7 @@ const Client = props => {
       'client-status': clientStatus
     }
     onClientFiler(data)
-  }, [clientListIds, currentDropdownLabelVal, isSelectAll, isWithoutClient, onClientFiler])
+  }, [clientListIds, currentDropdownLabelVal, filterClients.length, isSelectAll, isWithoutClient, onClientFiler])
 
   useEffect(() => {
     if (!isChangeArchive.current) {
@@ -72,8 +76,16 @@ const Client = props => {
       const clientStatus = queryParams.get('client-status');
       const containsClient = queryParams.get('contains-client');
 
-      if (clientsQuery.length) {
+      if (clientsQuery.length === 1 && clientsQuery.includes('without') && containsClient === 'false') {
+        const currentClientsIds = filterClients.map(client => client.id);
+        setClientListIds(currentClientsIds);
+        setIsWithoutClient(false);
+        setIsSelectAll(true)
+      } else {
         setClientListIds(clientsQuery);
+      }
+      if (clientsQuery.length) {
+
       }
       if (clientsQuery.length > 1 && clientsQuery.includes('without')) {
         setIsWithoutClient(true)
@@ -89,15 +101,22 @@ const Client = props => {
         setIsWithoutClient(false);
         setIsSelectAll(false);
       }
+      console.log()
       currentDropdownLabelVal.current = dropdownArchiveData.find(item => item.label.toUpperCase() === clientStatus).label
     }
     isChangeArchive.current = false;
   }, [filterClients, queryParams])
 
   const onSearchClientByNameHandler = useCallback(name => {
+    isChangeArchive.current = true;
     const archived = dropdownArchiveData.find(data => data.label === currentDropdownLabelVal.current)?.value
     nameVal.current = name;
-    dispatch(fetchClientsData({workspaceId, archived: archived || 'empty', name, page: 'projects'}));
+    dispatch(fetchClientsData({
+      workspaceId,
+      archived: archived !== undefined ? archived : 'empty',
+      name,
+      page: 'projects'
+    }));
   }, [dispatch, workspaceId]);
 
   const onChangeArchived = useCallback(archived => {

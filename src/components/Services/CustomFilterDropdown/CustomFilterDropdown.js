@@ -63,11 +63,18 @@ const CustomFilterDropdown = props => {
 
   let badge = '';
 
-  if (isSelectAll && selectedListIds.length) {
+  if (selectedListIds.length) {
+    badge = selectedListIds.length;
+    if (isSelectAll) {
+      badge = selectedListIds.length
+    } else if (isWithoutClient && !selectedListIds.includes('without')) {
+      badge = Number(badge) + 1
+    }
+  } else if (isWithoutClient) {
+    badge = 1;
+  }
+  if (isSelectAll && isWithoutClient && selectedListIds.length) {
     badge = '...'
-  } else if (!isSelectAll && (selectedListIds.length || isWithoutClient)) {
-    /*TODO refactor badge the counter is not correct after change queryParams*/
-    // badge = isWithoutClient ? selectedListIds.length + 1 : selectedListIds.length
   }
 
   return (
