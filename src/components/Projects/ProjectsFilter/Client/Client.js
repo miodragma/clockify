@@ -84,9 +84,6 @@ const Client = props => {
       } else {
         setClientListIds(clientsQuery);
       }
-      if (clientsQuery.length) {
-
-      }
       if (clientsQuery.length > 1 && clientsQuery.includes('without')) {
         setIsWithoutClient(true)
       }
