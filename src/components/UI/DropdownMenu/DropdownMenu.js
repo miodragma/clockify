@@ -9,15 +9,22 @@ const DropdownMenu = props => {
   const isMounted = useRef(true);
   const [activeFilterName, setActiveFilterName] = useState('');
 
-  const {dropdownMenuData, onChangeSelectVal} = props;
+  const {currentDropdownLabel, dropdownMenuData, onChangeSelectVal, className} = props;
+  const filterNameRef = useRef('');
 
   useEffect(() => {
     if (isMounted.current) {
       isMounted.current = false;
       const findFilterName = dropdownMenuData[0].label
       setActiveFilterName(findFilterName);
+      filterNameRef.current = findFilterName;
     }
-  }, [activeFilterName, dropdownMenuData])
+
+    if (currentDropdownLabel && currentDropdownLabel !== filterNameRef.current) {
+      filterNameRef.current = currentDropdownLabel
+      setActiveFilterName(currentDropdownLabel)
+    }
+  }, [activeFilterName, dropdownMenuData, currentDropdownLabel])
 
   const options = dropdownMenuData && dropdownMenuData.map((item, index) => {
     return (
@@ -37,11 +44,11 @@ const DropdownMenu = props => {
   }
 
   return (
-    <DropdownButton className={classes.dropdownButton} title={activeFilterName}>
+    <DropdownButton className={`${classes.dropdownButton} ${className || classes.defaultDropdownButton}`}
+                    title={activeFilterName}>
       <div className={classes.optionsWrapper}>
         {options}
       </div>
-      {/*{options}*/}
     </DropdownButton>
   )
 };

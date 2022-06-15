@@ -7,7 +7,7 @@ export const fetchClientsData = data => {
   return async dispatch => {
     dispatch(loaderActions.setLoaderData(true));
 
-    const {workspaceId, archived = 'false', name = ''} = data;
+    const {workspaceId, archived = 'false', name = '', page = 'clients'} = data;
 
     let currentArchived;
     if (archived === 'empty') {
@@ -17,16 +17,17 @@ export const fetchClientsData = data => {
     }
 
     const fetchClients = async () => {
-      return axiosConfig(`/workspaces/${workspaceId}/clients?archived=${currentArchived}&name=${name}`);
+      return axiosConfig(`/workspaces/${workspaceId}/clients?archived=${currentArchived}&name=${name}&page=1&page-size=50`);
     }
 
     try {
       const {data: clientsData} = await fetchClients();
-      dispatch(clientsActions.setClients({archived, name, clientsData: clientsData}))
+      dispatch(clientsActions.setClients({archived, name, clientsData: clientsData, page}))
       dispatch(loaderActions.setLoaderData(false));
     } catch (error) {
       console.log(error);
       dispatch(loaderActions.setLoaderData(false));
+      dispatch(loaderActions.showToast({toastMessage: `${error.response.data.message}`, type: 'error'}))
     }
   }
 }

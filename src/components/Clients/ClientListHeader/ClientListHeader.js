@@ -1,17 +1,18 @@
-import { Col, Row } from 'react-bootstrap';
+import { Col } from 'react-bootstrap';
 
-import classes from './ClientListHeader.module.css';
+import ListHeaderRow from '../../UI/ListHeaderRow/ListHeaderRow';
 
 const ClientListHeader = () => {
+
   return (
-    <Row className={classes.rowHeader}>
+    <ListHeaderRow>
       <Col xs={5}>
-        <p className={classes.colLabel}>Name</p>
+        <p>Name</p>
       </Col>
       <Col xs={7}>
-        <p className={classes.colLabel}>Address</p>
+        <p>Address</p>
       </Col>
-    </Row>
+    </ListHeaderRow>
   )
 }
 

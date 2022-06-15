@@ -1,0 +1,19 @@
+.td {
+  padding: 10px;
+}
+
+.td:not(:first-child) {
+  padding: 10px 10px 10px 0;
+}
+
+.tableDataItemWrapper {
+  display: flex;
+  align-items: center;
+  padding-left: 10px;
+  height: 40px;
+  background-image: linear-gradient(#c9d5db 33%, rgba(255, 255, 255, 0) 0%);
+  background-position: left;
+  background-size: 1px 3px;
+  background-repeat: repeat-y;
+  cursor: pointer;
+}

@@ -7,21 +7,20 @@ import MainCard from '../../components/UI/MainCard/MainCard';
 import Clients from '../../components/Clients';
 
 import { fetchClientsData } from '../../components/Clients/store/clients-actions';
-import { clientsActions } from '../../components/Clients/store/clients-slice';
 
 const ClientsPage = () => {
 
-  const {activeWorkspace} = useSelector(state => state.user.user);
+  const {activeWorkspace: workspaceId} = useSelector(state => state.user.user);
   const dispatch = useDispatch();
 
   useEffect(() => {
 
-    if (activeWorkspace) {
-      dispatch(fetchClientsData({workspaceId: activeWorkspace}))
+    if (workspaceId) {
+      dispatch(fetchClientsData({workspaceId}))
     }
-
-    return () => dispatch(clientsActions.clearFilterClients(null))
-  }, [dispatch, activeWorkspace])
+    /*TODO check whether should clear filter clients*/
+    // return () => dispatch(clientsActions.clearFilterClients(null))
+  }, [dispatch, workspaceId])
 
   return (
     <MainCard>

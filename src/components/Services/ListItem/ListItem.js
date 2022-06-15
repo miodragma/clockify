@@ -1,8 +1,8 @@
-import { useEffect, useRef, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 
 import { Col, Row } from 'react-bootstrap';
 
-import useOutsideAlerter from '../../../hooks/OutsideClick';
+import CustomDropdown from '../../UI/CustomDropdown/CustomDropdown';
 
 import noteIcon from '../../../assets/note-icon.svg';
 import editIcon from '../../../assets/edit-icon.svg';
@@ -19,16 +19,12 @@ const ListItem = props => {
 
   const [isOpenActions, setIsOpenActions] = useState(false);
 
-  const actionsRef = useRef(null);
-  const outsideClick = useOutsideAlerter;
-
   useEffect(() => {
   }, [id]);
 
-  const onCloseActions = () => {
+  const onCloseActions = useCallback(() => {
     setIsOpenActions(false)
-  }
-  outsideClick({actionsRef, onCloseActions})
+  }, [])
 
   const onOpenItemActions = () => {
     setIsOpenActions(true)
@@ -55,7 +51,7 @@ const ListItem = props => {
   }
 
   return (
-    <Row className={`${classes.rowItem}`}>
+    <Row className='rowItem'>
       <Col xs={type === 'clients' ? 5 : null} className={classes.colItem}>
         <div>
           <p className={`${archived && classes.archivedItem}`}>{name}</p>
@@ -75,9 +71,9 @@ const ListItem = props => {
         </div>
         <div className={`${classes.actionButton} ${classes.border}`}>
           <img onClick={onOpenItemActions} src={ellipsisIcon} alt='ellipsis-icon'/>
-          {isOpenActions && <div ref={actionsRef} className={classes.actionsList}>
+          <CustomDropdown isOpenDropdown={isOpenActions} closeDropdown={onCloseActions}>
             {actions}
-          </div>}
+          </CustomDropdown>
         </div>
       </Col>
     </Row>

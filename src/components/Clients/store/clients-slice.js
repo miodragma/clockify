@@ -4,14 +4,19 @@ const clientsSlice = createSlice({
   name: 'clients',
   initialState: {
     clients: [],
-    filterClients: []
+    filterClients: [],
+    filterProjectClients: []
   },
   reducers: {
     setClients(state, action) {
       if (!action.payload.archived && !action.payload.name) {
         state.clients = action.payload.clientsData;
       }
-      state.filterClients = action.payload.clientsData;
+      if (action.payload.page === 'projects') {
+        state.filterProjectClients = action.payload.clientsData;
+      } else {
+        state.filterClients = action.payload.clientsData;
+      }
     },
     addNewClient(state, action) {
       state.clients = [...state.clients, action.payload]

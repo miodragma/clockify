@@ -1,0 +1,13 @@
+.filterDropdownButton button {
+  border: unset !important;
+  margin-left: 5px;
+}
+
+.filterDropdownButton button:hover, button:active {
+  border: unset !important;
+  background-color: #ffffff !important;
+}
+
+.filterDropdownButton button:focus {
+  border: unset !important;
+}

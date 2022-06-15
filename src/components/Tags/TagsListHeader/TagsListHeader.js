@@ -1,6 +1,6 @@
 import { Col, Row } from 'react-bootstrap';
 
-import classes from '../../Clients/ClientListHeader/ClientListHeader.module.css';
+import classes from './TagsListHeader.module.css';
 
 const TagsListHeader = () => {
   return (

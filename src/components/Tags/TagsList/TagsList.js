@@ -2,7 +2,7 @@ import { useCallback, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import TagsListHeader from '../TagsListHeader/TagsListHeader';
-import ListItem from '../../Utils/ListItem/ListItem';
+import ListItem from '../../Services/ListItem/ListItem';
 import TagsEdit from '../TagsEdit/TagsEdit';
 import ModalWrapper from '../../UI/ModalWrapper/ModalWrapper';
 

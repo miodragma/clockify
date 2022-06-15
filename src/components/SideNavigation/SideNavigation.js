@@ -1,50 +1,53 @@
 import { NavLink } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 
-import * as routeConstants from '../../route/RouteConstants';
+import { sideNavigationData } from './sideNavigationData/side-navigation-data';
 
-import timeIcon from '../../assets/time-icon.svg';
-import clientsIcon from '../../assets/clients-icon.svg';
-import tagsIcon from '../../assets/tags-icon.svg';
+import { reviver } from '../Utils/reviver';
+import { mapQueryParams } from '../Utils/mapQueryParams';
 
 import classes from './SideNavigation.module.css';
 
 const SideNavigation = () => {
+
+  const {newQueryParams, defaultQueryParams} = useSelector(state => state.projects);
+  const currentNewQueryParams = JSON.parse(newQueryParams, reviver);
+  const currentDefaultQueryParams = JSON.parse(defaultQueryParams, reviver);
+
+  let links = sideNavigationData.map((item, index) => {
+    if (item.type === 'link') {
+      let path = item.path;
+      if (item.label === 'Projects') {
+        path = mapQueryParams(currentNewQueryParams) ? `${item.path}${mapQueryParams(currentNewQueryParams)}` : `${item.path}${mapQueryParams(currentDefaultQueryParams)}`
+      }
+
+      return (
+        <li key={index}>
+          <NavLink className={classes.sidenavExpand} to={path}
+                   activeClassName={classes.active}>
+              <span className={classes.linkImg}>
+                <img src={item.icon} alt=""/>
+              </span>
+            {item.label}
+          </NavLink>
+        </li>
+      )
+    } else {
+      return (
+        <li key={index} className={classes.divider}>
+            <span className={classes.sidenavExpand}>
+              <span>{item.label}</span>
+            </span>
+        </li>
+      )
+    }
+  })
+
   return (
     <div className={classes.sidenav}>
       <nav>
         <ul className={classes.sideNavigationUl}>
-          <li>
-            <NavLink className={classes.sidenavExpand} to={`/${routeConstants.TRACKER}`}
-                     activeClassName={classes.active}>
-              <span className={classes.linkImg}>
-                <img src={timeIcon} alt=""/>
-              </span>
-              Time Tracker
-            </NavLink>
-          </li>
-          <li className={classes.divider}>
-            <span className={classes.sidenavExpand}>
-              <span>Manage</span>
-            </span>
-          </li>
-          <li>
-            <NavLink className={classes.sidenavExpand} to={`/${routeConstants.CLIENTS}`}
-                     activeClassName={classes.active}>
-              <span className={classes.linkImg}>
-                <img src={clientsIcon} alt=""/>
-              </span>
-              Clients
-            </NavLink>
-          </li>
-          <li>
-            <NavLink className={classes.sidenavExpand} to={`/${routeConstants.TAGS}`}
-                     activeClassName={classes.active}>
-              <span className={classes.linkImg}>
-                <img src={tagsIcon} alt=""/>
-              </span>
-              Tags
-            </NavLink>
-          </li>
+          {links}
         </ul>
       </nav>
     </div>

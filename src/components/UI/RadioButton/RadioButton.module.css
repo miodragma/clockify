@@ -1,0 +1,37 @@
+.radioWrapper {
+  height: 41px;
+  display: flex;
+  align-items: center;
+  font-size: 14px;
+  color: #666666;
+  padding: 10px 20px;
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+
+.radioWrapper:hover {
+  background-color: #e4eaee
+}
+
+.radio {
+  cursor: pointer;
+  pointer-events: none;
+  margin-top: 7px;
+}
+
+.radio:checked {
+  background-color: #03A9F4;
+  border-color: #03A9F4;
+  box-shadow: 0 5px 10px #0000001a !important;
+}
+
+.label {
+  user-select: none;
+  -moz-user-select: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  margin-top: 4px;
+  font-size: 14px;
+  color: #666666;
+  cursor: pointer;
+}

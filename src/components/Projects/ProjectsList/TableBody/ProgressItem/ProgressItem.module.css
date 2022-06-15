@@ -1,0 +1,21 @@
+.progressBarWrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin: 0 10px;
+  width: 100%;
+}
+
+.progressBarWrapper p {
+  margin: 0;
+}
+
+.progressBar {
+  border-radius: unset;
+  height: 10px;
+  background-color: #e4eaee;
+}
+
+.progressBar div {
+  background-color: #8bc34a;
+}

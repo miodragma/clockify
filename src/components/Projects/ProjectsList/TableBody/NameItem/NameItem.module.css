@@ -1,0 +1,21 @@
+.nameItemWrapper {
+  padding-left: 0;
+  cursor: unset;
+  background: unset;
+}
+
+.icon {
+  width: 5px;
+  height: 5px;
+  border-radius: 100%;
+}
+
+.name {
+  cursor: pointer;
+  display: inline-block;
+  margin: 0 0 0 10px;
+}
+
+.archivedItem {
+  text-decoration: line-through;
+}

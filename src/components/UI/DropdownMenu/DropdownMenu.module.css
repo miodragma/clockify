@@ -1,6 +1,5 @@
 .dropdownButton button {
   background-color: #ffffff !important;
-  border: 1px solid #ced4da !important;
   color: #666666 !important;
   font-size: 14px;
   padding: 8px;
@@ -11,15 +10,12 @@
 }
 
 .dropdownButton button:hover, button:active {
-  background-color: #e4eaee !important;
   color: #666666 !important;
-  border: 1px solid #ced4da !important;
 }
 
 .dropdownButton button:focus {
   background-color: #ffffff !important;
   color: #666666 !important;
-  border: 1px solid #ced4da !important;
 }
 
 .dropdownButton div {
@@ -29,6 +25,7 @@
 .dropdownItem a {
   padding: 10px 20px;
   font-size: 14px;
+  transition: 0.2s ease;
   color: #666666;
 }
 
@@ -43,4 +40,17 @@
 
 .activeDropdownItem a {
   color: #333333;
+}
+
+.defaultDropdownButton button {
+  border: 1px solid #ced4da !important;
+}
+
+.defaultDropdownButton button:hover, button:active {
+  background-color: #e4eaee !important;
+  border: 1px solid #ced4da !important;
+}
+
+.defaultDropdownButton button:focus {
+  border: 1px solid #ced4da !important;
 }

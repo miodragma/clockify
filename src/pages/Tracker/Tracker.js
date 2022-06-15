@@ -1,7 +1,7 @@
 import MainCard from '../../components/UI/MainCard/MainCard';
 import { Col, Row } from 'react-bootstrap';
 
-const Tracker = () => {
+const TrackerPage = () => {
   return (
     <MainCard>
       <Row className='pageTitleRow'>
@@ -13,4 +13,4 @@ const Tracker = () => {
   )
 }
 
-export default Tracker;
+export default TrackerPage;
