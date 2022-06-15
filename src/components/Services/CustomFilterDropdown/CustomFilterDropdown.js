@@ -13,10 +13,13 @@ const CustomFilterDropdown = props => {
     className,
     inputLabel,
     itemsList,
+    users,
+    groups,
     selectedListIds,
     isSelectAll,
     isWithoutClient,
     isSearchByName,
+    isFromAccess = false,
     searchByName,
     changeActive,
     changeWithout,
@@ -25,7 +28,8 @@ const CustomFilterDropdown = props => {
     currentDropdownData,
     isUseWithoutClient,
     currentDropdownLabelVal,
-    currentInputValue
+    currentInputValue,
+    dropdownLabel
   } = props;
 
   const onSearchByName = useCallback(name => {
@@ -48,18 +52,51 @@ const CustomFilterDropdown = props => {
     clickCheck(id)
   }, [clickCheck]);
 
-  let newItemsList = [...itemsList].map(item => {
+  let newItemsList;
 
-    let isChecked = selectedListIds.some(id => id === item.id);
+  if (!isFromAccess) {
+    newItemsList = [...itemsList].map(item => {
 
-    return (<RadioButton
-      key={item.id}
-      buttonWrapper={classes.buttonWrapper}
-      type='checkbox'
-      isChecked={isChecked}
-      label={item.name}
-      changeCheckValue={() => onClickCheck(item.id)}/>)
-  })
+      let isChecked = selectedListIds.some(id => id === item.id);
+
+      return (<RadioButton
+        key={item.id}
+        buttonWrapper={`${classes.buttonWrapper} ${classes.buttonWrapperBorder}`}
+        type='checkbox'
+        isChecked={isChecked}
+        label={item.name}
+        changeCheckValue={() => onClickCheck(item.id)}/>)
+    })
+  } else {
+    let user = false;
+    let group = false;
+    let divider;
+
+    const usersGroupsList = currentDropdownLabelVal === 'Active' ? [...groups, ...users] : [...users]
+    newItemsList = usersGroupsList.map(item => {
+
+      if (groups.length && !group && groups[0].id === item.id) {
+        divider = <p className={classes.divider}>Groups</p>
+        group = true;
+      }
+      if (users.length && !user && users[0].id === item.id) {
+        divider = <p className={classes.divider}>Users</p>
+        user = true;
+      }
+      let isChecked = selectedListIds.some(id => id === item.id);
+
+      return (
+        <Fragment key={item.id}>
+          {divider}
+          <RadioButton
+            buttonWrapper={classes.buttonWrapper}
+            type='checkbox'
+            isChecked={isChecked}
+            label={item.name}
+            changeCheckValue={() => onClickCheck(item.id)}/>
+        </Fragment>)
+    })
+  }
 
   let badge = '';
 
@@ -78,7 +115,7 @@ const CustomFilterDropdown = props => {
   }
 
   return (
-    <CustomDropdownWrapper className={className} label='Client' badgeCounter={badge}>
+    <CustomDropdownWrapper className={className} label={dropdownLabel} badgeCounter={badge}>
       <div className={classes.inputWrapper}>
         <Input
           className={classes.input}
@@ -99,7 +136,7 @@ const CustomFilterDropdown = props => {
             onChangeSelectVal={onChangeActive}/>
         </div>
         {
-          itemsList?.length === 0 ? <p className={classes.noMemberLeft}>No members left</p> :
+          newItemsList?.length === 0 ? <p className={classes.noMemberLeft}>No members left</p> :
             <Fragment>
               <RadioButton
                 buttonWrapper={classes.buttonWrapper}

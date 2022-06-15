@@ -129,14 +129,13 @@ const Client = props => {
     const currentIsSelectAll = isSelectAll;
     if (!currentIsSelectAll) {
       const allClientsIds = filterClients.map(client => client.id);
-      const newClientListIds = [...new Set([...clientListIds, ...allClientsIds])];
-      setClientListIds(newClientListIds)
+      setClientListIds(allClientsIds)
     } else {
       setClientListIds([])
     }
     setIsSelectAll(!currentIsSelectAll)
     setIsWithoutClient(!currentIsSelectAll)
-  }, [clientListIds, filterClients, isSelectAll]);
+  }, [filterClients, isSelectAll]);
 
   const onChangeWithoutClientHandler = useCallback(val => {
     setIsWithoutClient(val);
@@ -165,6 +164,7 @@ const Client = props => {
     <CustomFilterDropdown
       className={className}
       inputLabel='SearchClient'
+      dropdownLabel='Client'
       itemsList={filterClients}
       selectedListIds={clientListIds}
       isSelectAll={isSelectAll}

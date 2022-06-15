@@ -1,24 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 
-export const replacer = (key, value) => {
-  if (value instanceof Map) {
-    return {
-      dataType: 'Map',
-      value: Array.from([...value])
-    };
-  } else {
-    return value;
-  }
-};
-
-export const reviver = (key, value) => {
-  if (typeof value === 'object' && value !== null) {
-    if (value.dataType === 'Map') {
-      return new Map(value.value);
-    }
-  }
-  return value;
-};
+import { replacer } from '../../Utils/replacer';
+import { reviver } from '../../Utils/reviver';
 
 const projectsSlice = createSlice({
   name: 'projects',
@@ -31,7 +14,7 @@ const projectsSlice = createSlice({
       ['client-status', 'ALL'],
       ['contains-client', 'true'],
       ['users', ''],
-      ['user-status', 'ALL'],
+      ['user-status', 'ACTIVE'],
       ['contains-user', 'true'],
       ['sort-column', 'DURATION'],
       ['sort-order', 'DESCENDING'],

@@ -4,16 +4,18 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Button, Col, Row } from 'react-bootstrap';
 
 import Archived from './Archived/Archived';
-
-import { reviver } from '../store/projects-slice';
-
-import { mapQueryParams } from '../../Utils/mapQueryParams';
-
-import classes from './ProjectFilter.module.css';
 import Billing from './Billing/Billing';
 import Client from './Client/Client';
+
+import { mapQueryParams } from '../../Utils/mapQueryParams';
+import { reviver } from '../../Utils/reviver';
+
 import { fetchClientsData } from '../../Clients/store/clients-actions';
+
 import { dropdownArchiveData } from '../../Services/dropdownArchiveData/dropdown-archive-data';
+
+import classes from './ProjectFilter.module.css';
+import Access from './Access/Access';
 
 const ProjectFilter = () => {
 
@@ -46,6 +48,12 @@ const ProjectFilter = () => {
     }
   }, [changedQueryParams])
 
+  const onUserGroupFilerHandler = useCallback(data => {
+    for (const [key, value] of Object.entries(data)) {
+      setChangedQueryParams(changedQueryParams.set(key, value))
+    }
+  }, [changedQueryParams])
+
   const applyFilterHandler = () => {
     const queryParams = new Map(JSON.parse(newQueryParams, reviver));
     changedQueryParams.forEach((value, key) => queryParams.set(key, value));
@@ -72,6 +80,7 @@ const ProjectFilter = () => {
             className={classes.border}
             changeArchiveValue={changeArchiveValueHandler}/>
           <Client className={classes.border} onClientFiler={onClientFilterHandler}/>
+          <Access className={classes.border} onUserGroupFiler={onUserGroupFilerHandler}/>
           <Billing onBillingChange={changeBillingHandler} className={classes.border}/>
         </Col>
         <Col xs={6}>

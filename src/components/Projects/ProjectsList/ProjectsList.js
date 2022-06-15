@@ -4,7 +4,7 @@ import { useSelector } from 'react-redux';
 import TableHeadingItem from './TableHeadingItem/TableHeadingItem';
 import ListHeaderRow from '../../UI/ListHeaderRow/ListHeaderRow';
 
-import { reviver } from '../store/projects-slice';
+import { reviver } from '../../Utils/reviver';
 import { mapQueryParams } from '../../Utils/mapQueryParams';
 
 import classes from './ProjectsList.module.css';

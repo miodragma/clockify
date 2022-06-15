@@ -4,6 +4,7 @@ import timeIcon from '../../../assets/time-icon.svg';
 import clientsIcon from '../../../assets/clients-icon.svg';
 import tagsIcon from '../../../assets/tags-icon.svg';
 import projectsIcon from '../../../assets/projects-icon.svg';
+import teamIcon from '../../../assets/team-icon.svg';
 
 export const sideNavigationData = [
   {
@@ -21,6 +22,12 @@ export const sideNavigationData = [
     label: 'Projects',
     icon: projectsIcon,
     path: `/${routeConstants.PROJECTS}`
+  },
+  {
+    type: 'link',
+    label: 'Team',
+    icon: teamIcon,
+    path: `/${routeConstants.TEAMS}`
   },
   {
     type: 'link',

@@ -3,10 +3,10 @@ import { useSelector } from 'react-redux';
 
 import { sideNavigationData } from './sideNavigationData/side-navigation-data';
 
-import { reviver } from '../Projects/store/projects-slice';
+import { reviver } from '../Utils/reviver';
+import { mapQueryParams } from '../Utils/mapQueryParams';
 
 import classes from './SideNavigation.module.css';
-import { mapQueryParams } from '../Utils/mapQueryParams';
 
 const SideNavigation = () => {
 

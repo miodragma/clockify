@@ -7,15 +7,19 @@ import { Col, Row } from 'react-bootstrap';
 import MainCard from '../../components/UI/MainCard/MainCard';
 import Projects from '../../components/Projects';
 
-import { reviver } from '../../components/Projects/store/projects-slice';
+import { reviver } from '../../components/Utils/reviver';
+
 import { fetchProjectsData } from '../../components/Projects/store/projects-actions';
 import { fetchClientsData } from '../../components/Clients/store/clients-actions';
+import { fetchAllGroups, fetchAllUsers } from '../../components/Team/store/teams-actions';
+
 import { dropdownArchiveData } from '../../components/Services/dropdownArchiveData/dropdown-archive-data';
 
 const ProjectsPage = () => {
 
-  const {defaultQueryParams} = useSelector(state => state.projects);
   const {activeWorkspace: workspaceId} = useSelector(state => state.user.user);
+  const defaultQueryParams = useSelector(state => state.projects.defaultQueryParams);
+  const {defaultUsersQueryParams, defaultGroupsQueryParams} = useSelector(state => state.teams);
 
   const {search} = useLocation();
 
@@ -46,12 +50,20 @@ const ProjectsPage = () => {
   useEffect(() => {
     if (isMounted.current) {
       if (workspaceId) {
+
         const archived = dropdownArchiveData.find(data => data.label.toUpperCase() === clientStatus).value;
-        dispatch(fetchClientsData({workspaceId, archived, page: 'projects'}))
+        dispatch(fetchClientsData({workspaceId, archived, page: 'projects'}));
+
+        const currentDefaultUsersQueryParams = JSON.parse(defaultUsersQueryParams, reviver);
+        dispatch(fetchAllUsers({queryParams: currentDefaultUsersQueryParams, workspaceId}))
+
+        const currentDefaultGroupsQueryParams = JSON.parse(defaultGroupsQueryParams, reviver);
+        dispatch(fetchAllGroups({queryParams: currentDefaultGroupsQueryParams, workspaceId}))
+
         isMounted.current = false;
       }
     }
-  }, [clientStatus, dispatch, workspaceId])
+  }, [clientStatus, defaultGroupsQueryParams, defaultUsersQueryParams, dispatch, workspaceId])
 
   return (
     <MainCard>

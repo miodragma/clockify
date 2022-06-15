@@ -1,6 +1,20 @@
 .buttonWrapper {
   width: 360px;
+}
+
+.buttonWrapperBorder {
   border-bottom: 1px solid #E4EAEE;
+}
+
+.divider {
+  font-size: 12px;
+  color: #999999;
+  text-transform: uppercase;
+  margin: 0;
+  padding: 7px 20px;
+  -moz-user-select: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
 }
 
 .inputWrapper {

@@ -1,7 +1,10 @@
-import { loaderActions } from '../../UI/store/loader/loader-slice';
 import axiosConfig from '../../../axios/axiosConfig';
-import { projectsActions, replacer } from './projects-slice';
+import { projectsActions } from './projects-slice';
+
 import { mapQueryParams } from '../../Utils/mapQueryParams';
+import { replacer } from '../../Utils/replacer';
+
+import { loaderActions } from '../../UI/store/loader/loader-slice';
 
 export const fetchProjectsData = data => {
   return async dispatch => {
