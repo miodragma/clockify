@@ -50,8 +50,8 @@ const Billing = props => {
 
   return (
     <CustomDropdownWrapper className={className} label='Billing' badgeCounter={badge}>
-      <RadioButton type='radio' isChecked={isBillable} label='Billable' changeCheckValue={onChangeBillableHandler}/>
-      <RadioButton type='radio' isChecked={isNonBillable} label='Non billable'
+      <RadioButton type='checkbox' isChecked={isBillable} label='Billable' changeCheckValue={onChangeBillableHandler}/>
+      <RadioButton type='checkbox' isChecked={isNonBillable} label='Non billable'
                    changeCheckValue={onChangeNonBillableHandler}/>
     </CustomDropdownWrapper>
   )

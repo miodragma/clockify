@@ -3,10 +3,13 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useLocation } from 'react-router-dom';
 
 import CustomFilterDropdown from '../../../Services/CustomFilterDropdown/CustomFilterDropdown';
-import { dropdownUsersGroupsData } from './dropdownData/dropdownUsersGroupsData';
-import { fetchAllGroups, fetchAllUsers } from '../../../Team/store/teams-actions';
+
 import { reviver } from '../../../Utils/reviver';
 import { existAllValuesInArray } from '../../../Utils/existAllValuesInArray';
+
+import { fetchAllGroups, fetchAllUsers } from '../../../Team/store/teams-actions';
+
+import { dropdownUsersGroupsData } from './dropdownData/dropdownUsersGroupsData';
 
 const Access = props => {
 
