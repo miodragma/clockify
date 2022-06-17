@@ -1,3 +1,7 @@
 .mainCardWrapper {
   padding: 40px 10px;
 }
+
+.container {
+  position: relative;
+}

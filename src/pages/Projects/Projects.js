@@ -6,14 +6,13 @@ import { Col, Row } from 'react-bootstrap';
 
 import MainCard from '../../components/UI/MainCard/MainCard';
 import Projects from '../../components/Projects';
+import CreateProject from '../../components/Projects/CreateProject/CreateProject';
 
 import { reviver } from '../../components/Utils/reviver';
 
 import { fetchProjectsData } from '../../components/Projects/store/projects-actions';
 import { fetchClientsData } from '../../components/Clients/store/clients-actions';
 import { fetchAllGroups, fetchAllUsers } from '../../components/Team/store/teams-actions';
-
-import { dropdownArchiveData } from '../../components/Services/dropdownArchiveData/dropdown-archive-data';
 
 const ProjectsPage = () => {
 
@@ -51,8 +50,7 @@ const ProjectsPage = () => {
     if (isMounted.current) {
       if (workspaceId) {
 
-        const archived = dropdownArchiveData.find(data => data.label.toUpperCase() === clientStatus).value;
-        dispatch(fetchClientsData({workspaceId, archived, page: 'projects'}));
+        dispatch(fetchClientsData({workspaceId, archived: false, page: 'projects'}));
 
         const currentDefaultUsersQueryParams = JSON.parse(defaultUsersQueryParams, reviver);
         dispatch(fetchAllUsers({queryParams: currentDefaultUsersQueryParams, workspaceId}))
@@ -72,6 +70,7 @@ const ProjectsPage = () => {
           <h1 className='pageTitle'>Projects</h1>
         </Col>
       </Row>
+      <CreateProject/>
       <Projects/>
     </MainCard>
   )

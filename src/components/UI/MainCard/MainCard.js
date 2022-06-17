@@ -5,7 +5,7 @@ import classes from './MainCard.module.css';
 const MainCard = props => {
   return (
     <div className={classes.mainCardWrapper}>
-      <Container fluid>
+      <Container className={classes.container} fluid>
         {props.children}
       </Container>
     </div>

@@ -33,6 +33,31 @@ export const fetchProjectsData = data => {
   }
 }
 
+export const addNewProject = data => {
+  return async dispatch => {
+
+    const {workspaceId, projectData} = data;
+
+    dispatch(loaderActions.setLoaderData(true));
+
+    const addNewProject = async () => {
+      return axiosConfig.post(`/workspaces/${workspaceId}/projects`, projectData)
+    }
+
+    try {
+      const {data: projectsData} = await addNewProject();
+      dispatch(projectsActions.addNewProject(projectsData));
+      dispatch(loaderActions.setLoaderData(false));
+    } catch (error) {
+      console.log(error);
+      const message = error.response.data.code === 3000 ? 'Unexpected filter values' : `${error.response.data.message}`
+      dispatch(loaderActions.setLoaderData(false));
+      dispatch(loaderActions.showToast({toastMessage: message, type: 'error'}))
+    }
+
+  }
+}
+
 export const updateProjectArchive = data => {
   return async dispatch => {
 

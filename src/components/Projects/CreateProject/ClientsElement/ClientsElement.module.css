@@ -1,0 +1,35 @@
+.clientInputBorder {
+  border-bottom: 1px solid #ebeff3;
+}
+
+.clientsNameFormFiled {
+  max-width: 90%;
+  margin: 10px auto;
+}
+
+.projectNameFormField {
+  border: 1px solid #ced4da !important;
+}
+
+.clientNoFoundWrapper {
+  cursor: grab;
+  padding: 10px 20px;
+  border-bottom: 1px solid #ebeff3;
+}
+
+.noMatchingClient {
+  margin: 0;
+  font-size: 14px;
+}
+
+.pressCtrl {
+  margin: 0;
+  font-size: 12px;
+  color: #999999;
+}
+
+.createClientSpan {
+  font-size: 12px;
+  color: #03a9f4;
+  cursor: pointer;
+}

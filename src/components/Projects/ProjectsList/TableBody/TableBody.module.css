@@ -11,3 +11,8 @@
 .td {
   width: 57px;
 }
+
+.actionModalMessage {
+  color: #6c757d;
+  font-size: 14px;
+}

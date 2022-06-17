@@ -26,7 +26,10 @@ const Archived = props => {
   }, [queryParams])
 
   const onChangeArchived = val => {
-    changeArchiveValue(val)
+    const data = {
+      archived: val !== 'empty' ? val : ''
+    }
+    changeArchiveValue(data)
   };
 
   return (

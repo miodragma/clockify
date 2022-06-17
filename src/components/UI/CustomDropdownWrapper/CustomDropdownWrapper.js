@@ -1,4 +1,4 @@
-import { useCallback, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 
 import CustomDropdown from '../CustomDropdown/CustomDropdown';
 
@@ -6,7 +6,7 @@ import classes from './CustomDropdownWrapper.module.css';
 
 const CustomDropdownWrapper = props => {
 
-  const {className, label, badgeCounter} = props;
+  const {className, label, badgeCounter, closeDropdown, onResetCloseDropdown} = props;
 
   const [isOpenCDW, setIsOpenCDW] = useState(false);
 
@@ -15,8 +15,15 @@ const CustomDropdownWrapper = props => {
   }
 
   const onCloseCDW = useCallback(() => {
-    setIsOpenCDW(false)
+    setIsOpenCDW(false);
   }, [])
+
+  useEffect(() => {
+    if (closeDropdown) {
+      onCloseCDW();
+      onResetCloseDropdown(false)
+    }
+  }, [closeDropdown, onCloseCDW, onResetCloseDropdown])
 
   return (
     <div className={`${className} ${classes.cdwWrapper}`} onClick={onOpenItemClient}>

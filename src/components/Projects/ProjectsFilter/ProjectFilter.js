@@ -6,6 +6,8 @@ import { Button, Col, Row } from 'react-bootstrap';
 import Archived from './Archived/Archived';
 import Billing from './Billing/Billing';
 import Client from './Client/Client';
+import Access from './Access/Access';
+
 
 import { mapQueryParams } from '../../Utils/mapQueryParams';
 import { reviver } from '../../Utils/reviver';
@@ -15,7 +17,6 @@ import { fetchClientsData } from '../../Clients/store/clients-actions';
 import { dropdownArchiveData } from '../../Services/dropdownArchiveData/dropdown-archive-data';
 
 import classes from './ProjectFilter.module.css';
-import Access from './Access/Access';
 
 const ProjectFilter = () => {
 
@@ -34,21 +35,7 @@ const ProjectFilter = () => {
     setIsClearFilter(newQueryParams !== defaultQueryParams)
   }, [newQueryParams, defaultQueryParams])
 
-  const changeArchiveValueHandler = useCallback(archiveVal => {
-    setChangedQueryParams(changedQueryParams.set('archived', archiveVal !== 'empty' ? archiveVal : ''))
-  }, [changedQueryParams]);
-
-  const changeBillingHandler = useCallback(billing => {
-    setChangedQueryParams(changedQueryParams.set('billable', billing))
-  }, [changedQueryParams]);
-
-  const onClientFilterHandler = useCallback(data => {
-    for (const [key, value] of Object.entries(data)) {
-      setChangedQueryParams(changedQueryParams.set(key, value))
-    }
-  }, [changedQueryParams])
-
-  const onUserGroupFilerHandler = useCallback(data => {
+  const onFilterHandler = useCallback(data => {
     for (const [key, value] of Object.entries(data)) {
       setChangedQueryParams(changedQueryParams.set(key, value))
     }
@@ -78,10 +65,10 @@ const ProjectFilter = () => {
           </div>
           <Archived
             className={classes.border}
-            changeArchiveValue={changeArchiveValueHandler}/>
-          <Client className={classes.border} onClientFiler={onClientFilterHandler}/>
-          <Access className={classes.border} onUserGroupFiler={onUserGroupFilerHandler}/>
-          <Billing onBillingChange={changeBillingHandler} className={classes.border}/>
+            changeArchiveValue={onFilterHandler}/>
+          <Client className={classes.border} onClientFiler={onFilterHandler}/>
+          <Access className={classes.border} onUserGroupFiler={onFilterHandler}/>
+          <Billing onBillingChange={onFilterHandler} className={classes.border}/>
         </Col>
         <Col xs={6}>
 

@@ -36,12 +36,14 @@ const projectsSlice = createSlice({
     setProjectsData(state, action) {
       state.projects = action.payload;
     },
+    addNewProject(state, action) {
+      state.projects = [action.payload, ...state.projects]
+    },
     onUpdateProject(state, action) {
       const currentProjects = [...state.projects];
       const index = currentProjects.findIndex(project => project.id === action.payload.projectData.id);
       const currentProject = {...currentProjects.find(project => project.id === action.payload.projectData.id)};
       if (action.payload.type === 'archived') {
-        console.log(action.payload)
         currentProject.archived = action.payload.projectData.archived;
       } else {
         currentProject.template = !action.payload.projectData.template

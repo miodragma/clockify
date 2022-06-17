@@ -1,3 +1,4 @@
+import { Fragment, useState } from 'react';
 import { useDispatch } from 'react-redux';
 
 import NameItem from './NameItem/NameItem';
@@ -9,8 +10,11 @@ import AccessItem from './AccessItem/AccessItem';
 import FavoriteItem from './FavoriteItem/FavoriteItem';
 import EditItem from './EditItem/EditItem';
 
-import classes from './TableBody.module.css';
+import ModalWrapper from '../../../UI/ModalWrapper/ModalWrapper';
+
 import { deleteProject, updateProjectArchive } from '../../store/projects-actions';
+
+import classes from './TableBody.module.css';
 
 const TableBody = props => {
 
@@ -18,13 +22,28 @@ const TableBody = props => {
 
   const dispatch = useDispatch();
 
+  const [showActionModal, setShowActionModal] = useState(false);
+  const [projectData, setProjectData] = useState({});
+
   const onEditProjectActionHandler = actionData => {
     actionData.actionType !== 'delete' && dispatch(updateProjectArchive({
       actionType: actionData.actionType,
       data: actionData.project
     }))
-    actionData.actionType === 'delete' && dispatch(deleteProject(actionData.project))
+    if (actionData.actionType === 'delete') {
+      setShowActionModal(true);
+      setProjectData(actionData.project)
+    }
   }
+
+  const onHideActionModalHandler = () => {
+    setShowActionModal(false);
+  }
+
+  const submitActionModalHandler = () => {
+    dispatch(deleteProject(projectData))
+    onHideActionModalHandler()
+  };
 
   const projectsData = projects.map(project => <tr className={classes.tr} key={project.id}>
     <NameItem project={project}/>
@@ -37,7 +56,24 @@ const TableBody = props => {
     <EditItem editProjectAction={onEditProjectActionHandler} project={project} className={classes.td}/>
   </tr>)
 
-  return (projectsData);
+  return (
+    <Fragment>
+      {projectsData}
+      <ModalWrapper
+        show={showActionModal}
+        onHide={onHideActionModalHandler}
+        title='Delete'
+        buttonTitle='Delete'
+        className={'warning'}
+        onClickSubmitButton={submitActionModalHandler}>
+        <div>
+          <p className={classes.actionModalMessage}>The {projectData.name} Project will also be removed from all time
+            entries it is
+            assigned to. This action cannot be reversed.</p>
+        </div>
+      </ModalWrapper>
+    </Fragment>
+  );
 };
 
 export default TableBody;
