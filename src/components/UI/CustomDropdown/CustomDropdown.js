@@ -13,14 +13,14 @@ const CustomDropdown = props => {
   const onCloseDropdown = () => {
     closeDropdown()
   }
+
   outsideClick({actionsRef, onCloseDropdown})
 
   return (
     <Fragment>
       {isOpenDropdown && <div
         ref={actionsRef}
-        className={`${className || classes.defaultActionsList} ${position ? classes.left : classes.right}`}
-      >
+        className={`${className || classes.defaultActionsList} ${position ? classes.left : classes.right}`}>
         {props.children}
       </div>}
     </Fragment>

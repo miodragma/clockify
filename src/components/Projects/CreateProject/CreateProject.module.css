@@ -1,0 +1,125 @@
+.createNewProjectButton {
+  background: transparent !important;
+  color: #03A9F4 !important;
+  text-transform: uppercase;
+  position: absolute;
+  top: 0;
+  right: 12px;
+  transition: all 0.2s ease;
+}
+
+.createNewProjectButton:hover {
+  background: #03A9F4 !important;
+  color: #ffffff !important;
+}
+
+.createProjectCdw > div:nth-child(1) {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  margin: 0;
+  padding: 0 6px 0 15px;
+  border: 1px solid #ced4da;
+  border-radius: 3px;
+  height: 40px;
+}
+
+.createProjectCdw > div:nth-child(1):hover {
+  background-color: #e4eaee
+}
+
+.createProjectCdwTemplate > div:nth-child(2) {
+  z-index: 10;
+  top: unset;
+  background: transparent;
+  min-width: unset;
+}
+
+.formRowWrapper {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  position: relative;
+}
+
+.formRowWrapper > div {
+  width: 48%;
+}
+
+.clientsList {
+  width: 360px
+}
+
+.clientsList p {
+  padding: 10px 20px;
+  font-size: 14px;
+  color: #666666;
+  margin: 0;
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+
+.clientsList p:hover {
+  background-color: #e4eaee
+}
+
+.projectNameFormField {
+  border: 1px solid #ced4da !important;
+}
+
+.formRowWrapperWithColor {
+  margin-top: 15px;
+}
+
+.colorAndPublicWrapper {
+  display: flex;
+  align-items: center;
+}
+
+.buttonWrapper {
+  margin-left: 20px;
+  padding: 0;
+  height: 18px;
+}
+
+.buttonWrapper:hover {
+  background: unset;
+}
+
+.popover {
+  display: flex;
+  box-shadow: 0 5px 10px #0000001a;
+  position: absolute;
+  bottom: 3px;
+  right: 15px;
+  width: 206px;
+  height: 61px;
+  background: #fff;
+  padding: 20px;
+  border: 1px solid #ced4da;
+  cursor: grab;
+}
+
+.popover p {
+  margin: 0;
+  font-size: 14px;
+}
+
+.popover span {
+  cursor: pointer;
+  font-size: 14px;
+  color: #03A9F4;
+}
+
+.popoverArrow {
+  background-color: #FFF;
+  border-right: 1px solid #ced4da;
+  border-top: 1px solid #ced4da;
+  height: 12px;
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translate(50%, -50%) rotate(45deg);
+  width: 12px;
+}

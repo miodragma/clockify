@@ -16,7 +16,10 @@ const Billing = props => {
 
   useEffect(() => {
     let billingVal = !isBillable && !isNonBillable ? '' : isNonBillable ? 'false' : 'true';
-    onBillingChange(billingVal)
+    const data = {
+      billable: billingVal
+    }
+    onBillingChange(data)
   }, [isBillable, isNonBillable, onBillingChange])
 
   useEffect(() => {
