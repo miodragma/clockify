@@ -32,6 +32,7 @@ const CreateProject = props => {
   const [clientId, setClientId] = useState('');
   const [color, setColor] = useState('');
   const [isPublic, setIsPublic] = useState(true);
+  const [isWithout, setIsWithout] = useState(false);
 
   const isClientList = useRef(false);
 
@@ -76,9 +77,16 @@ const CreateProject = props => {
   }, [])
 
   const onClickClientHandler = client => {
-    setClientId(client.id);
-    setClientDropdownLabel(client.name);
-    setCloseDropdown(true);
+    if (client.id !== 'without') {
+      setClientId(client.id);
+      setClientDropdownLabel(client.name);
+      setCloseDropdown(true);
+    } else {
+      setClientId('');
+      setClientDropdownLabel('Select client');
+      setCloseDropdown(true);
+    }
+    setIsWithout(client.id !== 'without');
   }
 
   const onResetCloseDropdownHandler = useCallback(val => {
@@ -136,6 +144,7 @@ const CreateProject = props => {
               onResetCloseDropdown={onResetCloseDropdownHandler}>
               <div className={classes.clientsList}>
                 <ClientsElement
+                  isWithoutClient={isWithout}
                   clients={clients}
                   findClientName={findClientName}
                   clickClient={onClickClientHandler}

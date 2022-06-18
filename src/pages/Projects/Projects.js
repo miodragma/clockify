@@ -1,6 +1,6 @@
-import { useEffect, useMemo, useRef } from 'react';
+import { Fragment, useEffect, useMemo, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useLocation } from 'react-router-dom';
+import { useHistory, useLocation } from 'react-router-dom';
 
 import { Col, Row } from 'react-bootstrap';
 
@@ -13,6 +13,7 @@ import { reviver } from '../../components/Utils/reviver';
 import { fetchProjectsData } from '../../components/Projects/store/projects-actions';
 import { fetchClientsData } from '../../components/Clients/store/clients-actions';
 import { fetchAllGroups, fetchAllUsers } from '../../components/Team/store/teams-actions';
+import { mapQueryParams } from '../../components/Utils/mapQueryParams';
 
 const ProjectsPage = () => {
 
@@ -29,22 +30,29 @@ const ProjectsPage = () => {
 
   const dispatch = useDispatch();
 
+  const history = useHistory();
+  const {pathname} = useLocation();
+
+  const isLoadParams = useRef(false);
+
   useEffect(() => {
 
-    const initParams = new Map();
-    for (let [key, value] of [...queryParams]) {
-      initParams.set(key, value)
-    }
     if (workspaceId) {
+      const initParams = new Map();
+      for (let [key, value] of [...queryParams]) {
+        initParams.set(key, value)
+      }
       if (initParams.size === 0) {
         const currentDefaultQueryParams = JSON.parse(defaultQueryParams, reviver);
-        dispatch(fetchProjectsData({queryParams: currentDefaultQueryParams, workspaceId}))
+        history.replace({pathname, search: mapQueryParams(currentDefaultQueryParams)})
+        setTimeout(() => isLoadParams.current = true, 200)
       } else {
         dispatch(fetchProjectsData({queryParams: initParams, workspaceId}))
+        isLoadParams.current = true;
       }
     }
 
-  }, [dispatch, queryParams, defaultQueryParams, workspaceId])
+  }, [dispatch, queryParams, defaultQueryParams, workspaceId, history, pathname])
 
   useEffect(() => {
     if (isMounted.current) {
@@ -70,8 +78,10 @@ const ProjectsPage = () => {
           <h1 className='pageTitle'>Projects</h1>
         </Col>
       </Row>
-      <CreateProject/>
-      <Projects/>
+      {isLoadParams.current && <Fragment>
+        <CreateProject/>
+        <Projects/>
+      </Fragment>}
     </MainCard>
   )
 };
