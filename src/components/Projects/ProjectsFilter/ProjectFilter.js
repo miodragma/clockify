@@ -1,12 +1,13 @@
-import { useCallback, useEffect, useState } from 'react';
+import { Fragment, useCallback, useEffect, useState } from 'react';
 import { useHistory, useLocation } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { Button, Col, Row } from 'react-bootstrap';
+import { Button, Row } from 'react-bootstrap';
 
 import Archived from './Archived/Archived';
-import Billing from './Billing/Billing';
 import Client from './Client/Client';
 import Access from './Access/Access';
+import Billing from './Billing/Billing';
+import Search from './Search/Search';
 
 
 import { mapQueryParams } from '../../Utils/mapQueryParams';
@@ -57,9 +58,9 @@ const ProjectFilter = () => {
   }
 
   return (
-    <div>
-      <Row className={`${classes.rowItemBorder} rowItem`}>
-        <Col xs={4} className={classes.filterActionButtonsWrapper}>
+    <Fragment>
+      <div className={`${classes.rowItemBorder} ${classes.rowContent} rowItem`}>
+        <div className={classes.filterActionButtonsWrapper}>
           <div className={classes.filterTitle}>
             <p>Filter</p>
           </div>
@@ -68,23 +69,23 @@ const ProjectFilter = () => {
             changeArchiveValue={onFilterHandler}/>
           <Client className={classes.border} onClientFiler={onFilterHandler}/>
           <Access className={classes.border} onUserGroupFiler={onFilterHandler}/>
-          <Billing onBillingChange={onFilterHandler} className={classes.border}/>
-        </Col>
-        <Col xs={6}>
-
-        </Col>
-        <Col xs={2} className={classes.applyFilterButtonCol}>
-          <Button
-            onClick={applyFilterHandler}
-            className='primary'>Apply Filter
-          </Button>
-        </Col>
-      </Row>
+          <Billing className={classes.border} onBillingChange={onFilterHandler}/>
+        </div>
+        <div className={classes.searchApplyWrapper}>
+          <Search className={classes.border} onProjectNameChange={onFilterHandler}/>
+          <div className={classes.applyFilterButtonCol}>
+            <Button
+              onClick={applyFilterHandler}
+              className='primary'>Apply Filter
+            </Button>
+          </div>
+        </div>
+      </div>
       <Row className={classes.clearFilterButtonRow}>
         {isClearFilter && <Button className={classes.clearFilterButton} variant="link" onClick={clearFilterHandler}>Clear
           filters</Button>}
       </Row>
-    </div>
+    </Fragment>
   )
 };
 

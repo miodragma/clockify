@@ -6,7 +6,7 @@ import classes from './ClientsElement.module.css';
 
 const ClientsElement = props => {
 
-  const {clients, findClientName, clickClient, isClientList, findClient, createClient} = props;
+  const {clients, findClientName, clickClient, isClientList, findClient, createClient, isWithoutClient} = props;
 
   const onClickClient = client => {
     clickClient(client)
@@ -22,20 +22,26 @@ const ClientsElement = props => {
 
   let clientsList = [];
 
+  const clientElement = client => <p onClick={() => onClickClient(client)} key={client.id}>{client.name}</p>;
+
   if (findClientName) {
     clientsList = clients.filter(client => client.name.toLowerCase().includes(findClientName))
-      .map(client => <p onClick={() => onClickClient(client)} key={client.id}>{client.name}</p>);
+      .map(client => clientElement(client));
     isClientList(!!clientsList.length);
   } else {
-    clientsList = clients.map(client => <p onClick={() => onClickClient(client)}
-                                           key={client.id}>{client.name}</p>);
+    clientsList = clients.map(client => clientElement(client));
     isClientList(!!clientsList.length);
+  }
+
+  if (isWithoutClient) {
+    clientsList.unshift(clientElement({id: 'without', name: 'Without client'}))
   }
 
   return (
     <Fragment>
       <div className={classes.clientInputBorder}>
         <Input
+          currentValue={findClientName}
           className={`${classes.projectNameFormField} ${classes.clientsNameFormFiled}`}
           placeholder='Add/Find client'
           type='text'

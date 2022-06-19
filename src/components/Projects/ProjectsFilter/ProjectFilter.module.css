@@ -15,6 +15,20 @@
   margin-left: 5px;
 }
 
+.rowContent {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.searchApplyWrapper {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  margin: 0 10px 0 0;
+}
+
 .rowItemBorder {
   border-top: 1px solid #C6D2D9;
 }
