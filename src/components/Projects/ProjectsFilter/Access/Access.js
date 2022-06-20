@@ -137,7 +137,7 @@ const Access = props => {
   return (
     <CustomFilterDropdown
       className={className}
-      inputLabel='SearchClient'
+      inputLabel='Find member or group...'
       dropdownLabel='Access'
       users={users}
       groups={groups}

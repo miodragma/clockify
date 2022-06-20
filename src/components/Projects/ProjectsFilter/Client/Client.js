@@ -163,7 +163,7 @@ const Client = props => {
   return (
     <CustomFilterDropdown
       className={className}
-      inputLabel='SearchClient'
+      inputLabel='Search client'
       dropdownLabel='Client'
       itemsList={filterClients}
       selectedListIds={clientListIds}
