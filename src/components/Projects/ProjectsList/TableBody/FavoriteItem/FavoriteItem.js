@@ -1,16 +1,13 @@
 import TableData from '../../../../UI/TableData/TableData';
-
-import favoriteIcon from '../../../../../assets/favorite-icon.svg';
-
-import classes from './FavoriteItem.module.css';
+import FavoriteButton from '../../../../Services/FavoriteButton/FavoriteButton';
 
 const FavoriteItem = props => {
 
   const {className} = props;
 
   return (
-    <TableData tdClassName={className}>
-      <img className={classes.favoriteIcon} src={favoriteIcon} alt="favorite-icon"/>
+    <TableData tdClassName={className} onClickTableData={console.log}>
+      <FavoriteButton/>
     </TableData>
   );
 };

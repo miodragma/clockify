@@ -8,7 +8,8 @@ import Loader from '../components/UI/Loader/Loader';
 const Tracker = React.lazy(() => import('../pages/Tracker/Tracker'));
 const Clients = React.lazy(() => import('../pages/Clients/Clients'));
 const Tags = React.lazy(() => import('../pages/Tags/Tags'));
-const Projects = React.lazy(() => import('../pages/Projects/Projects'));
+const ProjectsList = React.lazy(() => import('../pages/ProjectsList/ProjectsList'));
+const ProjectsEdit = React.lazy(() => import('../pages/ProjectsEdit/ProjectsEdit'));
 const Teams = React.lazy(() => import('../pages/Team/Team'));
 
 const Routes = () => {
@@ -22,7 +23,8 @@ const Routes = () => {
         <Route path={`/${routeConstants.TRACKER}`} component={Tracker}/>
         <Route path={`/${routeConstants.CLIENTS}`} component={Clients}/>
         <Route path={`/${routeConstants.TAGS}`} component={Tags}/>
-        <Route path={`/${routeConstants.PROJECTS}`} component={Projects}/>
+        <Route path={`/${routeConstants.PROJECTS}`} exact component={ProjectsList}/>
+        <Route path={`/${routeConstants.PROJECTS}/:id/edit`} component={ProjectsEdit}/>
         <Route path={`/${routeConstants.TEAMS}`} component={Teams}/>
       </Switch>
     </Suspense>

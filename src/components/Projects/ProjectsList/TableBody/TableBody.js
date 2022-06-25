@@ -1,4 +1,4 @@
-import { Fragment, useState } from 'react';
+import { Fragment, useCallback, useState } from 'react';
 import { useDispatch } from 'react-redux';
 
 import NameItem from './NameItem/NameItem';
@@ -9,8 +9,7 @@ import ProgressItem from './ProgressItem/ProgressItem';
 import AccessItem from './AccessItem/AccessItem';
 import FavoriteItem from './FavoriteItem/FavoriteItem';
 import EditItem from './EditItem/EditItem';
-
-import ModalWrapper from '../../../UI/ModalWrapper/ModalWrapper';
+import DeleteProjectModal from '../../../Services/DeleteProjectModal/DeleteProjectModal';
 
 import { deleteProject, updateProjectArchive } from '../../store/projects-actions';
 
@@ -18,7 +17,7 @@ import classes from './TableBody.module.css';
 
 const TableBody = props => {
 
-  const {projects} = props;
+  const {projects, editProject} = props;
 
   const dispatch = useDispatch();
 
@@ -45,13 +44,17 @@ const TableBody = props => {
     onHideActionModalHandler()
   };
 
+  const onEditProject = useCallback(data => {
+    editProject(data);
+  }, [editProject])
+
   const projectsData = projects.map(project => <tr className={classes.tr} key={project.id}>
-    <NameItem project={project}/>
-    <ClientItem project={project}/>
-    <TrackedItem project={project}/>
-    <AmountItem/>
-    <ProgressItem/>
-    <AccessItem project={project}/>
+    <NameItem project={project} onClickName={() => onEditProject({id: project.id, tab: 'tasks'})}/>
+    <ClientItem project={project} onClickClient={() => onEditProject({id: project.id, tab: 'settings'})}/>
+    <TrackedItem project={project} onClickTracked={() => onEditProject({id: project.id, tab: 'status'})}/>
+    <AmountItem onClickAmount={() => onEditProject({id: project.id, tab: 'status'})}/>
+    <ProgressItem onClickProgress={() => onEditProject({id: project.id, tab: 'status'})}/>
+    <AccessItem project={project} onClickAccess={() => onEditProject({id: project.id, tab: 'access'})}/>
     <FavoriteItem className={classes.td}/>
     <EditItem editProjectAction={onEditProjectActionHandler} project={project} className={classes.td}/>
   </tr>)
@@ -59,19 +62,11 @@ const TableBody = props => {
   return (
     <Fragment>
       {projectsData}
-      <ModalWrapper
-        show={showActionModal}
-        onHide={onHideActionModalHandler}
-        title='Delete'
-        buttonTitle='Delete'
-        className={'warning'}
-        onClickSubmitButton={submitActionModalHandler}>
-        <div>
-          <p className={classes.actionModalMessage}>The {projectData.name} Project will also be removed from all time
-            entries it is
-            assigned to. This action cannot be reversed.</p>
-        </div>
-      </ModalWrapper>
+      <DeleteProjectModal
+        showDeleteActionModal={showActionModal}
+        projectName={projectData.name}
+        onSubmitActionModal={submitActionModalHandler}
+        onHideActionModal={onHideActionModalHandler}/>
     </Fragment>
   );
 };

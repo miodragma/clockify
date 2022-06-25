@@ -22,7 +22,8 @@ const projectsSlice = createSlice({
       ['page-size', '50']
     ]), replacer),
     newQueryParams: JSON.stringify(new Map(), replacer),
-    projects: []
+    projects: [],
+    project: {}
   },
   reducers: {
     changeNewQueryParams(state, action) {
@@ -53,6 +54,9 @@ const projectsSlice = createSlice({
     },
     deleteProject(state, action) {
       state.projects = state.projects.filter(project => project.id !== action.payload);
+    },
+    setProject(state, action) {
+      state.project = action.payload;
     }
   }
 })

@@ -1,10 +1,12 @@
+import { useCallback } from 'react';
+
 import TableData from '../../../../UI/TableData/TableData';
 
 import classes from './TrackedItem.module.css';
 
 const TrackedItem = props => {
 
-  const {project} = props;
+  const {project, onClickTracked} = props;
   const {duration, estimate} = project;
 
   const totalSeconds = time => {
@@ -48,8 +50,13 @@ const TrackedItem = props => {
   const getDuration = getDurationHour ? `${getDurationHour}.${getRestWithHour(duration)}` : calcLength(calculated(duration));
 
   const getEstimate = getEstimateHour ? `${getEstimateHour}.${getRestWithHour(estimate.estimate)}` : calcLength(calculated(estimate.estimate));
+
+  const onClickTrackedHandler = useCallback(() => {
+    onClickTracked()
+  }, [onClickTracked]);
+
   return (
-    <TableData>
+    <TableData onClickTableData={onClickTrackedHandler}>
       <div>
         <p className={classes.duration}>{getDuration}h</p>
         {estimate.type === 'MANUAL' && <p className={classes.estimate}>of {getEstimate}h</p>}

@@ -111,3 +111,27 @@ export const deleteProject = data => {
     }
   }
 }
+
+export const fetchProjectById = data => {
+  return async dispatch => {
+    dispatch(projectsActions.setProject({}));
+    dispatch(loaderActions.setLoaderData(true));
+
+    const {projectId, workspaceId} = data;
+
+    const fetchProject = async () => {
+      return axiosConfig(`/workspaces/${workspaceId}/projects/${projectId}`)
+    }
+
+    try {
+      const {data: projectData} = await fetchProject();
+      dispatch(projectsActions.setProject(projectData));
+      dispatch(loaderActions.setLoaderData(false));
+    } catch (error) {
+      console.log(error);
+      const message = error.response.data.code === 3000 ? 'Unexpected filter values' : `${error.response.data.message}`
+      dispatch(loaderActions.setLoaderData(false));
+      dispatch(loaderActions.showToast({toastMessage: message, type: 'error'}))
+    }
+  }
+}
