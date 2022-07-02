@@ -31,7 +31,7 @@ const Search = props => {
 
   return (
     <div className={classes.searchWrapper}>
-      <div className={`${className} ${classes.iconWrapper}`}>
+      <div className={`${className ? className : ''} ${classes.iconWrapper}`}>
         <img src={searchIcon} alt="searchIcon"/>
       </div>
       <Form.Group className={classes.formGroup}>

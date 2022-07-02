@@ -1,10 +1,10 @@
 import ModalWrapper from '../../UI/ModalWrapper/ModalWrapper';
 
-import classes from './DeleteProjectModal.module.css';
+import classes from './DeleteItemModal.module.css';
 
-const DeleteProjectModal = props => {
+const DeleteItemModal = props => {
 
-  const {showDeleteActionModal, projectName, onSubmitActionModal, onHideActionModal} = props;
+  const { showDeleteActionModal, message, onSubmitActionModal, onHideActionModal } = props;
 
   const onHideActionModalHandler = () => {
     onHideActionModal();
@@ -23,13 +23,11 @@ const DeleteProjectModal = props => {
       className={'warning'}
       onClickSubmitButton={submitActionModalHandler}>
       <div>
-        <p className={classes.actionModalMessage}>The {projectName} Project will also be removed from all time
-          entries it is
-          assigned to. This action cannot be reversed.</p>
+        <p className={classes.actionModalMessage}>{message}</p>
       </div>
     </ModalWrapper>
   )
 
 };
 
-export default DeleteProjectModal;
+export default DeleteItemModal;

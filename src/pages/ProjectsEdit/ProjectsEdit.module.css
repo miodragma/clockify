@@ -36,7 +36,7 @@
 }
 
 .favoriteButton {
-  background-color: #ffffff;
+  background-color: #ffffff !important;
   width: 40px;
   height: 40px;
   transition: 0.2s ease;
@@ -51,6 +51,6 @@
 }
 
 .favoriteButton:hover, .actionsButton:hover {
-  background-color: #e4eaee;
+  background-color: #e4eaee !important;
   border: 1px solid #c6d2d9;
 }

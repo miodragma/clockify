@@ -37,7 +37,7 @@ const ModalWrapper = props => {
       </Modal.Body>
       <Modal.Footer>
         <Button className={classes.cancelButton} variant="link" onClick={onHide}>Cancel</Button>
-        <Button disabled={isDisabledButton} className={`${classes.submitButton} ${className}`}
+        <Button disabled={isDisabledButton} className={`${classes.submitButton} ${className ? className : ''}`}
                 onClick={onClickSubmit}>{buttonTitle || 'Save'}</Button>
       </Modal.Footer>
     </Modal>

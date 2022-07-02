@@ -12,14 +12,14 @@ import { tabsData } from './dropdownData/tabs-data';
 
 import classes from './ProjectEdit.module.css';
 
-const ProjectEdit = props => {
+const ProjectEdit = () => {
 
   const history = useHistory();
   const { pathname } = useLocation();
   const hash = history.location.hash.replace('#', '');
 
   const onChangeHashHandler = hash => {
-    history.push({pathname, hash})
+    history.push({ pathname, hash })
   }
 
   const tabs = tabsData.map((item, index) => {

@@ -16,9 +16,11 @@ import { fetchAllGroups, fetchAllUsers } from '../../../Team/store/teams-actions
 
 import { sortTaskData } from '../dropdownData/filter-tasks-data';
 
-import { addNewTask } from '../../store/projects-actions';
+import { addNewTask, deleteTask, editTask } from '../../store/projects-actions';
 
 import classes from './Tasks.module.css';
+import EditTask from './EditTask/EditTask';
+import DeleteItemModal from '../../../Services/DeleteItemModal/DeleteItemModal';
 
 const Tasks = () => {
 
@@ -26,6 +28,8 @@ const Tasks = () => {
 
   const [sortOrder, setSortOrder] = useState('DESCENDING');
   const [currentTasks, setCurrentTasks] = useState([]);
+  const [showActionModal, setShowActionModal] = useState(false);
+  const [taskData, setTaskData] = useState({});
 
   const { project, tasks } = useSelector(state => state.projects);
 
@@ -70,13 +74,36 @@ const Tasks = () => {
     setCurrentTasks(updateTasks)
   }, []);
 
+  const onEditTaskHandler = useCallback(newTaskData => {
+    if (newTaskData.actionType !== 'delete') {
+      const taskData = {
+        name: newTaskData.task.name,
+        status: newTaskData.actionType
+      }
+      dispatch(editTask({ projectId: project.id, workspaceId, taskData, taskId: newTaskData.task.id }))
+    }
+    if (newTaskData.actionType === 'delete') {
+      setShowActionModal(true);
+      setTaskData(newTaskData.task)
+    }
+  }, [dispatch, project.id, workspaceId]);
+
+  const onHideActionModalHandler = useCallback(() => {
+    setShowActionModal(false);
+  }, []);
+
+  const submitActionModalHandler = useCallback(() => {
+    dispatch(deleteTask({ projectId: project.id, workspaceId, taskId: taskData.id }))
+    onHideActionModalHandler();
+  }, [dispatch, onHideActionModalHandler, project.id, taskData.id, workspaceId]);
+
   let tasksContent;
 
   if (currentTasks) {
     tasksContent = filterByAscAndDesc([...currentTasks], sortOrder).map(task => {
 
       return <TableRow key={task.id}>
-        <TableData className={classes.tableData}>
+        <TableData className={classes.tableDataNameInput}>
           <div className={`${classes.tableDataChildrenWrapper} ${classes.inputWrapper}`}>
             <TaskNameInput
               task={task}
@@ -96,12 +123,16 @@ const Tasks = () => {
             />
           </div>
         </TableData>
-        <TableData>
-          <div className={classes.tableDataChildrenWrapper}><p></p></div>
+        <TableData tdClassName={classes.tableDataEditButton}>
+          <div className={classes.tableDataChildrenWrapper}>
+            <EditTask task={task} onEditTask={onEditTaskHandler}/>
+          </div>
         </TableData>
       </TableRow>
     })
   }
+
+  const deleteMessage = `The ${taskData.name} task will also be removed from all time entries it is assigned to. This action cannot be reversed.`
 
   return (
     <div>
@@ -125,6 +156,11 @@ const Tasks = () => {
           </tbody>
         </table>
       </div>
+      <DeleteItemModal
+        showDeleteActionModal={showActionModal}
+        message={deleteMessage}
+        onSubmitActionModal={submitActionModalHandler}
+        onHideActionModal={onHideActionModalHandler}/>
     </div>
   )
 };

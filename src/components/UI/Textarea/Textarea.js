@@ -35,7 +35,7 @@ const Textarea = props => {
       <Form.Group>
         {label && <Form.Label className={classes.label}>{label}</Form.Label>}
         <Form.Control
-          className={`${classes.textarea} ${className || ''}`}
+          className={`${classes.textarea} ${className ? className : ''}`}
           value={textareaValue}
           onChange={onChangeTextareaValHandler}
           as='textarea'

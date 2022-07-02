@@ -5,7 +5,7 @@
 .assigneesLabelSubWrapper {
   width: max-content;
   color: #02587f;
-  height: 20px;
+  height: 20px !important;
   background: #E1F5FE;
   transition: all 0.3s ease;
 }

@@ -9,7 +9,7 @@ import ProgressItem from './ProgressItem/ProgressItem';
 import AccessItem from './AccessItem/AccessItem';
 import FavoriteItem from './FavoriteItem/FavoriteItem';
 import EditItem from './EditItem/EditItem';
-import DeleteProjectModal from '../../../Services/DeleteProjectModal/DeleteProjectModal';
+import DeleteItemModal from '../../../Services/DeleteItemModal/DeleteItemModal';
 import TableRow from '../../../UI/TableRow/TableRow';
 
 import { deleteProject, updateProjectArchive } from '../../store/projects-actions';
@@ -36,14 +36,14 @@ const TableBody = props => {
     }
   }
 
-  const onHideActionModalHandler = () => {
+  const onHideActionModalHandler = useCallback(() => {
     setShowActionModal(false);
-  }
+  }, [])
 
-  const submitActionModalHandler = () => {
+  const submitActionModalHandler = useCallback(() => {
     dispatch(deleteProject(projectData))
     onHideActionModalHandler()
-  };
+  }, [dispatch, onHideActionModalHandler, projectData]);
 
   const onEditProject = useCallback(data => {
     editProject(data);
@@ -65,12 +65,16 @@ const TableBody = props => {
     <EditItem editProjectAction={onEditProjectActionHandler} project={project} className={classes.td}/>
   </TableRow>)
 
+  const deleteMessage = `The ${projectData.name} Project will also be removed from all time
+          entries it is
+          assigned to. This action cannot be reversed.`
+
   return (
     <Fragment>
       {projectsData}
-      <DeleteProjectModal
+      <DeleteItemModal
         showDeleteActionModal={showActionModal}
-        projectName={projectData.name}
+        message={deleteMessage}
         onSubmitActionModal={submitActionModalHandler}
         onHideActionModal={onHideActionModalHandler}/>
     </Fragment>

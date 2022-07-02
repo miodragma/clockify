@@ -73,7 +73,7 @@ const TaskAssignees = props => {
   }, [dispatch, project.id, tasks, workspaceId])
 
   const findTask = tasks.find(currTask => currTask.id === task.id);
-  const dropdownLabel = findTask.assigneeIds[0] ? [...users, ...groups].find(item => item.id === findTask.assigneeIds[0])?.name : 'Anyone';
+  const dropdownLabel = findTask?.assigneeIds[0] ? [...users, ...groups].find(item => item.id === findTask?.assigneeIds[0])?.name : 'Anyone';
 
   return (
     <CustomFilterDropdown

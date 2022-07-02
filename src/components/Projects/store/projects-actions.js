@@ -186,3 +186,28 @@ export const editTask = data => {
     }
   }
 }
+
+export const deleteTask = data => {
+  return async dispatch => {
+
+    dispatch(loaderActions.setLoaderData(true));
+
+    const { projectId, workspaceId, taskId } = data;
+
+    const deleteTask = async () => {
+      return axiosConfig.delete(`/workspaces/${workspaceId}/projects/${projectId}/tasks/${taskId}`);
+    }
+
+    try {
+      const { data: taskData } = await deleteTask();
+      dispatch(loaderActions.setLoaderData(false));
+      dispatch(projectsActions.deleteTask(taskData.id));
+      dispatch(loaderActions.showToast({ toastMessage: `Task ${taskData.name} has been deleted`, type: 'success' }));
+    } catch (error) {
+      console.log(error);
+      const message = error.response.data.message || 'Please contact support'
+      dispatch(loaderActions.setLoaderData(false));
+      dispatch(loaderActions.showToast({ toastMessage: message, type: 'error' }))
+    }
+  }
+}

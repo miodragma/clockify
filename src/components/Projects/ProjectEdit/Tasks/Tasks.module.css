@@ -25,9 +25,13 @@
   font-weight: 400;
 }
 
-.tableData {
-  padding-left: 0;
-  background: unset;
+.tableDataNameInput {
+  padding-left: 0 !important;
+  background: unset !important;
+}
+
+.tableDataEditButton {
+  width: 0 !important;
 }
 
 .tableDataChildrenWrapper {
@@ -38,5 +42,5 @@
 }
 
 .inputWrapper div:nth-child(1) {
-  width: 100%;
+  width: 100% !important;
 }

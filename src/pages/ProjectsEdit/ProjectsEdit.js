@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { useHistory, useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { Col, Row } from 'react-bootstrap';
@@ -8,7 +8,7 @@ import MainCard from '../../components/UI/MainCard/MainCard';
 import ProjectEditActionsDropdown
   from '../../components/Services/ProjectEditActionsDropdown/ProjectEditActionsDropdown';
 import FavoriteButton from '../../components/Services/FavoriteButton/FavoriteButton';
-import DeleteProjectModal from '../../components/Services/DeleteProjectModal/DeleteProjectModal';
+import DeleteItemModal from '../../components/Services/DeleteItemModal/DeleteItemModal';
 
 import { reviver } from '../../components/Utils/reviver';
 import { mapQueryParams } from '../../components/Utils/mapQueryParams';
@@ -21,7 +21,6 @@ import {
 } from '../../components/Projects/store/projects-actions';
 
 import classes from './ProjectsEdit.module.css';
-
 
 const ProjectsEditPage = () => {
 
@@ -50,10 +49,10 @@ const ProjectsEditPage = () => {
     }
   }, [dispatch, projectId, workspaceId])
 
-  const onNavigateToProjectsHandler = () => {
+  const onNavigateToProjectsHandler = useCallback(() => {
     const currentDefaultQueryParams = JSON.parse(newQueryParams, reviver);
-    history.push({pathname: '/projects', search: mapQueryParams(currentDefaultQueryParams)})
-  };
+    history.push({ pathname: '/projects', search: mapQueryParams(currentDefaultQueryParams) })
+  }, [history, newQueryParams]);
 
   const onEditProjectActionHandler = actionData => {
     if (actionData.actionType !== 'delete') {
@@ -69,15 +68,19 @@ const ProjectsEditPage = () => {
     }
   }
 
-  const onHideActionModalHandler = () => {
+  const onHideActionModalHandler = useCallback(() => {
     setShowActionModal(false);
-  }
+  }, []);
 
-  const submitActionModalHandler = () => {
+  const submitActionModalHandler = useCallback(() => {
     dispatch(deleteProject(projectData))
     onHideActionModalHandler();
     setTimeout(() => onNavigateToProjectsHandler(), 200);
-  };
+  }, [dispatch, onHideActionModalHandler, onNavigateToProjectsHandler, projectData]);
+
+  const deleteMessage = `The ${projectData.name} Project will also be removed from all time
+          entries it is
+          assigned to. This action cannot be reversed.`
 
   return (
     <MainCard>
@@ -98,9 +101,9 @@ const ProjectsEditPage = () => {
         </Col>
       </Row>
       {project.id && projectId && <ProjectEdit projectId={projectId}/>}
-      <DeleteProjectModal
+      <DeleteItemModal
         showDeleteActionModal={showActionModal}
-        projectName={projectData.name}
+        message={deleteMessage}
         onSubmitActionModal={submitActionModalHandler}
         onHideActionModal={onHideActionModalHandler}/>
     </MainCard>

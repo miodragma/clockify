@@ -44,7 +44,7 @@ const ProjectEditActionsDropdown = props => {
   }
 
   return (
-    <button className={`${classes.editItemIconWrapper} ${className ? className : ''}`}>
+    <button className={`${className ? className : ''} editItemIconWrapper `}>
       <img onClick={onOpenItemActions} className={classes.editIcon} src={ellipsisIcon} alt="edit-icon"/>
       <CustomDropdown isOpenDropdown={isOpenActions} closeDropdown={onCloseActions}>
         {actions}

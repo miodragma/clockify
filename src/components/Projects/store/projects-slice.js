@@ -69,6 +69,7 @@ const projectsSlice = createSlice({
       state.tasks = filteredTasks
     },
     addNewTask(state, action) {
+      state.project.tasks = [action.payload, ...state.project.tasks]
       state.tasks = [action.payload, ...state.tasks]
     },
     editTask(state, action) {
@@ -82,6 +83,10 @@ const projectsSlice = createSlice({
 
       state.project.tasks = projectTasks;
       state.tasks = tasks;
+    },
+    deleteTask(state, action) {
+      state.project.tasks = state.project.tasks.filter(task => task.id !== action.payload);
+      state.tasks = state.tasks.filter(task => task.id !== action.payload);
     }
   }
 })

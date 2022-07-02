@@ -33,7 +33,7 @@ const Archived = props => {
   };
 
   return (
-    <div className={`${className}`}>
+    <div className={`${className ? className : ''}`}>
       <DropdownMenu
         currentDropdownLabel={currentDropdownLabelVal}
         className={classes.filterDropdownButton}
