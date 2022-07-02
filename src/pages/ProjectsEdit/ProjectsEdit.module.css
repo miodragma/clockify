@@ -1,0 +1,56 @@
+.projectsButton {
+  color: #03a9f4;
+  text-decoration: none;
+  font-size: 12px;
+  width: 96px;
+  transition: 0.2s ease;
+  cursor: pointer;
+  margin-left: 0;
+}
+
+.projectsButton:hover {
+  text-decoration: underline;
+  color: #0a58ca;
+}
+
+.projectClientName {
+  margin: 0;
+  font-size: 14px;
+  color: #666;
+}
+
+.headerWrapper {
+  display: flex;
+}
+
+.headerWrapper div:nth-child(1) {
+  margin-right: auto;
+}
+
+.headerWrapperButtons {
+  display: flex;
+  align-items: center;
+  max-height: 40px;
+  width: 90px;
+  justify-content: space-between;
+}
+
+.favoriteButton {
+  background-color: #ffffff !important;
+  width: 40px;
+  height: 40px;
+  transition: 0.2s ease;
+  margin-right: 10px;
+}
+
+.actionsButton {
+  background-color: #ffffff;
+  width: 40px;
+  height: 40px;
+  transition: 0.2s ease;
+}
+
+.favoriteButton:hover, .actionsButton:hover {
+  background-color: #e4eaee !important;
+  border: 1px solid #c6d2d9;
+}

@@ -20,6 +20,7 @@ const CustomFilterDropdown = props => {
     isWithoutClient,
     isSearchByName,
     isFromAccess = false,
+    isSelectAllCheckbox = true,
     searchByName,
     changeActive,
     changeWithout,
@@ -29,7 +30,11 @@ const CustomFilterDropdown = props => {
     isUseWithoutClient,
     currentDropdownLabelVal,
     currentInputValue,
-    dropdownLabel
+    dropdownLabel,
+    onCloseEvent,
+    isCloseEvent,
+    isBadgeCounter,
+    classCustomDropdownSubWrapper
   } = props;
 
   const onSearchByName = useCallback(name => {
@@ -114,8 +119,20 @@ const CustomFilterDropdown = props => {
     badge = '...'
   }
 
+  const onCloseEventHandler = useCallback(() => {
+    onCloseEvent()
+  }, [onCloseEvent])
+
   return (
-    <CustomDropdownWrapper className={className} label={dropdownLabel} badgeCounter={badge}>
+    <CustomDropdownWrapper
+      classCustomDropdownSubWrapper={classCustomDropdownSubWrapper}
+      className={className}
+      label={dropdownLabel}
+      badgeCounter={badge}
+      isCloseEvent={isCloseEvent}
+      onCloseEvent={onCloseEventHandler}
+      isBadgeCounter={isBadgeCounter}
+    >
       <div className={classes.inputWrapper}>
         <Input
           className={classes.input}
@@ -138,12 +155,13 @@ const CustomFilterDropdown = props => {
         {
           newItemsList?.length === 0 ? <p className={classes.noMemberLeft}>No members left</p> :
             <Fragment>
-              <RadioButton
-                buttonWrapper={classes.buttonWrapper}
-                type='checkbox'
-                isChecked={isSelectAll}
-                label='Select all'
-                changeCheckValue={onChangeSelectAll}/>
+              {
+                isSelectAllCheckbox && <RadioButton
+                  buttonWrapper={classes.buttonWrapper}
+                  type='checkbox'
+                  isChecked={isSelectAll}
+                  label='Select all'
+                  changeCheckValue={onChangeSelectAll}/>}
               {
                 isUseWithoutClient && !isSearchByName && <RadioButton
                   buttonWrapper={classes.buttonWrapper}

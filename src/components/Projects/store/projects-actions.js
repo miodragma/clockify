@@ -48,6 +48,10 @@ export const addNewProject = data => {
       const {data: projectsData} = await addNewProject();
       dispatch(projectsActions.addNewProject(projectsData));
       dispatch(loaderActions.setLoaderData(false));
+      dispatch(loaderActions.showToast({
+        toastMessage: `Project ${projectData.name} has been created`,
+        type: 'success'
+      }))
     } catch (error) {
       console.log(error);
       const message = error.response.data.code === 3000 ? 'Unexpected filter values' : `${error.response.data.message}`
@@ -108,6 +112,102 @@ export const deleteProject = data => {
       const message = error.response.data.message || 'Please contact support'
       dispatch(loaderActions.setLoaderData(false));
       dispatch(loaderActions.showToast({toastMessage: message, type: 'error'}))
+    }
+  }
+}
+
+export const fetchProjectById = data => {
+  return async dispatch => {
+    dispatch(loaderActions.setLoaderData(true));
+
+    const {projectId, workspaceId} = data;
+
+    const fetchProject = async () => {
+      return axiosConfig(`/workspaces/${workspaceId}/projects/${projectId}?hydrated=true`)
+    }
+
+    try {
+      const { data: projectData } = await fetchProject();
+      dispatch(projectsActions.setProject(projectData));
+      dispatch(loaderActions.setLoaderData(false));
+    } catch (error) {
+      console.log(error);
+      const message = error.response.data.code === 3000 ? 'Unexpected filter values' : `${error.response.data.message}`
+      dispatch(loaderActions.setLoaderData(false));
+      dispatch(loaderActions.showToast({ toastMessage: message, type: 'error' }))
+    }
+  }
+}
+
+export const addNewTask = data => {
+  return async dispatch => {
+    dispatch(loaderActions.setLoaderData(true));
+
+    const { projectId, workspaceId, taskName } = data;
+
+    const addTask = async () => {
+      return axiosConfig.post(`/workspaces/${workspaceId}/projects/${projectId}/tasks`, { name: taskName })
+    }
+
+    try {
+      const { data: taskData } = await addTask();
+      dispatch(projectsActions.addNewTask(taskData));
+      dispatch(loaderActions.setLoaderData(false));
+      dispatch(loaderActions.showToast({ toastMessage: `Task ${taskName} has been created`, type: 'success' }))
+    } catch (error) {
+      console.log(error);
+      const message = error.response.data.code === 3000 ? 'Unexpected filter values' : `${error.response.data.message}`
+      dispatch(loaderActions.setLoaderData(false));
+      dispatch(loaderActions.showToast({ toastMessage: message, type: 'error' }))
+    }
+  }
+}
+
+export const editTask = data => {
+  return async dispatch => {
+    dispatch(loaderActions.setLoaderData(true));
+
+    const { projectId, workspaceId, taskData, taskId } = data;
+
+    const editTask = async () => {
+      return axiosConfig.put(`/workspaces/${workspaceId}/projects/${projectId}/tasks/${taskId}`, taskData)
+    }
+
+    try {
+      const { data: taskData } = await editTask();
+      dispatch(projectsActions.editTask(taskData));
+      dispatch(loaderActions.setLoaderData(false));
+      dispatch(loaderActions.showToast({ toastMessage: `Task ${taskData.name} has been updated`, type: 'success' }))
+    } catch (error) {
+      console.log(error);
+      const message = error.response.data.code === 3000 ? 'Unexpected filter values' : `${error.response.data.message}`
+      dispatch(loaderActions.setLoaderData(false));
+      dispatch(loaderActions.showToast({ toastMessage: message, type: 'error' }))
+    }
+  }
+}
+
+export const deleteTask = data => {
+  return async dispatch => {
+
+    dispatch(loaderActions.setLoaderData(true));
+
+    const { projectId, workspaceId, taskId } = data;
+
+    const deleteTask = async () => {
+      return axiosConfig.delete(`/workspaces/${workspaceId}/projects/${projectId}/tasks/${taskId}`);
+    }
+
+    try {
+      const { data: taskData } = await deleteTask();
+      dispatch(loaderActions.setLoaderData(false));
+      dispatch(projectsActions.deleteTask(taskData.id));
+      dispatch(loaderActions.showToast({ toastMessage: `Task ${taskData.name} has been deleted`, type: 'success' }));
+    } catch (error) {
+      console.log(error);
+      const message = error.response.data.message || 'Please contact support'
+      dispatch(loaderActions.setLoaderData(false));
+      dispatch(loaderActions.showToast({ toastMessage: message, type: 'error' }))
     }
   }
 }

@@ -1,0 +1,27 @@
+.assignees {
+  width: 300px;
+}
+
+.assigneesLabelSubWrapper {
+  width: max-content;
+  color: #02587f;
+  height: 20px !important;
+  background: #E1F5FE;
+  transition: all 0.3s ease;
+}
+
+.assigneesLabelSubWrapper:hover {
+  background: #abe5f5;
+}
+
+.assigneesLabelSubWrapper p {
+  color: #02587f;
+  font-size: 12px;
+  padding: 1px 6px 1px 10px;
+}
+
+.assigneesLabelSubWrapper div i {
+  left: 0;
+  border: solid 4px transparent;
+  border-top: solid 4px #02587f;
+}

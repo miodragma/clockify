@@ -1,14 +1,22 @@
+import { useCallback } from 'react';
+
 import TableData from '../../../../UI/TableData/TableData';
 
 import classes from './AccessItem.module.css';
 
 const AccessItem = props => {
 
-  const {project} = props;
+  const { project, onClickAccess, className } = props;
+
+  const onClickAccessItemHandler = useCallback(() => {
+    onClickAccess();
+  }, [onClickAccess]);
 
   return (
     <TableData>
-      <p className={classes.accessName}>{project.public ? 'Public' : '-'}</p>
+      <div onClick={onClickAccessItemHandler} className={className}>
+        <p className={classes.accessName}>{project.public ? 'Public' : 'Private'}</p>
+      </div>
     </TableData>
   );
 

@@ -1,4 +1,4 @@
-import { Fragment, useState } from 'react';
+import { Fragment, useCallback, useState } from 'react';
 import { useDispatch } from 'react-redux';
 
 import NameItem from './NameItem/NameItem';
@@ -9,8 +9,8 @@ import ProgressItem from './ProgressItem/ProgressItem';
 import AccessItem from './AccessItem/AccessItem';
 import FavoriteItem from './FavoriteItem/FavoriteItem';
 import EditItem from './EditItem/EditItem';
-
-import ModalWrapper from '../../../UI/ModalWrapper/ModalWrapper';
+import DeleteItemModal from '../../../Services/DeleteItemModal/DeleteItemModal';
+import TableRow from '../../../UI/TableRow/TableRow';
 
 import { deleteProject, updateProjectArchive } from '../../store/projects-actions';
 
@@ -18,7 +18,7 @@ import classes from './TableBody.module.css';
 
 const TableBody = props => {
 
-  const {projects} = props;
+  const {projects, editProject} = props;
 
   const dispatch = useDispatch();
 
@@ -36,42 +36,47 @@ const TableBody = props => {
     }
   }
 
-  const onHideActionModalHandler = () => {
+  const onHideActionModalHandler = useCallback(() => {
     setShowActionModal(false);
-  }
+  }, [])
 
-  const submitActionModalHandler = () => {
+  const submitActionModalHandler = useCallback(() => {
     dispatch(deleteProject(projectData))
     onHideActionModalHandler()
-  };
+  }, [dispatch, onHideActionModalHandler, projectData]);
 
-  const projectsData = projects.map(project => <tr className={classes.tr} key={project.id}>
-    <NameItem project={project}/>
-    <ClientItem project={project}/>
-    <TrackedItem project={project}/>
-    <AmountItem/>
-    <ProgressItem/>
-    <AccessItem project={project}/>
-    <FavoriteItem className={classes.td}/>
+  const onEditProject = useCallback(data => {
+    editProject(data);
+  }, [editProject])
+
+  const projectsData = projects.map(project => <TableRow key={project.id}>
+    <NameItem className={classes.tableDataChildrenWrapper} project={project}
+              onClickName={() => onEditProject({ id: project.id, tab: 'tasks' })}/>
+    <ClientItem className={classes.tableDataChildrenWrapper} project={project}
+                onClickClient={() => onEditProject({ id: project.id, tab: 'settings' })}/>
+    <TrackedItem className={classes.tableDataChildrenWrapper} project={project}
+                 onClickTracked={() => onEditProject({ id: project.id, tab: 'status' })}/>
+    <AmountItem className={classes.tableDataChildrenWrapper}
+                onClickAmount={() => onEditProject({ id: project.id, tab: 'status' })}/>
+    <ProgressItem onClickProgress={() => onEditProject({ id: project.id, tab: 'status' })}/>
+    <AccessItem className={classes.tableDataChildrenWrapper} project={project}
+                onClickAccess={() => onEditProject({ id: project.id, tab: 'access' })}/>
+    <FavoriteItem tableDataclassName={classes.td}/>
     <EditItem editProjectAction={onEditProjectActionHandler} project={project} className={classes.td}/>
-  </tr>)
+  </TableRow>)
+
+  const deleteMessage = `The ${projectData.name} Project will also be removed from all time
+          entries it is
+          assigned to. This action cannot be reversed.`
 
   return (
     <Fragment>
       {projectsData}
-      <ModalWrapper
-        show={showActionModal}
-        onHide={onHideActionModalHandler}
-        title='Delete'
-        buttonTitle='Delete'
-        className={'warning'}
-        onClickSubmitButton={submitActionModalHandler}>
-        <div>
-          <p className={classes.actionModalMessage}>The {projectData.name} Project will also be removed from all time
-            entries it is
-            assigned to. This action cannot be reversed.</p>
-        </div>
-      </ModalWrapper>
+      <DeleteItemModal
+        showDeleteActionModal={showActionModal}
+        message={deleteMessage}
+        onSubmitActionModal={submitActionModalHandler}
+        onHideActionModal={onHideActionModalHandler}/>
     </Fragment>
   );
 };

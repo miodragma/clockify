@@ -1,14 +1,15 @@
+import { useCallback } from 'react';
 import { useHistory, useLocation } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 
 import TableHeadingItem from './TableHeadingItem/TableHeadingItem';
+import TableBody from './TableBody/TableBody';
 import ListHeaderRow from '../../UI/ListHeaderRow/ListHeaderRow';
 
 import { reviver } from '../../Utils/reviver';
 import { mapQueryParams } from '../../Utils/mapQueryParams';
 
 import classes from './ProjectsList.module.css';
-import TableBody from './TableBody/TableBody';
 
 const ProjectsList = () => {
 
@@ -29,6 +30,11 @@ const ProjectsList = () => {
     history.replace({pathname, search: mapQueryParams(queryParams)})
   };
 
+  const onEditProjectHandler = useCallback(data => {
+    const pathName = `${pathname}/${data.id}/edit`
+    history.push({pathname: pathName, hash: data.tab})
+  }, [history, pathname]);
+
   return (
     <div>
       <ListHeaderRow>
@@ -41,7 +47,7 @@ const ProjectsList = () => {
         </tr>
         </thead>
         <tbody>
-        <TableBody projects={projects}/>
+        <TableBody projects={projects} editProject={onEditProjectHandler}/>
         </tbody>
       </table>
     </div>

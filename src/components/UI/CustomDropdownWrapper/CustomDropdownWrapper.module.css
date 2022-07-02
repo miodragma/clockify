@@ -1,16 +1,16 @@
-.cdwWrapper {
+.customDropdownWrapper {
   cursor: pointer;
   position: relative;
 }
 
-.cdw {
+.customDropdownSubWrapper {
   display: flex;
   margin-left: 15px;
   height: 37px;
   align-items: center;
 }
 
-.cdwLabel {
+.customDropdownWrapperLabel {
   display: inline-block;
   position: relative;
   margin: 0;
@@ -26,7 +26,7 @@
 
 .dropdownCaret {
   position: absolute;
-  top: 2px;
+  top: 3px;
   left: 3px;
   display: inline-block;
   width: 0;

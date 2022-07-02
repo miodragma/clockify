@@ -27,7 +27,7 @@ const ClientsActions = () => {
   }, [dispatch, activeWorkspace]);
 
   const onAddNewClientHandler = useCallback(val => {
-    setNewClientVal(val)
+    setNewClientVal(val.trim())
   }, []);
 
   const onClickAddHandler = () => {

@@ -3,7 +3,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useHistory, useLocation } from 'react-router-dom';
 
 import { Col, Row } from 'react-bootstrap';
-
 import MainCard from '../../components/UI/MainCard/MainCard';
 import Projects from '../../components/Projects';
 import CreateProject from '../../components/Projects/CreateProject/CreateProject';
@@ -15,7 +14,7 @@ import { fetchClientsData } from '../../components/Clients/store/clients-actions
 import { fetchAllGroups, fetchAllUsers } from '../../components/Team/store/teams-actions';
 import { mapQueryParams } from '../../components/Utils/mapQueryParams';
 
-const ProjectsPage = () => {
+const ProjectsListPage = () => {
 
   const {activeWorkspace: workspaceId} = useSelector(state => state.user.user);
   const defaultQueryParams = useSelector(state => state.projects.defaultQueryParams);
@@ -86,4 +85,4 @@ const ProjectsPage = () => {
   )
 };
 
-export default ProjectsPage;
+export default ProjectsListPage;

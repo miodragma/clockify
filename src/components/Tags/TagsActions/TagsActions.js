@@ -28,7 +28,7 @@ const TagsActions = () => {
   }, [dispatch, activeWorkspace]);
 
   const onAddNewTagHandler = useCallback(val => {
-    setNewTagVal(val)
+    setNewTagVal(val.trim())
   }, []);
 
   const onClickAddHandler = () => {

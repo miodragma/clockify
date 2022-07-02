@@ -2,11 +2,11 @@ import classes from './TableData.module.css';
 
 const TableData = props => {
 
-  const {className, tdClassName} = props;
+  const { className, tdClassName } = props;
 
   return (
-    <td className={`${classes.td} ${tdClassName}`}>
-      <div className={`${classes.tableDataItemWrapper} ${className}`}>
+    <td className={`${classes.td} ${tdClassName ? tdClassName : ''}`}>
+      <div className={`${classes.tableDataItemWrapper} ${className ? className : ''}`}>
         {props.children}
       </div>
     </td>

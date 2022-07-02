@@ -1,0 +1,46 @@
+.tasksListWrapper {
+  margin-top: 20px;
+}
+
+.table {
+  background-color: #fff;
+  margin-bottom: 0;
+  border-left: 1px solid #C6D2D9;
+  border-bottom: 1px solid #C6D2D9;
+  border-right: 1px solid #C6D2D9;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+.thead {
+  height: 41px;
+  border-bottom: 1px solid #C6D2D9;
+}
+
+.thead th {
+  text-transform: uppercase;
+  color: #999;
+  font-size: 13px;
+  letter-spacing: 1px;
+  font-weight: 400;
+}
+
+.tableDataNameInput {
+  padding-left: 0 !important;
+  background: unset !important;
+}
+
+.tableDataEditButton {
+  width: 0 !important;
+}
+
+.tableDataChildrenWrapper {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+}
+
+.inputWrapper div:nth-child(1) {
+  width: 100% !important;
+}

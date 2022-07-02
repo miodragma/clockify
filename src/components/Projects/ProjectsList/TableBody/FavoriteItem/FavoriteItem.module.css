@@ -1,8 +1,0 @@
-.favoriteIcon {
-  margin: 0 10px;
-  transition: 0.1s ease;
-}
-
-.favoriteIcon:hover {
-  filter: invert(66%) sepia(52%) saturate(739%) hue-rotate(342deg) brightness(152%) contrast(105%);
-}

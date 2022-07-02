@@ -12,9 +12,11 @@ const teamsSlice = createSlice({
       ['sort-order', ''],
       ['page', '1'],
       ['page-size', ''],
-      ['status', 'ACTIVE']
+      ['status', ''],
+      ['projectId', '']
     ]), replacer),
     defaultGroupsQueryParams: JSON.stringify(new Map([
+      ['projectId', ''],
       ['name', ''],
       ['sort-column', ''],
       ['sort-order', ''],
