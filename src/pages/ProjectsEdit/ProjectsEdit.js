@@ -13,6 +13,7 @@ import DeleteProjectModal from '../../components/Services/DeleteProjectModal/Del
 import { reviver } from '../../components/Utils/reviver';
 import { mapQueryParams } from '../../components/Utils/mapQueryParams';
 
+import { projectsActions } from '../../components/Projects/store/projects-slice';
 import {
   deleteProject,
   fetchProjectById,
@@ -40,7 +41,13 @@ const ProjectsEditPage = () => {
   const projectId = params.id;
 
   useEffect(() => {
-    dispatch(fetchProjectById({workspaceId, projectId}))
+    if (workspaceId) {
+      dispatch(fetchProjectById({ workspaceId, projectId }))
+    }
+
+    return () => {
+      dispatch(projectsActions.setProject({}));
+    }
   }, [dispatch, projectId, workspaceId])
 
   const onNavigateToProjectsHandler = () => {
@@ -80,7 +87,7 @@ const ProjectsEditPage = () => {
           {project.id && <div className={classes.headerWrapper}>
             <div>
               <h1 className='pageTitle'>{project.name}</h1>
-              <p className={classes.projectClientName}>{project.clientName}</p>
+              <p className={classes.projectClientName}>{project.client?.name}</p>
             </div>
             <div className={classes.headerWrapperButtons}>
               <FavoriteButton className={classes.favoriteButton}/>
@@ -90,7 +97,7 @@ const ProjectsEditPage = () => {
           </div>}
         </Col>
       </Row>
-      {project.id && <ProjectEdit projectId={projectId}/>}
+      {project.id && projectId && <ProjectEdit projectId={projectId}/>}
       <DeleteProjectModal
         showDeleteActionModal={showActionModal}
         projectName={projectData.name}

@@ -1,20 +1,22 @@
-import { Fragment, useEffect } from 'react';
+import { Fragment } from 'react';
 import { useHistory, useLocation } from 'react-router-dom';
 import { Nav } from 'react-bootstrap';
 
-import { tabsData } from './tabsData/tabs-data';
+import Tasks from './Tasks/Tasks';
+import Access from './Access/Access';
+import Status from './Status/Status';
+import Note from './Note/Note';
+import Settings from './Settings/Settings';
+
+import { tabsData } from './dropdownData/tabs-data';
 
 import classes from './ProjectEdit.module.css';
 
 const ProjectEdit = props => {
 
   const history = useHistory();
-  const {pathname} = useLocation();
+  const { pathname } = useLocation();
   const hash = history.location.hash.replace('#', '');
-
-  useEffect(() => {
-
-  }, [])
 
   const onChangeHashHandler = hash => {
     history.push({pathname, hash})
@@ -34,11 +36,15 @@ const ProjectEdit = props => {
 
   return (
     <Fragment>
-      <Nav variant="tabs" defaultActiveKey={hash.replace('#', 'tasks')}>
+      <Nav variant="tabs" defaultActiveKey='tasks'>
         {tabs}
       </Nav>
       <div className={classes.editContent}>
-
+        {hash === 'tasks' && <Tasks/>}
+        {hash === 'access' && <Access/>}
+        {hash === 'status' && <Status/>}
+        {hash === 'note' && <Note/>}
+        {hash === 'settings' && <Settings/>}
       </div>
     </Fragment>
   )

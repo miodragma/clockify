@@ -1,0 +1,13 @@
+.taskNameInput {
+  max-width: 100%;
+  border: 1px solid transparent;
+}
+
+.taskNameInput:hover {
+  border: 1px solid #ced4da;
+}
+
+.doneTaskNameInput {
+  text-decoration: line-through;
+}
+

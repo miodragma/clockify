@@ -23,7 +23,8 @@ const projectsSlice = createSlice({
     ]), replacer),
     newQueryParams: JSON.stringify(new Map(), replacer),
     projects: [],
-    project: {}
+    project: {},
+    tasks: []
   },
   reducers: {
     changeNewQueryParams(state, action) {
@@ -57,6 +58,30 @@ const projectsSlice = createSlice({
     },
     setProject(state, action) {
       state.project = action.payload;
+      state.tasks = action.payload.tasks?.filter(task => task.status === 'ACTIVE');
+    },
+    searchTasksByStatusAndName(state, action) {
+      let filteredTasks = state.project.tasks;
+      if (action.payload.status !== 'all') {
+        filteredTasks = filteredTasks.filter(task => task.status === action.payload.status);
+      }
+      action.payload.name && (filteredTasks = filteredTasks.filter(task => task.name.toLowerCase().includes(action.payload.name.toLowerCase())))
+      state.tasks = filteredTasks
+    },
+    addNewTask(state, action) {
+      state.tasks = [action.payload, ...state.tasks]
+    },
+    editTask(state, action) {
+      const projectTasks = [...state.project.tasks];
+      const projectTaskIndex = projectTasks.findIndex(task => task.id === action.payload.id);
+      projectTasks[projectTaskIndex] = { ...projectTasks[projectTaskIndex], ...action.payload };
+
+      const tasks = [...state.tasks];
+      const taskIndex = tasks.findIndex(task => task.id === action.payload.id);
+      tasks[taskIndex] = { ...tasks[taskIndex], ...action.payload };
+
+      state.project.tasks = projectTasks;
+      state.tasks = tasks;
     }
   }
 })

@@ -5,7 +5,7 @@ import Input from '../../UI/Input/Input';
 
 import classes from './Actions.module.css';
 
-/* Clients and Tags, above table actions */
+/* Clients, Tags, ProjectsEdit, above table actions */
 
 const Actions = props => {
 

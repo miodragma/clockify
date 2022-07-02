@@ -10,6 +10,7 @@ import AccessItem from './AccessItem/AccessItem';
 import FavoriteItem from './FavoriteItem/FavoriteItem';
 import EditItem from './EditItem/EditItem';
 import DeleteProjectModal from '../../../Services/DeleteProjectModal/DeleteProjectModal';
+import TableRow from '../../../UI/TableRow/TableRow';
 
 import { deleteProject, updateProjectArchive } from '../../store/projects-actions';
 
@@ -48,16 +49,21 @@ const TableBody = props => {
     editProject(data);
   }, [editProject])
 
-  const projectsData = projects.map(project => <tr className={classes.tr} key={project.id}>
-    <NameItem project={project} onClickName={() => onEditProject({id: project.id, tab: 'tasks'})}/>
-    <ClientItem project={project} onClickClient={() => onEditProject({id: project.id, tab: 'settings'})}/>
-    <TrackedItem project={project} onClickTracked={() => onEditProject({id: project.id, tab: 'status'})}/>
-    <AmountItem onClickAmount={() => onEditProject({id: project.id, tab: 'status'})}/>
-    <ProgressItem onClickProgress={() => onEditProject({id: project.id, tab: 'status'})}/>
-    <AccessItem project={project} onClickAccess={() => onEditProject({id: project.id, tab: 'access'})}/>
-    <FavoriteItem className={classes.td}/>
+  const projectsData = projects.map(project => <TableRow key={project.id}>
+    <NameItem className={classes.tableDataChildrenWrapper} project={project}
+              onClickName={() => onEditProject({ id: project.id, tab: 'tasks' })}/>
+    <ClientItem className={classes.tableDataChildrenWrapper} project={project}
+                onClickClient={() => onEditProject({ id: project.id, tab: 'settings' })}/>
+    <TrackedItem className={classes.tableDataChildrenWrapper} project={project}
+                 onClickTracked={() => onEditProject({ id: project.id, tab: 'status' })}/>
+    <AmountItem className={classes.tableDataChildrenWrapper}
+                onClickAmount={() => onEditProject({ id: project.id, tab: 'status' })}/>
+    <ProgressItem onClickProgress={() => onEditProject({ id: project.id, tab: 'status' })}/>
+    <AccessItem className={classes.tableDataChildrenWrapper} project={project}
+                onClickAccess={() => onEditProject({ id: project.id, tab: 'access' })}/>
+    <FavoriteItem tableDataclassName={classes.td}/>
     <EditItem editProjectAction={onEditProjectActionHandler} project={project} className={classes.td}/>
-  </tr>)
+  </TableRow>)
 
   return (
     <Fragment>

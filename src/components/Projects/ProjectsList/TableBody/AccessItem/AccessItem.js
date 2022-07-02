@@ -6,15 +6,17 @@ import classes from './AccessItem.module.css';
 
 const AccessItem = props => {
 
-  const {project, onClickAccess} = props;
+  const { project, onClickAccess, className } = props;
 
   const onClickAccessItemHandler = useCallback(() => {
     onClickAccess();
   }, [onClickAccess]);
 
   return (
-    <TableData onClickTableData={onClickAccessItemHandler}>
-      <p className={classes.accessName}>{project.public ? 'Public' : '-'}</p>
+    <TableData>
+      <div onClick={onClickAccessItemHandler} className={className}>
+        <p className={classes.accessName}>{project.public ? 'Public' : 'Private'}</p>
+      </div>
     </TableData>
   );
 

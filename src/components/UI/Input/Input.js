@@ -19,7 +19,11 @@ const Input = props => {
     isDebounce,
     isNewAdded,
     inputValIsEmpty,
-    autofocus
+    autofocus,
+    onFocus,
+    onBlur,
+    isFocusAndBlur = false,
+    isOnChangeInputVal = true
   } = props;
 
   useEffect(() => {
@@ -38,31 +42,40 @@ const Input = props => {
 
     if (isDebounce) {
       const timer = setTimeout(() => {
-        onChangeInputVal(inputVal)
+        isOnChangeInputVal && onChangeInputVal(inputVal)
       }, 300);
 
       return () => {
         clearTimeout(timer);
       }
     } else {
-      onChangeInputVal(inputVal)
+      isOnChangeInputVal && onChangeInputVal(inputVal)
     }
 
-  }, [currentValue, inputVal, isDebounce, onChangeInputVal, isNewAdded, inputValIsEmpty])
-
+  }, [currentValue, inputVal, isDebounce, onChangeInputVal, isNewAdded, inputValIsEmpty, isOnChangeInputVal])
 
   const onChangeInputValHandler = e => {
     const val = e.target.value;
     setInputVal(val)
   };
 
+  const onFocusHandler = e => {
+    isFocusAndBlur && onFocus(e.target.value);
+  };
+
+  const onBlurHandler = e => {
+    isFocusAndBlur && onBlur(e.target.value)
+  }
+
   return (
     <Fragment>
       <Form.Group>
         {label && <Form.Label className={classes.label}>{label}</Form.Label>}
         <Form.Control
+          onFocus={onFocusHandler}
+          onBlur={onBlurHandler}
           autoFocus={autofocus}
-          className={`${classes.input} ${className || ''}`}
+          className={`${classes.input} ${className ? className : ''}`}
           value={inputVal}
           onChange={onChangeInputValHandler}
           type={type}

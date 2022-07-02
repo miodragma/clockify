@@ -73,7 +73,7 @@ const CreateProject = props => {
   }, [projectName, clientId, isPublic, color, dispatch, onHideModalHandler, workspaceId])
 
   const onChangeProjectNameHandler = useCallback(name => {
-    setProjectName(name);
+    setProjectName(name.trim());
   }, [])
 
   const onClickClientHandler = client => {

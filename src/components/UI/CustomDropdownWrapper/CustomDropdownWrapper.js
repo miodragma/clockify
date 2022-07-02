@@ -6,7 +6,17 @@ import classes from './CustomDropdownWrapper.module.css';
 
 const CustomDropdownWrapper = props => {
 
-  const {className, label, badgeCounter, closeDropdown, onResetCloseDropdown} = props;
+  const {
+    classCustomDropdownSubWrapper,
+    className,
+    label,
+    badgeCounter,
+    isBadgeCounter = true,
+    closeDropdown,
+    onResetCloseDropdown,
+    isCloseEvent = false,
+    onCloseEvent
+  } = props;
 
   const [isOpenCDW, setIsOpenCDW] = useState(false);
 
@@ -16,7 +26,10 @@ const CustomDropdownWrapper = props => {
 
   const onCloseCDW = useCallback(() => {
     setIsOpenCDW(false);
-  }, [])
+    if (isCloseEvent) {
+      onCloseEvent()
+    }
+  }, [isCloseEvent, onCloseEvent])
 
   useEffect(() => {
     if (closeDropdown) {
@@ -26,10 +39,11 @@ const CustomDropdownWrapper = props => {
   }, [closeDropdown, onCloseCDW, onResetCloseDropdown])
 
   return (
-    <div className={`${className} ${classes.cdwWrapper}`} onClick={onOpenItemClient}>
-      {badgeCounter && <span className={classes.badge}>{badgeCounter}</span>}
-      <div className={classes.cdw}>
-        <p className={classes.cdwLabel}>{label}</p>
+    <div className={`${className ? className : ''} ${classes.customDropdownWrapper}`} onClick={onOpenItemClient}>
+      {badgeCounter && isBadgeCounter && <span className={classes.badge}>{badgeCounter}</span>}
+      <div
+        className={`${classes.customDropdownSubWrapper} ${classCustomDropdownSubWrapper ? classCustomDropdownSubWrapper : ''}`}>
+        <p className={classes.customDropdownWrapperLabel}>{label}</p>
         <div className={classes.dropdownCaretWrapper}>
           <i className={classes.dropdownCaret}/>
         </div>

@@ -16,7 +16,7 @@ const EditItem = props => {
   }, [editProjectAction])
 
   return (
-    <TableData tdClassName={className} onClickTableData={console.log}>
+    <TableData tdClassName={className}>
       <ProjectEditActionsDropdown project={project} onEditProjectAction={onEditProjectActionHandler}/>
     </TableData>
   )

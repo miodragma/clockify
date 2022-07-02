@@ -6,8 +6,8 @@ import classes from './TrackedItem.module.css';
 
 const TrackedItem = props => {
 
-  const {project, onClickTracked} = props;
-  const {duration, estimate} = project;
+  const { project, onClickTracked, className } = props;
+  const { duration, estimate } = project;
 
   const totalSeconds = time => {
     let parts = time.split(':');
@@ -56,8 +56,8 @@ const TrackedItem = props => {
   }, [onClickTracked]);
 
   return (
-    <TableData onClickTableData={onClickTrackedHandler}>
-      <div>
+    <TableData>
+      <div onClick={onClickTrackedHandler} className={className}>
         <p className={classes.duration}>{getDuration}h</p>
         {estimate.type === 'MANUAL' && <p className={classes.estimate}>of {getEstimate}h</p>}
       </div>

@@ -1,0 +1,13 @@
+import classes from './TableRow.module.css';
+
+const TableRow = props => {
+
+  return (
+    <tr className={classes.tr}>
+      {props.children}
+    </tr>
+  )
+
+};
+
+export default TableRow;

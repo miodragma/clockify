@@ -40,7 +40,7 @@ const Search = props => {
           value={projectName}
           onChange={onChangeProjectNameHandler}
           type='text'
-          placeholder='Enter project name'/>
+          placeholder='Project name'/>
       </Form.Group>
     </div>
   )

@@ -6,15 +6,17 @@ import classes from './AmountItem.module.css';
 
 const AmountItem = props => {
 
-  const {onClickAmount} = props;
+  const { onClickAmount, className } = props;
 
   const onClickAmountItemHandler = useCallback(() => {
     onClickAmount()
   }, [onClickAmount]);
 
   return (
-    <TableData onClickTableData={onClickAmountItemHandler}>
-      <p className={classes.amountItemText}>0.00 USD</p>
+    <TableData>
+      <div onClick={onClickAmountItemHandler} className={className}>
+        <p className={classes.amountItemText}>0.00 USD</p>
+      </div>
     </TableData>
   )
 };

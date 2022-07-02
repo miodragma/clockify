@@ -3,10 +3,10 @@ import FavoriteButton from '../../../../Services/FavoriteButton/FavoriteButton';
 
 const FavoriteItem = props => {
 
-  const {className} = props;
+  const { tableDataclassName } = props;
 
   return (
-    <TableData tdClassName={className} onClickTableData={console.log}>
+    <TableData tdClassName={tableDataclassName}>
       <FavoriteButton/>
     </TableData>
   );

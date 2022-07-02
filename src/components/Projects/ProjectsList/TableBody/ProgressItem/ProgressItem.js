@@ -14,8 +14,8 @@ const ProgressItem = props => {
   }, [onClickProgress]);
 
   return (
-    <TableData onClickTableData={onClickProgressItemHandler}>
-      <div className={classes.progressBarWrapper}>
+    <TableData>
+      <div onClick={onClickProgressItemHandler} className={classes.progressBarWrapper}>
         <p>0.00%</p>
         <ProgressBar className={classes.progressBar} now={0}/>
       </div>
