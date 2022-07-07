@@ -1,0 +1,33 @@
+.textareaWrapper {
+  display: inline-grid;
+  vertical-align: top;
+  align-items: center;
+  position: relative;
+  cursor: pointer;
+  border: 1px solid #C6D2D9;
+  width: 100%;
+  min-width: 400px;
+  max-width: 600px;
+  min-height: 200px;
+}
+
+.markdown {
+  padding: 15px;
+  height: 100%;
+  font-size: 14px;
+}
+
+.markdown h1, h2, h3, h4, h5, h6 {
+  font-weight: 400 !important;
+  border-bottom: unset !important;
+}
+
+.textareaWrapper textarea, textarea:focus {
+  border: none !important;
+  padding: 15px;
+  height: 100%;
+  font-size: 14px;
+  min-height: 200px;
+  opacity: 0;
+  transition: all 0.1s ease;
+}

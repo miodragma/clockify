@@ -62,26 +62,25 @@ export const addNewProject = data => {
   }
 }
 
-export const updateProjectArchive = data => {
+export const updateProject = data => {
   return async dispatch => {
 
     dispatch(loaderActions.setLoaderData(true));
 
-    const {archived, workspaceId, id: projectId, template} = data.data;
-
+    const { dataToUpdate, workspaceId, id: projectId, template, actionType } = data;
 
     const updateProject = async () => {
-      if (data.actionType === 'archived') {
-        return axiosConfig.put(`workspaces/${workspaceId}/projects/${projectId}`, {archived: !archived})
+      if (actionType === 'template') {
+        return axiosConfig.patch(`/workspaces/${workspaceId}/projects/${projectId}/template`, { isTemplate: !template })
       }
-      return axiosConfig.patch(`/workspaces/${workspaceId}/projects/${projectId}/template`, {isTemplate: !template})
+      return axiosConfig.put(`workspaces/${workspaceId}/projects/${projectId}`, dataToUpdate)
     }
 
     try {
       const {data: projectData} = await updateProject();
       dispatch(loaderActions.setLoaderData(false));
-      dispatch(projectsActions.onUpdateProject({type: data.actionType, projectData}))
-      dispatch(loaderActions.showToast({toastMessage: `Project successfully updated`, type: 'success'}))
+      dispatch(projectsActions.onUpdateProject(projectData))
+      dispatch(loaderActions.showToast({ toastMessage: `Project successfully updated`, type: 'success' }))
     } catch (error) {
       console.log(error);
       const message = error.response.data.message || 'Please contact support'
