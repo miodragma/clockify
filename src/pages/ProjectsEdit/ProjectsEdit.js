@@ -14,11 +14,7 @@ import { reviver } from '../../components/Utils/reviver';
 import { mapQueryParams } from '../../components/Utils/mapQueryParams';
 
 import { projectsActions } from '../../components/Projects/store/projects-slice';
-import {
-  deleteProject,
-  fetchProjectById,
-  updateProjectArchive
-} from '../../components/Projects/store/projects-actions';
+import { deleteProject, fetchProjectById, updateProject } from '../../components/Projects/store/projects-actions';
 
 import classes from './ProjectsEdit.module.css';
 
@@ -30,7 +26,7 @@ const ProjectsEditPage = () => {
   const newQueryParams = useSelector(state => state.projects.newQueryParams);
   const project = useSelector(state => state.projects.project);
 
-  const {activeWorkspace: workspaceId} = useSelector(state => state.user.user);
+  const { activeWorkspace: workspaceId } = useSelector(state => state.user.user);
 
   const dispatch = useDispatch();
 
@@ -56,9 +52,11 @@ const ProjectsEditPage = () => {
 
   const onEditProjectActionHandler = actionData => {
     if (actionData.actionType !== 'delete') {
-      dispatch(updateProjectArchive({
+      dispatch(updateProject({
         actionType: actionData.actionType,
-        data: actionData.project
+        dataToUpdate: { archived: !actionData.project.archived },
+        workspaceId,
+        id: actionData.project.id
       }))
       setTimeout(() => onNavigateToProjectsHandler(), 200);
     }

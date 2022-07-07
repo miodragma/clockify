@@ -43,15 +43,12 @@ const projectsSlice = createSlice({
     },
     onUpdateProject(state, action) {
       const currentProjects = [...state.projects];
-      const index = currentProjects.findIndex(project => project.id === action.payload.projectData.id);
-      const currentProject = {...currentProjects.find(project => project.id === action.payload.projectData.id)};
-      if (action.payload.type === 'archived') {
-        currentProject.archived = action.payload.projectData.archived;
-      } else {
-        currentProject.template = !action.payload.projectData.template
-      }
+      const index = currentProjects.findIndex(project => project.id === action.payload.id);
+      let currentProject = { ...currentProjects.find(project => project.id === action.payload.id) };
+      currentProject = { ...currentProject, ...action.payload }
       currentProjects[index] = currentProject;
       state.projects = currentProjects;
+      state.project = { ...state.project, note: currentProject.note }
     },
     deleteProject(state, action) {
       state.projects = state.projects.filter(project => project.id !== action.payload);

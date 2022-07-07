@@ -12,7 +12,7 @@ import EditItem from './EditItem/EditItem';
 import DeleteItemModal from '../../../Services/DeleteItemModal/DeleteItemModal';
 import TableRow from '../../../UI/TableRow/TableRow';
 
-import { deleteProject, updateProjectArchive } from '../../store/projects-actions';
+import { deleteProject, updateProject } from '../../store/projects-actions';
 
 import classes from './TableBody.module.css';
 
@@ -26,9 +26,11 @@ const TableBody = props => {
   const [projectData, setProjectData] = useState({});
 
   const onEditProjectActionHandler = actionData => {
-    actionData.actionType !== 'delete' && dispatch(updateProjectArchive({
+    actionData.actionType !== 'delete' && dispatch(updateProject({
       actionType: actionData.actionType,
-      data: actionData.project
+      dataToUpdate: { archived: !actionData.project.archived },
+      workspaceId: actionData.project.workspaceId,
+      id: actionData.project.id
     }))
     if (actionData.actionType === 'delete') {
       setShowActionModal(true);
