@@ -98,7 +98,6 @@ const Client = props => {
         setIsWithoutClient(false);
         setIsSelectAll(false);
       }
-      console.log()
       currentDropdownLabelVal.current = dropdownArchiveData.find(item => item.label.toUpperCase() === clientStatus).label
     }
     isChangeArchive.current = false;
