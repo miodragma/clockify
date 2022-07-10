@@ -1,9 +1,9 @@
 import { Fragment, useCallback } from 'react';
 
-import RadioButton from '../../UI/RadioButton/RadioButton';
-import CustomDropdownWrapper from '../../UI/CustomDropdownWrapper/CustomDropdownWrapper';
-import Input from '../../UI/Input/Input';
-import DropdownMenu from '../../UI/DropdownMenu/DropdownMenu';
+import RadioButton from '../RadioButton/RadioButton';
+import CustomDropdownWrapper from '../CustomDropdownWrapper/CustomDropdownWrapper';
+import Input from '../Input/Input';
+import DropdownMenu from '../DropdownMenu/DropdownMenu';
 
 import classes from './CustomFilterDropdown.module.css';
 

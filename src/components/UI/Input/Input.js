@@ -16,12 +16,15 @@ const Input = props => {
     currentValue,
     onChangeInputVal,
     className,
+    classNameLabel,
     isDebounce,
     isNewAdded,
     inputValIsEmpty,
     autofocus,
     onFocus,
     onBlur,
+    isRestrictInput = false,
+    isReadonly = false,
     isFocusAndBlur = false,
     isOnChangeInputVal = true
   } = props;
@@ -56,7 +59,19 @@ const Input = props => {
 
   const onChangeInputValHandler = e => {
     const val = e.target.value;
-    setInputVal(val)
+    if (!isRestrictInput) {
+      setInputVal(val)
+    } else {
+      let valMatch = val.match(/^\d+(\.\d+)?$/);
+
+      let rateValue = valMatch ? valMatch[0]?.split('.')[0] : '';
+      let rateDecimal = valMatch ? (valMatch[1]?.substring(valMatch[1]?.indexOf('.') + 1) || ' ') : '';
+
+      const limitRateValueLength = rateValue.startsWith('1') ? 8 : 7;
+      if (rateValue?.length <= limitRateValueLength && rateDecimal?.length <= 2) {
+        setInputVal(val)
+      }
+    }
   };
 
   const onFocusHandler = e => {
@@ -70,8 +85,10 @@ const Input = props => {
   return (
     <Fragment>
       <Form.Group>
-        {label && <Form.Label className={classes.label}>{label}</Form.Label>}
+        {label &&
+          <Form.Label className={`${classes.label} ${classNameLabel ? classNameLabel : ''}`}>{label}</Form.Label>}
         <Form.Control
+          readOnly={isReadonly}
           onFocus={onFocusHandler}
           onBlur={onBlurHandler}
           autoFocus={autofocus}

@@ -5,10 +5,9 @@ import { Col, Row } from 'react-bootstrap';
 
 import ProjectEdit from '../../components/Projects/ProjectEdit/ProjectEdit';
 import MainCard from '../../components/UI/MainCard/MainCard';
-import ProjectEditActionsDropdown
-  from '../../components/Services/ProjectEditActionsDropdown/ProjectEditActionsDropdown';
-import FavoriteButton from '../../components/Services/FavoriteButton/FavoriteButton';
-import DeleteItemModal from '../../components/Services/DeleteItemModal/DeleteItemModal';
+import ProjectEditActionsDropdown from '../../components/UI/ProjectEditActionsDropdown/ProjectEditActionsDropdown';
+import FavoriteButton from '../../components/UI/FavoriteButton/FavoriteButton';
+import DeleteItemModal from '../../components/UI/DeleteItemModal/DeleteItemModal';
 
 import { reviver } from '../../components/Utils/reviver';
 import { mapQueryParams } from '../../components/Utils/mapQueryParams';

@@ -1,7 +1,7 @@
 import { useCallback, useRef, useState } from 'react';
 import { useDispatch } from 'react-redux';
 
-import Actions from '../../../../Services/Actions/Actions';
+import ShortActions from '../../../../UI/ShortActions/ShortActions';
 
 import { filterTasksData } from '../../dropdownData/filter-tasks-data';
 
@@ -43,7 +43,7 @@ const TasksActions = props => {
   }, [dispatch]);
 
   return (
-    <Actions
+    <ShortActions
       addNewLabel='Add new task'
       dropdownData={filterTasksData}
       onShowBy={onShowByHandler}

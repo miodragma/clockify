@@ -1,7 +1,7 @@
 import { useCallback, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
-import Actions from '../../Services/Actions/Actions';
+import ShortActions from '../../UI/ShortActions/ShortActions';
 
 import { addNewTag, fetchTagsData } from '../store/tags-actions';
 
@@ -41,7 +41,7 @@ const TagsActions = () => {
   }, [])
 
   return (
-    <Actions
+    <ShortActions
       addNewLabel='Add new tag'
       dropdownData={dropdownData}
       onShowBy={onShowByHandler}

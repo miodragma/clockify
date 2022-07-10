@@ -2,20 +2,20 @@ import { useCallback, useEffect, useState } from 'react';
 
 import { Col, Row } from 'react-bootstrap';
 
-import CustomDropdown from '../../UI/CustomDropdown/CustomDropdown';
+import CustomDropdown from '../CustomDropdown/CustomDropdown';
 
 import noteIcon from '../../../assets/note-icon.svg';
 import editIcon from '../../../assets/edit-icon.svg';
 import ellipsisIcon from '../../../assets/ellipsis-icon.svg';
 
-import classes from './ListItem.module.css';
+import classes from './SimpleListItem.module.css';
 
 /* Clients and Tags list item */
 
-const ListItem = props => {
+const SimpleListItem = props => {
 
-  const {data, onClickEdit, onItemAction, type} = props;
-  const {id, archived, name, address, note} = data;
+  const { data, onClickEdit, onItemAction, type } = props;
+  const { id, archived, name, address, note } = data;
 
   const [isOpenActions, setIsOpenActions] = useState(false);
 
@@ -80,4 +80,4 @@ const ListItem = props => {
   )
 };
 
-export default ListItem;
+export default SimpleListItem;

@@ -1,5 +1,5 @@
 import TableData from '../../../../UI/TableData/TableData';
-import FavoriteButton from '../../../../Services/FavoriteButton/FavoriteButton';
+import FavoriteButton from '../../../../UI/FavoriteButton/FavoriteButton';
 
 const FavoriteItem = props => {
 

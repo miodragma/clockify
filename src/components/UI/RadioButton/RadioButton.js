@@ -4,10 +4,10 @@ import classes from './RadioButton.module.css';
 
 const RadioButton = props => {
 
-  const {isChecked, label, changeCheckValue, type, buttonWrapper} = props;
+  const { isChecked, label, changeCheckValue, type, buttonWrapper, isReadOnly = false } = props;
 
   const onChangeCheckValue = () => {
-    changeCheckValue()
+    !isReadOnly && changeCheckValue()
   }
 
   return (

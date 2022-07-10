@@ -1,6 +1,6 @@
 import { useCallback, useState } from 'react';
 
-import CustomDropdown from '../../UI/CustomDropdown/CustomDropdown';
+import CustomDropdown from '../CustomDropdown/CustomDropdown';
 
 import ellipsisIcon from '../../../assets/ellipsis-icon.svg';
 

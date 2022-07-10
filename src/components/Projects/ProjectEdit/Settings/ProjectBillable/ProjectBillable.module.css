@@ -1,0 +1,13 @@
+.switchButton input, label {
+  cursor: pointer;
+}
+
+.switchButton input:checked {
+  background-color: #03A9F4;
+  border-color: #03A9F4;
+}
+
+.switchButton label {
+  color: #333333;
+  font-size: 14px;
+}

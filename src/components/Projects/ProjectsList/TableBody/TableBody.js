@@ -9,7 +9,7 @@ import ProgressItem from './ProgressItem/ProgressItem';
 import AccessItem from './AccessItem/AccessItem';
 import FavoriteItem from './FavoriteItem/FavoriteItem';
 import EditItem from './EditItem/EditItem';
-import DeleteItemModal from '../../../Services/DeleteItemModal/DeleteItemModal';
+import DeleteItemModal from '../../../UI/DeleteItemModal/DeleteItemModal';
 import TableRow from '../../../UI/TableRow/TableRow';
 
 import { deleteProject, updateProject } from '../../store/projects-actions';

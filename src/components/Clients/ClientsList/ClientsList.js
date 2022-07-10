@@ -4,7 +4,7 @@ import { Form } from 'react-bootstrap';
 
 import ClientListHeader from '../ClientListHeader/ClientListHeader';
 import ClientEdit from '../ClientEdit/ClientEdit';
-import ListItem from '../../Services/ListItem/ListItem';
+import SimpleListItem from '../../UI/SimpleListItem/SimpleListItem';
 import ModalWrapper from '../../UI/ModalWrapper/ModalWrapper';
 
 import { deleteClient, updateClient } from '../store/clients-actions';
@@ -45,7 +45,7 @@ const ClientsList = () => {
   }, [])
 
   const clients = filterClients.map(client => {
-    return <ListItem
+    return <SimpleListItem
       type='client'
       key={client.id}
       data={client}

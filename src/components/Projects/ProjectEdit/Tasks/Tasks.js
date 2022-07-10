@@ -8,6 +8,8 @@ import TableData from '../../../UI/TableData/TableData';
 import TasksActions from './TasksActions/TasksActions';
 import TaskNameInput from './TaskNameInput/TaskNameInput';
 import TaskAssignees from './TaskAssingees/TaskAssignees';
+import EditTask from './EditTask/EditTask';
+import DeleteItemModal from '../../../UI/DeleteItemModal/DeleteItemModal';
 
 import { reviver } from '../../../Utils/reviver';
 import { filterByAscAndDesc } from '../../../Utils/filterByAscAndDesc';
@@ -19,8 +21,6 @@ import { sortTaskData } from '../dropdownData/filter-tasks-data';
 import { addNewTask, deleteTask, editTask } from '../../store/projects-actions';
 
 import classes from './Tasks.module.css';
-import EditTask from './EditTask/EditTask';
-import DeleteItemModal from '../../../Services/DeleteItemModal/DeleteItemModal';
 
 const Tasks = () => {
 
