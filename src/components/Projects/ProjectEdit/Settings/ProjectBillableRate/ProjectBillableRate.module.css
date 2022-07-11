@@ -49,11 +49,11 @@
 }
 
 .applyBillableRateRadioButton {
-  padding-left: 0;
+  padding-left: 0 !important;
 }
 
 .applyBillableRateRadioButton:hover {
-  background-color: #ffffff;
+  background-color: #ffffff !important;
 }
 
 .applyBillableRateWrapper {
