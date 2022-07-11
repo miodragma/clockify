@@ -1,4 +1,4 @@
-.radioWrapper {
+.customCheckButtonWrapper {
   height: 41px;
   display: flex;
   align-items: center;
@@ -9,17 +9,17 @@
   transition: 0.2s ease;
 }
 
-.radioWrapper:hover {
+.customCheckButtonWrapper:hover {
   background-color: #e4eaee
 }
 
-.radio {
+.customCheckButton {
   cursor: pointer;
   pointer-events: none;
   margin-top: 7px;
 }
 
-.radio:checked {
+.customCheckButton:checked {
   background-color: #03A9F4;
   border-color: #03A9F4;
   box-shadow: 0 5px 10px #0000001a !important;

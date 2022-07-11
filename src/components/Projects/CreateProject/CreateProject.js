@@ -7,7 +7,7 @@ import ModalWrapper from '../../UI/ModalWrapper/ModalWrapper';
 import Input from '../../UI/Input/Input';
 import AddFindClientsDropdown from '../../UI/AddFindClientsDropdown/AddFindClientsDropdown';
 import ColorPicker from '../../UI/ColorPicker/ColorPicker';
-import RadioButton from '../../UI/RadioButton/RadioButton';
+import CustomCheckButton from '../../UI/CustomCheckButton/CustomCheckButton';
 
 import { rgbToHex } from '../../Utils/rgbToHex';
 
@@ -153,7 +153,7 @@ const CreateProject = props => {
           <div className={`${classes.formRowWrapper} ${classes.formRowWrapperWithColor}`}>
             <div className={classes.colorAndPublicWrapper}>
               <ColorPicker changeColor={onChangeColorHandler}/>
-              <RadioButton
+              <CustomCheckButton
                 buttonWrapper={classes.buttonWrapper}
                 type='checkbox'
                 isChecked={isPublic}

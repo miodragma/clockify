@@ -1,8 +1,8 @@
 import { Form } from 'react-bootstrap';
 
-import classes from './RadioButton.module.css';
+import classes from './CustomCheckButton.module.css';
 
-const RadioButton = props => {
+const CustomCheckButton = props => {
 
   const { isChecked, label, changeCheckValue, type, buttonWrapper, isReadOnly = false } = props;
 
@@ -11,14 +11,14 @@ const RadioButton = props => {
   }
 
   return (
-    <div onClick={onChangeCheckValue} className={`${classes.radioWrapper} ${buttonWrapper || ''}`}>
+    <div onClick={onChangeCheckValue} className={`${classes.customCheckButtonWrapper} ${buttonWrapper || ''}`}>
       <Form.Check
         type={type}>
-        <Form.Check.Input readOnly checked={isChecked} type={type} className={classes.radio}/>
+        <Form.Check.Input readOnly checked={isChecked} type={type} className={classes.customCheckButton}/>
         <Form.Check.Label className={classes.label}>{label}</Form.Check.Label>
       </Form.Check>
     </div>
   )
 };
 
-export default RadioButton;
+export default CustomCheckButton;

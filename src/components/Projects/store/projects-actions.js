@@ -73,6 +73,9 @@ export const updateProject = data => {
       if (actionType === 'template') {
         return axiosConfig.patch(`/workspaces/${workspaceId}/projects/${projectId}/template`, { isTemplate: !template })
       }
+      if (actionType === 'estimate') {
+        return axiosConfig.patch(`/workspaces/${workspaceId}/projects/${projectId}/estimate`, dataToUpdate)
+      }
       return axiosConfig.put(`workspaces/${workspaceId}/projects/${projectId}`, dataToUpdate)
     }
     const singleProjectKeys = Object.keys(dataToUpdate);

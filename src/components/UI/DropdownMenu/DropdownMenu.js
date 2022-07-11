@@ -27,9 +27,16 @@ const DropdownMenu = props => {
   }, [activeFilterName, dropdownMenuData, currentDropdownLabel])
 
   const options = dropdownMenuData && dropdownMenuData.map((item, index) => {
+
+    const isDisable = item.hasOwnProperty('disabled') ? item.disabled : false;
+
     return (
       <div
-        className={`${activeFilterName === item.label ? classes.activeDropdownItem : ''} ${classes.dropdownItem}`}
+        className={`
+        ${activeFilterName === item.label ? classes.activeDropdownItem : ''}
+        ${classes.dropdownItem}
+        ${isDisable ? classes.disableDropdownItem : ''}
+        `}
         key={index}
         onClick={() => onChangeSelectValHandler(item)}>
         <Dropdown.Item>{item.label}</Dropdown.Item>

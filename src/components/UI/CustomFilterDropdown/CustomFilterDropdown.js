@@ -1,6 +1,6 @@
 import { Fragment, useCallback } from 'react';
 
-import RadioButton from '../RadioButton/RadioButton';
+import CustomCheckButton from '../CustomCheckButton/CustomCheckButton';
 import CustomDropdownWrapper from '../CustomDropdownWrapper/CustomDropdownWrapper';
 import Input from '../Input/Input';
 import DropdownMenu from '../DropdownMenu/DropdownMenu';
@@ -64,7 +64,7 @@ const CustomFilterDropdown = props => {
 
       let isChecked = selectedListIds.some(id => id === item.id);
 
-      return (<RadioButton
+      return (<CustomCheckButton
         key={item.id}
         buttonWrapper={`${classes.buttonWrapper} ${classes.buttonWrapperBorder}`}
         type='checkbox'
@@ -93,7 +93,7 @@ const CustomFilterDropdown = props => {
       return (
         <Fragment key={item.id}>
           {divider}
-          <RadioButton
+          <CustomCheckButton
             buttonWrapper={classes.buttonWrapper}
             type='checkbox'
             isChecked={isChecked}
@@ -156,14 +156,14 @@ const CustomFilterDropdown = props => {
           newItemsList?.length === 0 ? <p className={classes.noMemberLeft}>No members left</p> :
             <Fragment>
               {
-                isSelectAllCheckbox && <RadioButton
+                isSelectAllCheckbox && <CustomCheckButton
                   buttonWrapper={classes.buttonWrapper}
                   type='checkbox'
                   isChecked={isSelectAll}
                   label='Select all'
                   changeCheckValue={onChangeSelectAll}/>}
               {
-                isUseWithoutClient && !isSearchByName && <RadioButton
+                isUseWithoutClient && !isSearchByName && <CustomCheckButton
                   buttonWrapper={classes.buttonWrapper}
                   type='checkbox'
                   isChecked={isWithoutClient}

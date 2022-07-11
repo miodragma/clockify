@@ -4,7 +4,7 @@ import { OverlayTrigger, Popover } from 'react-bootstrap';
 
 import Input from '../../../../UI/Input/Input';
 import ModalWrapper from '../../../../UI/ModalWrapper/ModalWrapper';
-import RadioButton from '../../../../UI/RadioButton/RadioButton';
+import CustomCheckButton from '../../../../UI/CustomCheckButton/CustomCheckButton';
 
 import { updateProject } from '../../../store/projects-actions';
 
@@ -84,7 +84,7 @@ const ProjectBillableRate = props => {
         className={'primary'}
         autoFocus={true}
         onClickSubmitButton={onSubmitFormHandler}>
-        <div className={classes.modalRateInfo}>
+        <div className={'primaryInfo'}>
           <span>We'll apply this rate to all entries on this project, unless some member has a more specific rate for this project.</span>
         </div>
         <Input
@@ -102,7 +102,8 @@ const ProjectBillableRate = props => {
           overlay={
             <Popover id='popover-positioned-top'>
               <Popover.Body>
-                Upgrade to BASIC or apply new rate to old entries <a className={classes.popoverLink} target='_blank'
+                Upgrade to BASIC or apply new rate to old entries <a rel="noreferrer" className={'popoverLink'}
+                                                                     target='_blank'
                                                                      href='https://clockify.me/help/reports/rates/hourly-rates#historic-rates'>manually.</a>
               </Popover.Body>
             </Popover>
@@ -110,8 +111,8 @@ const ProjectBillableRate = props => {
           <div className={classes.applyBillableRateWrapper}>
             <p>Apply this billable rate to:</p>
             <div className={classes.applyBillableRateSubWrapper}>
-              <RadioButton isReadOnly={true} buttonWrapper={classes.applyBillableRateRadioButton} type='radio'
-                           isChecked={true} label='Time entries from'/>
+              <CustomCheckButton isReadOnly={true} buttonWrapper={classes.applyBillableRateRadioButton} type='radio'
+                                 isChecked={true} label='Time entries from'/>
               <img src={calendar} alt="calendar"/>
               <Input
                 className={classes.applyBillableRateSubWrapperInput}
@@ -122,8 +123,8 @@ const ProjectBillableRate = props => {
               />
               <p>onwards</p>
             </div>
-            <RadioButton isReadOnly={true} buttonWrapper={classes.applyBillableRateRadioButton} type='radio'
-                         isChecked={false} label='All past and future time entries'/>
+            <CustomCheckButton isReadOnly={true} buttonWrapper={classes.applyBillableRateRadioButton} type='radio'
+                               isChecked={false} label='All past and future time entries'/>
           </div>
         </OverlayTrigger>
       </ModalWrapper>

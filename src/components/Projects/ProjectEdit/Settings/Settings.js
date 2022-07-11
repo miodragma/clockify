@@ -8,6 +8,7 @@ import ProjectBillable from './ProjectBillable/ProjectBillable';
 
 import classes from './Settings.module.css';
 import ProjectBillableRate from './ProjectBillableRate/ProjectBillableRate';
+import ProjectEstimate from './ProjectEstimate/ProjectEstimate';
 
 const Settings = props => {
 
@@ -32,6 +33,11 @@ const Settings = props => {
         settingsTitle={classes.settingsItemTitle}
         settingsSubTitle={classes.settingsItemSubTitle}/>
       <ProjectBillableRate
+        project={project}
+        className={`${classes.itemWrapper} ${classes.settingsItemWrapper}`}
+        settingsTitle={classes.settingsItemTitle}
+        settingsSubTitle={classes.settingsItemSubTitle}/>
+      <ProjectEstimate
         project={project}
         className={`${classes.itemWrapper} ${classes.settingsItemWrapper}`}
         settingsTitle={classes.settingsItemTitle}

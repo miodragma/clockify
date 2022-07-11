@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useMemo, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 
-import RadioButton from '../../../UI/RadioButton/RadioButton';
+import CustomCheckButton from '../../../UI/CustomCheckButton/CustomCheckButton';
 import CustomDropdownWrapper from '../../../UI/CustomDropdownWrapper/CustomDropdownWrapper';
 
 const Billing = props => {
@@ -53,9 +53,10 @@ const Billing = props => {
 
   return (
     <CustomDropdownWrapper className={className} label='Billing' badgeCounter={badge}>
-      <RadioButton type='checkbox' isChecked={isBillable} label='Billable' changeCheckValue={onChangeBillableHandler}/>
-      <RadioButton type='checkbox' isChecked={isNonBillable} label='Non billable'
-                   changeCheckValue={onChangeNonBillableHandler}/>
+      <CustomCheckButton type='checkbox' isChecked={isBillable} label='Billable'
+                         changeCheckValue={onChangeBillableHandler}/>
+      <CustomCheckButton type='checkbox' isChecked={isNonBillable} label='Non billable'
+                         changeCheckValue={onChangeNonBillableHandler}/>
     </CustomDropdownWrapper>
   )
 
