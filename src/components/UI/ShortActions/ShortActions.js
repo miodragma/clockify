@@ -1,13 +1,13 @@
 import { Button } from 'react-bootstrap';
 
-import DropdownMenu from '../../UI/DropdownMenu/DropdownMenu';
-import Input from '../../UI/Input/Input';
+import DropdownMenu from '../DropdownMenu/DropdownMenu';
+import Input from '../Input/Input';
 
-import classes from './Actions.module.css';
+import classes from './ShortActions.module.css';
 
 /* Clients, Tags, ProjectsEdit, above table actions */
 
-const Actions = props => {
+const ShortActions = props => {
 
   const {
     addNewLabel,
@@ -56,4 +56,4 @@ const Actions = props => {
   )
 };
 
-export default Actions;
+export default ShortActions;

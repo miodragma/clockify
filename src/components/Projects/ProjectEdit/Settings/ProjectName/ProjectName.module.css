@@ -1,0 +1,8 @@
+.inputNameLabel {
+  font-size: 18px;
+  font-weight: 500;
+}
+
+.inputName {
+  max-width: 620px;
+}

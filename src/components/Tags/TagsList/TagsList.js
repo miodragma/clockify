@@ -2,7 +2,7 @@ import { useCallback, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import TagsListHeader from '../TagsListHeader/TagsListHeader';
-import ListItem from '../../Services/ListItem/ListItem';
+import SimpleListItem from '../../UI/SimpleListItem/SimpleListItem';
 import TagsEdit from '../TagsEdit/TagsEdit';
 import ModalWrapper from '../../UI/ModalWrapper/ModalWrapper';
 
@@ -42,7 +42,7 @@ const TagsList = () => {
   }, [])
 
   const tags = filterTags.map(client => {
-    return <ListItem
+    return <SimpleListItem
       type='tags'
       key={client.id}
       data={client}

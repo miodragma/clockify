@@ -5,9 +5,9 @@ import { Button, Form } from 'react-bootstrap';
 import CustomDropdownWrapper from '../../UI/CustomDropdownWrapper/CustomDropdownWrapper';
 import ModalWrapper from '../../UI/ModalWrapper/ModalWrapper';
 import Input from '../../UI/Input/Input';
-import ClientsElement from './ClientsElement/ClientsElement';
+import AddFindClientsDropdown from '../../UI/AddFindClientsDropdown/AddFindClientsDropdown';
 import ColorPicker from '../../UI/ColorPicker/ColorPicker';
-import RadioButton from '../../UI/RadioButton/RadioButton';
+import CustomCheckButton from '../../UI/CustomCheckButton/CustomCheckButton';
 
 import { rgbToHex } from '../../Utils/rgbToHex';
 
@@ -20,7 +20,7 @@ const CreateProject = props => {
 
   const dispatch = useDispatch();
 
-  const {activeWorkspace: workspaceId} = useSelector(state => state.user.user);
+  const { activeWorkspace: workspaceId } = useSelector(state => state.user.user);
   const clients = useSelector(state => state.clients.clients);
 
   const [showModal, setShowModal] = useState(false);
@@ -38,7 +38,7 @@ const CreateProject = props => {
 
   const keydownHandler = useCallback(e => {
     if (e.keyCode === 13 && e.ctrlKey && findClientName && !isClientList.current) {
-      dispatch(addNewClient({workspaceId, name: findClientName}))
+      dispatch(addNewClient({ workspaceId, name: findClientName }))
     }
   }, [dispatch, findClientName, workspaceId])
 
@@ -68,7 +68,7 @@ const CreateProject = props => {
       color: convertColor,
       isPublic: isPublic
     }
-    dispatch(addNewProject({workspaceId, projectData}));
+    dispatch(addNewProject({ workspaceId, projectData }));
     onHideModalHandler()
   }, [projectName, clientId, isPublic, color, dispatch, onHideModalHandler, workspaceId])
 
@@ -98,7 +98,7 @@ const CreateProject = props => {
   }, []);
 
   const onCreateClientHandler = useCallback(() => {
-    dispatch(addNewClient({workspaceId, name: findClientName}));
+    dispatch(addNewClient({ workspaceId, name: findClientName }));
   }, [dispatch, findClientName, workspaceId]);
 
   const onIsClientListHandler = useCallback(val => {
@@ -110,6 +110,7 @@ const CreateProject = props => {
   }, []);
 
   const onChangePublicHandler = useCallback(() => {
+    console.log('ssssssssssss')
     setIsPublic(!isPublic);
   }, [isPublic]);
 
@@ -136,29 +137,23 @@ const CreateProject = props => {
               type='text'
               onChangeInputVal={onChangeProjectNameHandler}
               autofocus={true}/>
-            <CustomDropdownWrapper
-              className={classes.createProjectCdw}
-              label={clientDropdownLabel}
-              position={false}
+            <AddFindClientsDropdown
+              clientDropdownLabel={clientDropdownLabel}
               closeDropdown={closeDropdown}
-              onResetCloseDropdown={onResetCloseDropdownHandler}>
-              <div className={classes.clientsList}>
-                <ClientsElement
-                  isWithoutClient={isWithout}
-                  clients={clients}
-                  findClientName={findClientName}
-                  clickClient={onClickClientHandler}
-                  isClientList={onIsClientListHandler}
-                  findClient={onFindClientHandler}
-                  createClient={onCreateClientHandler}
-                />
-              </div>
-            </CustomDropdownWrapper>
+              resetCloseDropdown={onResetCloseDropdownHandler}
+              isWithoutClient={isWithout}
+              clients={clients}
+              findClientName={findClientName}
+              clickClient={onClickClientHandler}
+              isClientList={onIsClientListHandler}
+              findClient={onFindClientHandler}
+              createClient={onCreateClientHandler}
+            />
           </div>
           <div className={`${classes.formRowWrapper} ${classes.formRowWrapperWithColor}`}>
             <div className={classes.colorAndPublicWrapper}>
               <ColorPicker changeColor={onChangeColorHandler}/>
-              <RadioButton
+              <CustomCheckButton
                 buttonWrapper={classes.buttonWrapper}
                 type='checkbox'
                 isChecked={isPublic}
@@ -166,7 +161,7 @@ const CreateProject = props => {
                 changeCheckValue={onChangePublicHandler}/>
             </div>
             <CustomDropdownWrapper
-              className={`${classes.createProjectCdw} ${classes.createProjectCdwTemplate}`}
+              className={`createProjectCdw ${classes.createProjectCdwTemplate}`}
               label='No template'
               position={false}
               closeDropdown={closeDropdown}

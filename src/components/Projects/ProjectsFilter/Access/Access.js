@@ -2,7 +2,7 @@ import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useLocation } from 'react-router-dom';
 
-import CustomFilterDropdown from '../../../Services/CustomFilterDropdown/CustomFilterDropdown';
+import CustomFilterDropdown from '../../../UI/CustomFilterDropdown/CustomFilterDropdown';
 
 import { reviver } from '../../../Utils/reviver';
 import { existAllValuesInArray } from '../../../Utils/existAllValuesInArray';

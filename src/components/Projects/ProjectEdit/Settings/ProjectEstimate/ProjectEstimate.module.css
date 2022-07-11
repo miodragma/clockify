@@ -1,0 +1,104 @@
+.estimateDropdownList button {
+  width: 256px;
+  text-align: left;
+  border: 1px solid #ced4da !important;
+  transition: all 0.2s ease;
+}
+
+.estimateDropdownList button:after {
+  float: right;
+  margin: 8px 0;
+}
+
+.estimateDropdownList button:hover {
+  background-color: #e4eaee !important;
+}
+
+.timeEstimateWrapper {
+  margin-top: 14px;
+}
+
+.timeEstimateSubWrapper {
+  display: flex;
+  align-items: center;
+}
+
+.timeEstimateSubWrapper p {
+  font-size: 14px;
+  color: #999999;
+  margin: 0 0 0 10px;
+}
+
+.typeTimeEstimate {
+  max-width: 120px;
+  padding-left: 0;
+}
+
+.typeTimeEstimate:hover {
+  background-color: #ffffff;
+}
+
+.timeEstimateInput {
+  padding: 8px 10px;
+  font-size: 14px;
+  border-radius: 0.25rem;
+  min-width: 80px;
+  max-width: 80px;
+  border: 1px solid #ced4da !important;
+}
+
+.timeEstimateInput:focus {
+  border: 1px solid #ced4da !important;
+}
+
+.timeEstimateInput:read-only {
+  background-color: #f2f6f8 !important;
+  border: 1px solid #ced4da !important;
+}
+
+.switchButton {
+  margin-bottom: 10px;
+}
+
+.switchButton input:checked {
+  background-color: #03A9F4;
+  border-color: #03A9F4;
+}
+
+.switchButton label {
+  color: #333333;
+  font-size: 14px;
+}
+
+.estimatePopoverContent {
+  margin-top: 5px;
+  max-width: 270px;
+  opacity: 0.5;
+}
+
+.estimatePopoverContent div {
+  pointer-events: none;
+}
+
+.paragraphSubTitle {
+  max-width: 340px;
+}
+
+.upgradeProLink {
+  color: #fff;
+  background-color: #03a9f4;
+  border-color: #03a9f4;
+  margin: 0 10px;
+  text-decoration: none;
+  padding: 5px 9px;
+  transition: all 0.2s ease;
+}
+
+.upgradeProLink:hover {
+  color: #ffffff;
+  background-color: #028cc9;
+}
+
+.addMoreFieldsDropdown button {
+  pointer-events: none;
+}

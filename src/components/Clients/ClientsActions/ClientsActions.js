@@ -1,7 +1,7 @@
 import { useCallback, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
-import Actions from '../../Services/Actions/Actions';
+import ShortActions from '../../UI/ShortActions/ShortActions';
 
 import { dropdownData } from './dropdownData/dropdown-data';
 import { addNewClient, fetchClientsData } from '../store/clients-actions';
@@ -40,7 +40,7 @@ const ClientsActions = () => {
   }, [])
 
   return (
-    <Actions
+    <ShortActions
       addNewLabel='Add new client'
       dropdownData={dropdownData}
       onShowBy={onShowByHandler}

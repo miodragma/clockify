@@ -1,8 +1,9 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 
 import { SketchPicker } from 'react-color';
 
 import { generateRandomRgb } from '../../Utils/generateRandomRgb';
+import { hexToRgba } from '../../Utils/hexToRgba';
 
 import classes from './ColorPicker.module.css';
 
@@ -10,14 +11,23 @@ const initialState = generateRandomRgb;
 
 const ColorPicker = props => {
 
-  const {changeColor} = props;
+  const { changeColor, currentColor } = props;
 
   const [displayColorPicker, setDisplayColorPicker] = useState(false);
   const [color, setColor] = useState(initialState);
+  const [hexColor, setHexColor] = useState();
+  const isMounted = useRef(true);
 
   useEffect(() => {
-    changeColor(color)
-  }, [changeColor, color])
+    if (isMounted.current) {
+      if (!currentColor) {
+        changeColor(color)
+      } else {
+        setColor(hexToRgba(currentColor))
+      }
+      isMounted.current = false
+    }
+  }, [changeColor, color, currentColor])
 
   const handleClick = () => {
     setDisplayColorPicker(!displayColorPicker)
@@ -25,11 +35,12 @@ const ColorPicker = props => {
 
   const handleClose = () => {
     setDisplayColorPicker(false);
+    changeColor(hexColor);
   };
 
   const handleChange = color => {
     setColor(color.rgb);
-    changeColor(color.hex);
+    setHexColor(color.hex)
   };
 
   return (

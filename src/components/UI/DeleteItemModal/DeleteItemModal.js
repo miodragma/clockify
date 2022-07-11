@@ -1,4 +1,4 @@
-import ModalWrapper from '../../UI/ModalWrapper/ModalWrapper';
+import ModalWrapper from '../ModalWrapper/ModalWrapper';
 
 import classes from './DeleteItemModal.module.css';
 

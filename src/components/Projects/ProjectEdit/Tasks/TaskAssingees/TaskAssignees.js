@@ -1,7 +1,7 @@
 import { useCallback, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
-import CustomFilterDropdown from '../../../../Services/CustomFilterDropdown/CustomFilterDropdown';
+import CustomFilterDropdown from '../../../../UI/CustomFilterDropdown/CustomFilterDropdown';
 
 import { reviver } from '../../../../Utils/reviver';
 import { compareArrays } from '../../../../Utils/compareArrays';

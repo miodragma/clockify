@@ -73,19 +73,24 @@ export const updateProject = data => {
       if (actionType === 'template') {
         return axiosConfig.patch(`/workspaces/${workspaceId}/projects/${projectId}/template`, { isTemplate: !template })
       }
+      if (actionType === 'estimate') {
+        return axiosConfig.patch(`/workspaces/${workspaceId}/projects/${projectId}/estimate`, dataToUpdate)
+      }
       return axiosConfig.put(`workspaces/${workspaceId}/projects/${projectId}`, dataToUpdate)
     }
-
+    const singleProjectKeys = Object.keys(dataToUpdate);
     try {
       const {data: projectData} = await updateProject();
       dispatch(loaderActions.setLoaderData(false));
-      dispatch(projectsActions.onUpdateProject(projectData))
+      dispatch(projectsActions.onUpdateProject({ projectData, singleProjectKeys }))
       dispatch(loaderActions.showToast({ toastMessage: `Project successfully updated`, type: 'success' }))
+      return projectData;
     } catch (error) {
       console.log(error);
       const message = error.response.data.message || 'Please contact support'
       dispatch(loaderActions.setLoaderData(false));
       dispatch(loaderActions.showToast({toastMessage: message, type: 'error'}))
+      throw error;
     }
   }
 }

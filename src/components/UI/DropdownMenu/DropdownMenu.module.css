@@ -54,3 +54,8 @@
 .defaultDropdownButton button:focus {
   border: 1px solid #ced4da !important;
 }
+
+.disableDropdownItem {
+  pointer-events: none;
+  opacity: 0.5;
+}

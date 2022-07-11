@@ -43,12 +43,17 @@ const projectsSlice = createSlice({
     },
     onUpdateProject(state, action) {
       const currentProjects = [...state.projects];
-      const index = currentProjects.findIndex(project => project.id === action.payload.id);
-      let currentProject = { ...currentProjects.find(project => project.id === action.payload.id) };
-      currentProject = { ...currentProject, ...action.payload }
+      const index = currentProjects.findIndex(project => project.id === action.payload.projectData.id);
+      let currentProject = { ...currentProjects.find(project => project.id === action.payload.projectData.id) };
+      currentProject = { ...currentProject, ...action.payload.projectData }
       currentProjects[index] = currentProject;
       state.projects = currentProjects;
-      state.project = { ...state.project, note: currentProject.note }
+
+      const singleProject = { ...state.project };
+      action.payload.singleProjectKeys.forEach(key => {
+        singleProject[key] = action.payload.projectData[key]
+      })
+      state.project = singleProject;
     },
     deleteProject(state, action) {
       state.projects = state.projects.filter(project => project.id !== action.payload);
@@ -56,6 +61,9 @@ const projectsSlice = createSlice({
     setProject(state, action) {
       state.project = action.payload;
       state.tasks = action.payload.tasks?.filter(task => task.status === 'ACTIVE');
+    },
+    updateClientOnProject(state, action) {
+      state.project.client = action.payload;
     },
     searchTasksByStatusAndName(state, action) {
       let filteredTasks = state.project.tasks;

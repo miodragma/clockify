@@ -1,7 +1,7 @@
 import { useCallback, useEffect } from 'react';
 
 import TableData from '../../../../UI/TableData/TableData';
-import ProjectEditActionsDropdown from '../../../../Services/ProjectEditActionsDropdown/ProjectEditActionsDropdown';
+import ProjectEditActionsDropdown from '../../../../UI/ProjectEditActionsDropdown/ProjectEditActionsDropdown';
 
 const EditItem = props => {
 

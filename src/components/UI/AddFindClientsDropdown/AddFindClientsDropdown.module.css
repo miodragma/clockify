@@ -37,3 +37,25 @@
 .activeClient {
   background-color: #e4eaee
 }
+
+.clientsList {
+  width: 360px
+}
+
+.clientsList p {
+  padding: 10px 20px;
+  font-size: 14px;
+  color: #666666;
+  margin: 0;
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+
+.clientsList p:hover {
+  background-color: #e4eaee
+}
+
+.clientName {
+  text-overflow: ellipsis;
+  overflow: hidden;
+}

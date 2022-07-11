@@ -59,7 +59,7 @@ const TrackedItem = props => {
     <TableData>
       <div onClick={onClickTrackedHandler} className={className}>
         <p className={classes.duration}>{getDuration}h</p>
-        {estimate.type === 'MANUAL' && <p className={classes.estimate}>of {getEstimate}h</p>}
+        {(estimate.type === 'MANUAL' && getEstimateHour) && <p className={classes.estimate}>of {getEstimate}h</p>}
       </div>
     </TableData>
   )

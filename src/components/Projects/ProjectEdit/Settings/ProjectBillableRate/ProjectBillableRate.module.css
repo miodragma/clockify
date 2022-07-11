@@ -1,0 +1,82 @@
+.inputWrapper {
+  display: flex;
+  align-items: flex-end;
+}
+
+.inputWrapper div {
+  display: flex;
+  flex-direction: column;
+}
+
+.inputWrapper div label {
+  margin-bottom: 7px;
+  color: #333333;
+  font-size: 14px;
+}
+
+.inputWrapper div input {
+  border-top: 1px solid #ced4da;
+  border-bottom: 1px solid #ced4da;
+  border-left: 1px solid #ced4da;
+  border-right: unset;
+  height: 39px;
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+  padding: 8px 10px;
+  font-size: 14px;
+}
+
+.inputWrapper div input:hover, .inputWrapper div input:focus {
+  border-top: 1px solid #ced4da !important;
+  border-bottom: 1px solid #ced4da !important;
+  border-left: 1px solid #ced4da !important;
+  border-right: unset !important;
+}
+
+.inputWrapper button {
+  height: 39px;
+  background-color: #ffffff;
+  font-size: 14px;
+  color: #03a9f4;
+  padding: 0 11px;
+  border: 1px solid #ced4da;
+  transition: 0.2s ease;
+}
+
+.inputWrapper button:hover {
+  text-decoration: underline;
+  color: #028cc9;
+}
+
+.applyBillableRateRadioButton {
+  padding-left: 0;
+}
+
+.applyBillableRateRadioButton:hover {
+  background-color: #ffffff;
+}
+
+.applyBillableRateWrapper {
+  margin-top: 14px;
+}
+
+.applyBillableRateWrapper p {
+  color: #333333;
+  font-size: 14px;
+  margin-bottom: 0;
+}
+
+.applyBillableRateSubWrapper {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.applyBillableRateSubWrapperInput {
+  background-color: #f2f6f8 !important;
+  border: 1px solid #ced4da !important;
+}
+
+.applyBillableRateSubWrapperInput:focus {
+  border: 1px solid #ced4da !important;
+}

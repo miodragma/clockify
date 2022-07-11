@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useLocation } from 'react-router-dom';
 
 import { existAllValuesInArray } from '../../../Utils/existAllValuesInArray';
-import CustomFilterDropdown from '../../../Services/CustomFilterDropdown/CustomFilterDropdown';
+import CustomFilterDropdown from '../../../UI/CustomFilterDropdown/CustomFilterDropdown';
 
 import { fetchClientsData } from '../../../Clients/store/clients-actions';
 
