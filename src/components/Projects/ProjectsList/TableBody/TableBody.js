@@ -12,13 +12,15 @@ import EditItem from './EditItem/EditItem';
 import DeleteItemModal from '../../../UI/DeleteItemModal/DeleteItemModal';
 import TableRow from '../../../UI/TableRow/TableRow';
 
+import { archiveActions, notArchiveActions } from '../../../Services/dropdownArchiveData/dropdown-archive-data';
+
 import { deleteProject, updateProject } from '../../store/projects-actions';
 
 import classes from './TableBody.module.css';
 
 const TableBody = props => {
 
-  const {projects, editProject} = props;
+  const { projects, editProject } = props;
 
   const dispatch = useDispatch();
 
@@ -28,7 +30,12 @@ const TableBody = props => {
   const onEditProjectActionHandler = actionData => {
     actionData.actionType !== 'delete' && dispatch(updateProject({
       actionType: actionData.actionType,
-      dataToUpdate: { archived: !actionData.project.archived },
+      dataToUpdate: {
+        ...actionData.project,
+        timeInterval: { duration: actionData.project.duration },
+        archived: !actionData.project.archived,
+        isPublic: actionData.project.public
+      },
       workspaceId: actionData.project.workspaceId,
       id: actionData.project.id
     }))
@@ -64,7 +71,13 @@ const TableBody = props => {
     <AccessItem className={classes.tableDataChildrenWrapper} project={project}
                 onClickAccess={() => onEditProject({ id: project.id, tab: 'access' })}/>
     <FavoriteItem tableDataclassName={classes.td}/>
-    <EditItem editProjectAction={onEditProjectActionHandler} project={project} className={classes.td}/>
+    <EditItem
+      editProjectAction={onEditProjectActionHandler}
+      project={project}
+      className={classes.td}
+      isArchiveActions={true}
+      archiveActions={archiveActions}
+      notArchiveActions={notArchiveActions}/>
   </TableRow>)
 
   const deleteMessage = `The ${projectData.name} Project will also be removed from all time

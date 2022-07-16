@@ -67,7 +67,7 @@ export const updateProject = data => {
 
     dispatch(loaderActions.setLoaderData(true));
 
-    const { dataToUpdate, workspaceId, id: projectId, template, actionType } = data;
+    const { dataToUpdate, workspaceId, id: projectId, template, actionType, userId } = data;
 
     const updateProject = async () => {
       if (actionType === 'template') {
@@ -76,11 +76,18 @@ export const updateProject = data => {
       if (actionType === 'estimate') {
         return axiosConfig.patch(`/workspaces/${workspaceId}/projects/${projectId}/estimate`, dataToUpdate)
       }
+      if (actionType === 'memberships') {
+        return axiosConfig.patch(`/workspaces/${workspaceId}/projects/${projectId}/memberships`, dataToUpdate)
+      }
+      if (actionType === 'billableRate') {
+        return axiosConfig.put(`/workspaces/${workspaceId}/projects/${projectId}/users/${userId}/hourly-rate`, dataToUpdate)
+      }
       return axiosConfig.put(`workspaces/${workspaceId}/projects/${projectId}`, dataToUpdate)
     }
-    const singleProjectKeys = Object.keys(dataToUpdate);
+
     try {
-      const {data: projectData} = await updateProject();
+      const { data: projectData } = await updateProject();
+      const singleProjectKeys = Object.keys(projectData);
       dispatch(loaderActions.setLoaderData(false));
       dispatch(projectsActions.onUpdateProject({ projectData, singleProjectKeys }))
       dispatch(loaderActions.showToast({ toastMessage: `Project successfully updated`, type: 'success' }))

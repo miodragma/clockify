@@ -8,7 +8,15 @@ import classes from './ProjectEditActionsDropdown.module.css';
 
 const ProjectEditActionsDropdown = props => {
 
-  const {project, onEditProjectAction, className} = props;
+  const {
+    project,
+    onEditProjectAction,
+    className,
+    isArchiveActions = true,
+    archiveActions,
+    notArchiveActions,
+    accessEditActions
+  } = props;
 
   const [isOpenActions, setIsOpenActions] = useState(false);
 
@@ -21,15 +29,9 @@ const ProjectEditActionsDropdown = props => {
   }, []);
 
   const onClickItemAction = (actionType) => {
-    onEditProjectAction({actionType, project})
+    onEditProjectAction({ actionType, project })
     setIsOpenActions(false)
   }
-
-  let archiveActions = [{label: 'Set as template', type: 'template'}, {
-    label: 'Restore',
-    type: 'archived'
-  }, {label: 'Delete', type: 'delete'}];
-  let notArchiveActions = [{label: 'Set as template', type: 'template'}, {label: 'Archive', type: 'archived'}];
 
   const mapActions = actionsData => actionsData.map((action, index) => {
     return (<p onClick={() => onClickItemAction(action.type)} key={index}>{action.label}</p>)
@@ -37,10 +39,14 @@ const ProjectEditActionsDropdown = props => {
 
   let actions;
 
-  if (project.archived) {
-    actions = mapActions(archiveActions)
+  if (isArchiveActions) {
+    if (project.archived) {
+      actions = mapActions(archiveActions)
+    } else {
+      actions = mapActions(notArchiveActions)
+    }
   } else {
-    actions = mapActions(notArchiveActions)
+    actions = mapActions(accessEditActions)
   }
 
   return (

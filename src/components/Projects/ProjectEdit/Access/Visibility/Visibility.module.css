@@ -1,0 +1,15 @@
+.isPublicButtonsWrapper {
+  display: flex;
+}
+
+.radioButton:hover {
+  background-color: #ffffff;
+}
+
+.radioButton {
+  padding-left: 0 !important;
+}
+
+.visibilitySubTitle {
+  margin-bottom: 0;
+}

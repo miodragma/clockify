@@ -4,7 +4,14 @@ import classes from './DeleteItemModal.module.css';
 
 const DeleteItemModal = props => {
 
-  const { showDeleteActionModal, message, onSubmitActionModal, onHideActionModal } = props;
+  const {
+    showDeleteActionModal,
+    message,
+    onSubmitActionModal,
+    onHideActionModal,
+    title = 'Delete',
+    buttonTitle = 'Delete'
+  } = props;
 
   const onHideActionModalHandler = () => {
     onHideActionModal();
@@ -18,8 +25,8 @@ const DeleteItemModal = props => {
     <ModalWrapper
       show={showDeleteActionModal}
       onHide={onHideActionModalHandler}
-      title='Delete'
-      buttonTitle='Delete'
+      title={title}
+      buttonTitle={buttonTitle}
       className={'warning'}
       onClickSubmitButton={submitActionModalHandler}>
       <div>

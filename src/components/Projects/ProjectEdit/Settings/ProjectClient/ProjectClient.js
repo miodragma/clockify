@@ -49,7 +49,7 @@ const ProjectClient = props => {
     if (selectedClient.id !== 'without') {
       if (selectedClient.name !== clientDropdownLabel) {
         dispatch(updateProject({
-          dataToUpdate: { clientId: selectedClient.id },
+          dataToUpdate: { ...project, isPublic: project.public, clientId: selectedClient.id },
           workspaceId: workspaceId,
           id: projectId
         })).then(project => {
@@ -61,7 +61,7 @@ const ProjectClient = props => {
     } else {
       if (selectedClient.id === 'without' && clientDropdownLabel !== 'No clients') {
         dispatch(updateProject({
-          dataToUpdate: { clientId: null },
+          dataToUpdate: { ...project, isPublic: project.public, clientId: null },
           workspaceId: workspaceId,
           id: projectId
         })).then(project => dispatch(projectsActions.updateClientOnProject(null)))

@@ -108,6 +108,10 @@ input:focus, textarea:focus, select:focus {
   background-color: #e4eaee
 }
 
+.editItemIconWrapper:active {
+  border: 1px solid transparent !important;
+}
+
 .createProjectCdw > div:nth-child(1) {
   display: flex;
   flex-direction: row;
@@ -143,4 +147,27 @@ input:focus, textarea:focus, select:focus {
   background-color: #cdeefd;
   border-color: #b8e7fc;
   font-size: 14px;
+}
+
+.customTable {
+  background-color: #fff;
+  margin-bottom: 0;
+  border-left: 1px solid #C6D2D9;
+  border-bottom: 1px solid #C6D2D9;
+  border-right: 1px solid #C6D2D9;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+.customThead {
+  height: 41px;
+  border-bottom: 1px solid #C6D2D9;
+}
+
+.customThead th {
+  text-transform: uppercase;
+  color: #999;
+  font-size: 13px;
+  letter-spacing: 1px;
+  font-weight: 400;
 }

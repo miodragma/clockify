@@ -10,12 +10,12 @@ import { removeExtraSpace } from '../../../../Utils/removeExtraSpace';
 
 const TaskNameInput = props => {
 
-  const { task, project, workspaceId } = props;
+  const { task, project } = props;
 
   const dispatch = useDispatch();
 
-  const { id: taskId, name } = task;
-  const { id: projectId } = project
+  const { name } = task;
+  const { id: projectId, workspaceId } = project;
 
   const onFocusNameHandler = useCallback(val => {
 
@@ -24,11 +24,12 @@ const TaskNameInput = props => {
   const onBlurNameHandler = useCallback(val => {
     if (removeExtraSpace(val) !== removeExtraSpace(name)) {
       const taskData = {
-        name: removeExtraSpace(val)
+        ...task,
+        name: removeExtraSpace(val),
       }
-      dispatch(editTask({ projectId, workspaceId, taskData, taskId }))
+      dispatch(editTask({ projectId, workspaceId, taskData, taskId: task.id }))
     }
-  }, [dispatch, name, projectId, taskId, workspaceId]);
+  }, [dispatch, name, projectId, task, workspaceId]);
 
   return (
     <Input

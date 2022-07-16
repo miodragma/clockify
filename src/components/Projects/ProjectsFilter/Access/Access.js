@@ -141,7 +141,7 @@ const Access = props => {
       dropdownLabel='Access'
       users={users}
       groups={groups}
-      isFromAccess={true}
+      isUsersAndGroups={true}
       selectedListIds={usersListIds}
       isSelectAll={isSelectAll}
       isSearchByName={!!nameVal.current}

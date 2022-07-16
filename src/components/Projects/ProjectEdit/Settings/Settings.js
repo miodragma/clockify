@@ -5,10 +5,10 @@ import ProjectName from './ProjectName/ProjectName';
 import ProjectClient from './ProjectClient/ProjectClient';
 import ProjectColor from './ProjectColor/ProjectColor';
 import ProjectBillable from './ProjectBillable/ProjectBillable';
-
-import classes from './Settings.module.css';
 import ProjectBillableRate from './ProjectBillableRate/ProjectBillableRate';
 import ProjectEstimate from './ProjectEstimate/ProjectEstimate';
+
+import classes from './Settings.module.css';
 
 const Settings = props => {
 

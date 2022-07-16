@@ -1,0 +1,43 @@
+.teamListWrapper {
+  margin-top: 20px;
+}
+
+.teamListTableDataNameColumn {
+  background: unset !important;
+  padding-left: 0 !important;
+  min-width: 200px !important;
+}
+
+.teamListTableData p {
+  margin: 0;
+}
+
+.teamListTableData:hover {
+  cursor: alias;
+}
+
+.teamListTableRow:hover {
+  box-shadow: unset !important;
+}
+
+.billableRateWrapper div input {
+  height: 26px;
+  font-size: 12px;
+  background-color: #f2f6f8;
+  max-width: 60px;
+}
+
+.billableRateWrapper button {
+  height: 26px;
+  font-size: 12px;
+  padding: 3px 7px;
+}
+
+.teamListTableDataEditColumn {
+  width: 20px;
+}
+
+.groupNameColumnMembers {
+  margin-left: 5px;
+  color: #999999;
+}

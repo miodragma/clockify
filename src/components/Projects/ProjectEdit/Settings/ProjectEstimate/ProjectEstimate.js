@@ -58,12 +58,14 @@ const ProjectEstimate = props => {
   }, []);
 
   const onBlurTimeHandler = useCallback(estimate => {
-    dispatch(updateProject({
-      actionType: 'estimate',
-      dataToUpdate: { timeEstimate: { ...timeEstimate, estimate: `PT${estimate}H` } },
-      workspaceId: workspaceId,
-      id: projectId
-    }))
+    if (timeEstimate.estimate.replace(/\D/g, '') !== estimate) {
+      dispatch(updateProject({
+        actionType: 'estimate',
+        dataToUpdate: { timeEstimate: { ...timeEstimate, estimate: `PT${estimate || 0}H` } },
+        workspaceId: workspaceId,
+        id: projectId
+      }))
+    }
   }, [dispatch, projectId, timeEstimate, workspaceId])
 
   return (

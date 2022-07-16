@@ -19,7 +19,8 @@ const CustomFilterDropdown = props => {
     isSelectAll,
     isWithoutClient,
     isSearchByName,
-    isFromAccess = false,
+    isIcon,
+    isUsersAndGroups = false,
     isSelectAllCheckbox = true,
     searchByName,
     changeActive,
@@ -59,7 +60,7 @@ const CustomFilterDropdown = props => {
 
   let newItemsList;
 
-  if (!isFromAccess) {
+  if (!isUsersAndGroups) {
     newItemsList = [...itemsList].map(item => {
 
       let isChecked = selectedListIds.some(id => id === item.id);
@@ -77,7 +78,7 @@ const CustomFilterDropdown = props => {
     let group = false;
     let divider;
 
-    const usersGroupsList = currentDropdownLabelVal === 'Active' ? [...groups, ...users] : [...users]
+    const usersGroupsList = currentDropdownLabelVal !== 'Inactive' ? [...groups, ...users] : [...users]
     newItemsList = usersGroupsList.map(item => {
 
       if (groups.length && !group && groups[0].id === item.id) {
@@ -127,6 +128,7 @@ const CustomFilterDropdown = props => {
     <CustomDropdownWrapper
       classCustomDropdownSubWrapper={classCustomDropdownSubWrapper}
       className={className}
+      isIcon={isIcon}
       label={dropdownLabel}
       badgeCounter={badge}
       isCloseEvent={isCloseEvent}

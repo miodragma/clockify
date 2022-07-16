@@ -15,12 +15,12 @@ const ProjectColor = props => {
   const onChangeColorHandler = useCallback(color => {
     if (color !== projectColor) {
       dispatch(updateProject({
-        dataToUpdate: { color },
+        dataToUpdate: { ...project, isPublic: project.public, color },
         workspaceId: workspaceId,
         id: projectId
       }))
     }
-  }, [dispatch, projectColor, projectId, workspaceId])
+  }, [dispatch, project, projectColor, projectId, workspaceId])
 
   return (
     <div className={`${className ? className : ''}`}>

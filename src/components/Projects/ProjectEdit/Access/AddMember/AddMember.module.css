@@ -1,0 +1,25 @@
+.members {
+  width: max-content;
+  margin-top: 14px;
+}
+
+.membersLabelSubWrapper {
+  width: max-content;
+  color: #03a9f4;
+  margin-left: 0;
+}
+
+.membersLabelSubWrapper p {
+  color: #03a9f4;
+  margin-left: 10px;
+  transition: all 0.2s ease;
+}
+
+.membersLabelSubWrapper p:hover {
+  text-decoration: underline;
+  color: #0a58ca;
+}
+
+.membersLabelSubWrapper div i {
+  display: none;
+}

@@ -66,7 +66,7 @@ const Note = () => {
   const onBlurHandler = () => {
     if (currentValue !== project.note) {
       dispatch(updateProject({
-        dataToUpdate: { note: currentValue },
+        dataToUpdate: { ...project, isPublic: project.public, note: currentValue },
         workspaceId: project.workspaceId,
         id: project.id
       }))

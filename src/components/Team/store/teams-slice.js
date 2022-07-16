@@ -13,7 +13,8 @@ const teamsSlice = createSlice({
       ['page', '1'],
       ['page-size', ''],
       ['status', ''],
-      ['projectId', '']
+      ['projectId', ''],
+      ['includeRoles', true]
     ]), replacer),
     defaultGroupsQueryParams: JSON.stringify(new Map([
       ['projectId', ''],

@@ -5,8 +5,16 @@ import ProjectEditActionsDropdown from '../../../../UI/ProjectEditActionsDropdow
 
 const EditItem = props => {
 
-  const {className, project, editProjectAction} = props;
-  const {id} = project
+  const {
+    className,
+    project,
+    editProjectAction,
+    isArchiveActions,
+    archiveActions,
+    notArchiveActions,
+    accessEditActions
+  } = props;
+  const { id } = project
 
   useEffect(() => {
   }, [id]);
@@ -17,7 +25,13 @@ const EditItem = props => {
 
   return (
     <TableData tdClassName={className}>
-      <ProjectEditActionsDropdown project={project} onEditProjectAction={onEditProjectActionHandler}/>
+      <ProjectEditActionsDropdown
+        project={project}
+        onEditProjectAction={onEditProjectActionHandler}
+        isArchiveActions={isArchiveActions}
+        archiveActions={archiveActions}
+        notArchiveActions={notArchiveActions}
+        accessEditActions={accessEditActions}/>
     </TableData>
   )
 };

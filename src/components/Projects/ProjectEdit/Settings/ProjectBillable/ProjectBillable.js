@@ -29,11 +29,11 @@ const ProjectBillable = props => {
     const checkedValue = e.target.checked;
     setIsBillable(checkedValue);
     dispatch(updateProject({
-      dataToUpdate: { billable: checkedValue },
+      dataToUpdate: { ...project, isPublic: project.public, billable: checkedValue },
       workspaceId: workspaceId,
       id: projectId
     }))
-  }, [dispatch, projectId, workspaceId]);
+  }, [dispatch, project, projectId, workspaceId]);
 
   return (
     <div className={`${className ? className : ''}`}>

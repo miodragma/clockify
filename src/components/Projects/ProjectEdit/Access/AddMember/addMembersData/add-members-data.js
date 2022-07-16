@@ -1,4 +1,4 @@
-export const dropdownUsersGroupsData = [
+export const addMembersData = [
   {
     label: 'Active',
     value: 'ACTIVE'

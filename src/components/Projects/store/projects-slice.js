@@ -14,9 +14,9 @@ const projectsSlice = createSlice({
       ['client-status', 'ALL'],
       ['contains-client', 'true'],
       ['users', ''],
-      ['user-status', 'ACTIVE'],
+      ['user-status', 'ALL'],
       ['contains-user', 'true'],
-      ['sort-column', 'DURATION'],
+      ['sort-column', 'BUDGET'],
       ['sort-order', 'DESCENDING'],
       ['page', '1'],
       ['page-size', '50']
@@ -53,7 +53,7 @@ const projectsSlice = createSlice({
       action.payload.singleProjectKeys.forEach(key => {
         singleProject[key] = action.payload.projectData[key]
       })
-      state.project = singleProject;
+      state.project = currentProject;
     },
     deleteProject(state, action) {
       state.projects = state.projects.filter(project => project.id !== action.payload);
