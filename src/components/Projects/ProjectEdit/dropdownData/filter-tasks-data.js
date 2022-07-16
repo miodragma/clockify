@@ -17,7 +17,7 @@ export const sortTaskData = [
   {
     label: 'Name',
     value: 'NAME',
-    defaultType: 'DESCENDING'
+    defaultType: 'ASCENDING'
   },
   {
     label: 'Assignees',

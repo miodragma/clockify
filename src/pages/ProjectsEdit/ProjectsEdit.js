@@ -9,6 +9,8 @@ import ProjectEditActionsDropdown from '../../components/UI/ProjectEditActionsDr
 import FavoriteButton from '../../components/UI/FavoriteButton/FavoriteButton';
 import DeleteItemModal from '../../components/UI/DeleteItemModal/DeleteItemModal';
 
+import { archiveActions, notArchiveActions } from '../../components/Services/dropdownArchiveData/dropdown-archive-data';
+
 import { reviver } from '../../components/Utils/reviver';
 import { mapQueryParams } from '../../components/Utils/mapQueryParams';
 
@@ -53,7 +55,11 @@ const ProjectsEditPage = () => {
     if (actionData.actionType !== 'delete') {
       dispatch(updateProject({
         actionType: actionData.actionType,
-        dataToUpdate: { archived: !actionData.project.archived },
+        dataToUpdate: {
+          ...actionData.project,
+          archived: !actionData.project.archived,
+          isPublic: actionData.project.public
+        },
         workspaceId,
         id: actionData.project.id
       }))
@@ -91,8 +97,12 @@ const ProjectsEditPage = () => {
             </div>
             <div className={classes.headerWrapperButtons}>
               <FavoriteButton className={classes.favoriteButton}/>
-              <ProjectEditActionsDropdown className={classes.actionsButton} project={project}
-                                          onEditProjectAction={onEditProjectActionHandler}/>
+              <ProjectEditActionsDropdown
+                className={classes.actionsButton}
+                project={project}
+                onEditProjectAction={onEditProjectActionHandler}
+                archiveActions={archiveActions}
+                notArchiveActions={notArchiveActions}/>
             </div>
           </div>}
         </Col>

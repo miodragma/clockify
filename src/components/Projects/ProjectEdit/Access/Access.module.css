@@ -1,0 +1,20 @@
+.itemWrapper {
+  border-bottom: 1px solid #E4EAEE;
+  padding-bottom: 15px;
+}
+
+.accessItemWrapper {
+  margin-top: 20px;
+}
+
+.accessItemTitle {
+  font-weight: 500;
+  font-size: 18px;
+  margin-bottom: 0;
+}
+
+.accessItemSubTitle {
+  font-size: 14px;
+  color: #999999;
+  margin-top: 0;
+}

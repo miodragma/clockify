@@ -110,7 +110,6 @@ const CreateProject = props => {
   }, []);
 
   const onChangePublicHandler = useCallback(() => {
-    console.log('ssssssssssss')
     setIsPublic(!isPublic);
   }, [isPublic]);
 

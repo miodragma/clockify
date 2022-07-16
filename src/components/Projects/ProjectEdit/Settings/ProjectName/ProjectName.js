@@ -27,12 +27,12 @@ const ProjectName = props => {
   const onBlurHandler = useCallback(() => {
     if (removeExtraSpace(currentName) !== removeExtraSpace(projectName)) {
       dispatch(updateProject({
-        dataToUpdate: { name: removeExtraSpace(currentName) },
+        dataToUpdate: { ...project, isPublic: project.public, name: removeExtraSpace(currentName) },
         workspaceId: workspaceId,
         id: projectId
       }))
     }
-  }, [currentName, dispatch, projectId, projectName, workspaceId]);
+  }, [currentName, dispatch, project, projectId, projectName, workspaceId]);
 
   return (
     <div className={`${className ? className : ''}`}>

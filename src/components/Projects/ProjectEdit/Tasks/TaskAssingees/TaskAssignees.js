@@ -27,19 +27,20 @@ const TaskAssignees = props => {
   const assigneesStatus = useRef('');
 
   const onClickCheckAssigneesHandler = useCallback((val, task) => {
+    const userOrGroup = users.some(user => user.id === val) ? 'assigneeIds' : 'userGroupIds';
     const updateTasks = [...currentTasks];
     const findTaskToUpdateIndex = updateTasks.findIndex(currTask => currTask.id === task.id);
     const taskToUpdate = { ...updateTasks[findTaskToUpdateIndex] };
-    let assigneeIdsToUpdate = [...taskToUpdate.assigneeIds];
-    if (task.assigneeIds.includes(val)) {
-      assigneeIdsToUpdate = assigneeIdsToUpdate.filter(assigneeId => assigneeId !== val)
+    let idsToUpdate = [...taskToUpdate[userOrGroup]];
+    if (task[userOrGroup].includes(val)) {
+      idsToUpdate = idsToUpdate.filter(id => id !== val)
     } else {
-      assigneeIdsToUpdate = [...assigneeIdsToUpdate, val]
+      idsToUpdate = [...idsToUpdate, val]
     }
-    taskToUpdate.assigneeIds = assigneeIdsToUpdate
+    taskToUpdate[userOrGroup] = idsToUpdate
     updateTasks[findTaskToUpdateIndex] = taskToUpdate;
     onClickCheckAssignees(updateTasks)
-  }, [currentTasks, onClickCheckAssignees]);
+  }, [currentTasks, onClickCheckAssignees, users]);
 
   const onSearchAssigneesByNameHandler = useCallback(name => {
     assigneesName.current = name;
@@ -61,11 +62,13 @@ const TaskAssignees = props => {
 
   const onCloseDropdownHandler = useCallback(currTask => {
     const findTask = tasks.find(task => task.id === currTask.id);
-    const isEqual = compareArrays(findTask.assigneeIds, currTask.assigneeIds)
-    if (!isEqual) {
+    const isEqualUsers = compareArrays(findTask.assigneeIds, currTask.assigneeIds)
+    const isEqualGroups = compareArrays(findTask.userGroupIds, currTask.userGroupIds)
+    if (!isEqualUsers || !isEqualGroups) {
       const taskData = {
         name: currTask.name,
-        assigneeIds: currTask.assigneeIds
+        assigneeIds: currTask.assigneeIds,
+        userGroupIds: currTask.userGroupIds
       }
       dispatch(editTask({ projectId: project.id, workspaceId, taskData, taskId: currTask.id }))
     }
@@ -73,19 +76,32 @@ const TaskAssignees = props => {
   }, [dispatch, project.id, tasks, workspaceId])
 
   const findTask = tasks.find(currTask => currTask.id === task.id);
-  const dropdownLabel = findTask?.assigneeIds[0] ? [...users, ...groups].find(item => item.id === findTask?.assigneeIds[0])?.name : 'Anyone';
+  let dropdownLabel = '';
+  const findNameById = (type, data) => data.forEach(item => {
+    if (findTask) {
+      if (findTask[type]?.includes(item.id)) {
+        if (dropdownLabel.length) {
+          dropdownLabel = `${dropdownLabel}, ${item.name}`
+        } else {
+          dropdownLabel = item.name;
+        }
+      }
+    }
+  })
+  findNameById('userGroupIds', groups);
+  findNameById('assigneeIds', users);
 
   return (
     <CustomFilterDropdown
       classCustomDropdownSubWrapper={classes.assigneesLabelSubWrapper}
       className={classes.assignees}
       inputLabel='Find team...'
-      dropdownLabel={dropdownLabel}
+      dropdownLabel={dropdownLabel.length ? dropdownLabel : 'Anyone'}
       users={users}
       groups={groups}
-      isFromAccess={true}
+      isUsersAndGroups={true}
       isSelectAllCheckbox={false}
-      selectedListIds={task.assigneeIds}
+      selectedListIds={[...task.assigneeIds, ...task.userGroupIds]}
       isSelectAll={false}
       isSearchByName={false}
       isBadgeCounter={false}

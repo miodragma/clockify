@@ -26,7 +26,7 @@ const Tasks = () => {
 
   const dispatch = useDispatch();
 
-  const [sortOrder, setSortOrder] = useState('DESCENDING');
+  const [sortOrder, setSortOrder] = useState('ASCENDING');
   const [currentTasks, setCurrentTasks] = useState([]);
   const [showActionModal, setShowActionModal] = useState(false);
   const [taskData, setTaskData] = useState({});
@@ -44,19 +44,19 @@ const Tasks = () => {
 
     if (project && isMounted.current) {
       const currentDefaultUsersQueryParams = JSON.parse(defaultUsersQueryParams, reviver);
-      currentDefaultUsersQueryParams.set('projectId', project.id);
+      // currentDefaultUsersQueryParams.set('projectId', project.id);
       currentDefaultUsersQueryParams.set('status', 'ACTIVE')
       dispatch(fetchAllUsers({ queryParams: currentDefaultUsersQueryParams, workspaceId }))
 
       const currentDefaultGroupsQueryParams = JSON.parse(defaultGroupsQueryParams, reviver);
-      currentDefaultGroupsQueryParams.set('projectId', project.id);
+      // currentDefaultGroupsQueryParams.set('projectId', project.id);
       dispatch(fetchAllGroups({ queryParams: currentDefaultGroupsQueryParams, workspaceId }))
       isMounted.current = false
     }
   }, [defaultGroupsQueryParams, defaultUsersQueryParams, dispatch, project, workspaceId]);
 
   useEffect(() => {
-    if (project) {
+    if (project && tasks) {
       setCurrentTasks([...tasks])
     }
   }, [project, tasks])
@@ -77,7 +77,7 @@ const Tasks = () => {
   const onEditTaskHandler = useCallback(newTaskData => {
     if (newTaskData.actionType !== 'delete') {
       const taskData = {
-        name: newTaskData.task.name,
+        ...newTaskData.task,
         status: newTaskData.actionType
       }
       dispatch(editTask({ projectId: project.id, workspaceId, taskData, taskId: newTaskData.task.id }))
@@ -108,7 +108,6 @@ const Tasks = () => {
             <TaskNameInput
               task={task}
               project={project}
-              workspaceId={workspaceId}
             />
           </div>
         </TableData>
@@ -141,8 +140,8 @@ const Tasks = () => {
         <ListHeaderRow>
           <p>Tasks</p>
         </ListHeaderRow>
-        <table className={classes.table}>
-          <thead className={classes.thead}>
+        <table className='customTable'>
+          <thead className='customThead'>
           <tr>
             <CustomTableHeadingItem
               data={sortTaskData}

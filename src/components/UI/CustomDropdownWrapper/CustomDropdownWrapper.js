@@ -2,6 +2,8 @@ import { useCallback, useEffect, useState } from 'react';
 
 import CustomDropdown from '../CustomDropdown/CustomDropdown';
 
+import addIcon from '../../../assets/add-icon.svg';
+
 import classes from './CustomDropdownWrapper.module.css';
 
 const CustomDropdownWrapper = props => {
@@ -15,7 +17,8 @@ const CustomDropdownWrapper = props => {
     closeDropdown,
     onResetCloseDropdown,
     isCloseEvent = false,
-    onCloseEvent
+    onCloseEvent,
+    isIcon
   } = props;
 
   const [isOpenCDW, setIsOpenCDW] = useState(false);
@@ -43,6 +46,7 @@ const CustomDropdownWrapper = props => {
       {badgeCounter && isBadgeCounter && <span className={classes.badge}>{badgeCounter}</span>}
       <div
         className={`${classes.customDropdownSubWrapper} ${classCustomDropdownSubWrapper ? classCustomDropdownSubWrapper : ''}`}>
+        {isIcon && <img src={addIcon} alt="add-icon"/>}
         <p className={classes.customDropdownWrapperLabel}>{label}</p>
         <div className={classes.dropdownCaretWrapper}>
           <i className={classes.dropdownCaret}/>

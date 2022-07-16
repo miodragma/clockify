@@ -1,5 +1,6 @@
 .estimateDropdownList button {
-  width: 256px;
+  max-width: 330px;
+  width: 100%;
   text-align: left;
   border: 1px solid #ced4da !important;
   transition: all 0.2s ease;
