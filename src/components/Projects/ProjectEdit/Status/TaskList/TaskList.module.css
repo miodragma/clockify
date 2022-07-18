@@ -1,0 +1,20 @@
+.taskListTableData {
+  cursor: alias;
+}
+
+.taskListTableData p {
+  margin: 0
+}
+
+.taskListTableDataTrackedValue {
+  color: #999999;
+}
+
+.tableDataName {
+  padding-left: 0 !important;
+  background: unset !important;
+}
+
+.doneTaskName {
+  text-decoration: line-through;
+}
