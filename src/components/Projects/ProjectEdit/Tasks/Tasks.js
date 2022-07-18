@@ -61,10 +61,10 @@ const Tasks = () => {
     }
   }, [project, tasks])
 
-  const onClickSortItemHandler = data => {
+  const onClickSortItemHandler = useCallback(data => {
     const order = data.sortOrder === 'ASCENDING' ? 'DESCENDING' : 'ASCENDING';
     setSortOrder(order);
-  }
+  }, []);
 
   const addNewTaskHandler = useCallback(val => {
     dispatch(addNewTask({ projectId: project.id, workspaceId, taskName: val }))
@@ -100,7 +100,7 @@ const Tasks = () => {
   let tasksContent;
 
   if (currentTasks) {
-    tasksContent = filterByAscAndDesc([...currentTasks], sortOrder).map(task => {
+    tasksContent = filterByAscAndDesc([...currentTasks], sortOrder, 'name').map(task => {
 
       return <TableRow key={task.id}>
         <TableData className={classes.tableDataNameInput}>

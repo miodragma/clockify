@@ -32,7 +32,6 @@ const Access = props => {
       dispatch(fetchAllGroups({ queryParams: currentDefaultGroupsQueryParams, workspaceId }))
       setCopyOfUsers(users);
       setCopyOfGroups(groups);
-      console.log('ssssssssssssss')
       isMounted.current = false
     }
   }, [defaultGroupsQueryParams, defaultUsersQueryParams, dispatch, groups, users, workspaceId]);
