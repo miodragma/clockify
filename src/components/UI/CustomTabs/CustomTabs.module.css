@@ -1,0 +1,28 @@
+.navItem {
+  margin-right: 5px;
+  padding: 10px 30px;
+  color: #666666;
+  font-size: 14px;
+  text-transform: uppercase;
+  background: #E4EAEE !important;
+  border: 1px solid #C6D2D9 !important;
+}
+
+.active {
+  border-color: #C6D2D9 #C6D2D9 #fff !important;
+  background: #ffffff !important;
+  color: #495057 !important;
+}
+
+.navItem:hover, .navItem:focus {
+  background: #ffffff;
+  color: #495057;
+}
+
+.editContent {
+  padding: 20px;
+  background: #ffffff;
+  border-bottom: 4px solid #C6D2D9;
+  border-left: 1px solid #C6D2D9;
+  border-right: 1px solid #C6D2D9;
+}

@@ -68,7 +68,7 @@ input[type=number]::-webkit-outer-spin-button {
 }
 
 input:focus, textarea:focus, select:focus {
-  border: 1px solid #90A4AE !important;
+  border: 1px solid #ced4da !important;
 }
 
 .rowItem {
@@ -170,4 +170,45 @@ input:focus, textarea:focus, select:focus {
   font-size: 13px;
   letter-spacing: 1px;
   font-weight: 400;
+}
+
+.upgradeLink {
+  color: #fff;
+  background-color: #03a9f4;
+  border-color: #03a9f4;
+  margin: 0 10px;
+  text-decoration: none;
+  padding: 5px 9px;
+  transition: all 0.2s ease;
+}
+
+.upgradeLink:hover {
+  color: #ffffff;
+  background-color: #028cc9;
+}
+
+.standardInputWrapper {
+  display: flex;
+  flex-direction: column;
+  margin-top: 14px;
+}
+
+.standardLabel {
+  cursor: alias;
+  margin-bottom: 7px;
+  color: #333333;
+  font-size: 14px;
+}
+
+.standardInput {
+  border: 1px solid #ced4da;
+  height: 39px;
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+  padding: 8px 10px;
+  font-size: 14px;
+}
+
+.standardInput:hover, .standardInput:focus {
+  border: 1px solid #ced4da !important;
 }

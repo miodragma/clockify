@@ -8,13 +8,14 @@ const teamsSlice = createSlice({
   initialState: {
     defaultUsersQueryParams: JSON.stringify(new Map([
       ['email', ''],
-      ['sort-column', 'name'],
-      ['sort-order', ''],
+      ['sort-column', 'NAME'],
+      ['sort-order', 'ASCENDING'],
       ['page', '1'],
       ['page-size', ''],
       ['status', ''],
       ['projectId', ''],
-      ['includeRoles', true]
+      ['includeRoles', true],
+      ['memberships', 'WORKSPACE']
     ]), replacer),
     defaultGroupsQueryParams: JSON.stringify(new Map([
       ['projectId', ''],
@@ -45,6 +46,25 @@ const teamsSlice = createSlice({
     },
     setGroups(state, action) {
       state.groups = action.payload;
+    },
+    updateGroups(state, action) {
+      /*TODO this is workaround because of missing update groups in API*/
+      const newGroups = [...state.groups].map(group => {
+        return {
+          ...group,
+          userIds: []
+        }
+      });
+      action.payload.selectedIds.forEach(selectedId => {
+        const currentGroupIndex = newGroups.findIndex(group => group.id === selectedId);
+        const newUserIds = [...newGroups[currentGroupIndex].userIds, action.payload.userId];
+        newGroups[currentGroupIndex].userIds = [...new Set(newUserIds)];
+      })
+      state.groups = newGroups;
+    },
+    updateBillableRate(state, action) {
+      const findUserIndex = state.users.findIndex(user => user.id === action.payload.userIdToUpdate);
+      state.users[findUserIndex].memberships = action.payload.usersData.memberships;
     }
   }
 });

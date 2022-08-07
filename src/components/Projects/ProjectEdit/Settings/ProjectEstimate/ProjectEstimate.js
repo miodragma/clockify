@@ -141,7 +141,7 @@ const ProjectEstimate = props => {
       <div className={`${className ? className : ''}`}>
         <div className={'primaryInfo'}>
           <span>PRO feature</span><a rel="noreferrer" href='https://app.clockify.me/upgrade?plan=pro' target='_blank'
-                                     className={classes.upgradeProLink}>Upgrade</a>
+                                     className='upgradeLink'>Upgrade</a>
         </div>
         <p className={`${settingsTitle ? settingsTitle : ''}`}> Add additional fields </p>
         <p className={`${settingsSubTitle ? settingsSubTitle : ''} ${classes.paragraphSubTitle}`}>All time entries on

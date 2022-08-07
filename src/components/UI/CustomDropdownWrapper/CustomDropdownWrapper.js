@@ -18,7 +18,8 @@ const CustomDropdownWrapper = props => {
     onResetCloseDropdown,
     isCloseEvent = false,
     onCloseEvent,
-    isIcon
+    isIcon,
+    classNameCustomDropdown
   } = props;
 
   const [isOpenCDW, setIsOpenCDW] = useState(false);
@@ -52,7 +53,8 @@ const CustomDropdownWrapper = props => {
           <i className={classes.dropdownCaret}/>
         </div>
       </div>
-      <CustomDropdown position={true} isOpenDropdown={isOpenCDW} closeDropdown={onCloseCDW}>
+      <CustomDropdown classNameCustomDropdown={classNameCustomDropdown} position={true} isOpenDropdown={isOpenCDW}
+                      closeDropdown={onCloseCDW}>
         {props.children}
       </CustomDropdown>
     </div>

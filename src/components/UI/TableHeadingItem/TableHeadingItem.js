@@ -1,13 +1,11 @@
 import { useCallback, useMemo } from 'react';
 import { useLocation } from 'react-router-dom';
 
-import CustomTableHeadingItem from '../../../UI/CustomTableHeadingItem/CustomTableHeadingItem';
-
-import { theadData } from './theadData/thead-data';
+import CustomTableHeadingItem from '../CustomTableHeadingItem/CustomTableHeadingItem';
 
 const TableHeadingItem = props => {
 
-  const { clickSortItem } = props;
+  const { clickSortItem, data } = props;
 
   const { search } = useLocation();
 
@@ -19,7 +17,7 @@ const TableHeadingItem = props => {
     clickSortItem(data)
   }, [clickSortItem])
 
-  return (<CustomTableHeadingItem data={theadData} clickSortItem={onClickSortItem} sortColumn={sortColumn}
+  return (<CustomTableHeadingItem data={data} clickSortItem={onClickSortItem} sortColumn={sortColumn}
                                   sortOrder={sortOrder}/>)
 };
 

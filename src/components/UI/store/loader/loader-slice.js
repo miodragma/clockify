@@ -15,10 +15,13 @@ const loaderSlice = createSlice({
     showToast(state, action) {
       switch (action.payload.type) {
         case 'success':
-          toast.success(action.payload.toastMessage, {...toastConfig})
+          toast.success(action.payload.toastMessage, { ...toastConfig })
           break;
         case 'error':
-          toast.error(action.payload.toastMessage, {...toastConfig})
+          toast.error(action.payload.toastMessage, { ...toastConfig })
+          break;
+        case 'info':
+          toast.info(action.payload.toastMessage, { ...toastConfig, position: toast.POSITION.TOP_RIGHT })
           break;
         default:
           return;

@@ -22,6 +22,7 @@ const CustomFilterDropdown = props => {
     isIcon,
     isUsersAndGroups = false,
     isSelectAllCheckbox = true,
+    isDropdownData = true,
     searchByName,
     changeActive,
     changeWithout,
@@ -35,7 +36,8 @@ const CustomFilterDropdown = props => {
     onCloseEvent,
     isCloseEvent,
     isBadgeCounter,
-    classCustomDropdownSubWrapper
+    classCustomDropdownSubWrapper,
+    classNameCustomDropdown
   } = props;
 
   const onSearchByName = useCallback(name => {
@@ -80,6 +82,7 @@ const CustomFilterDropdown = props => {
 
     const usersGroupsList = currentDropdownLabelVal !== 'Inactive' ? [...groups, ...users] : [...users]
     newItemsList = usersGroupsList.map(item => {
+      divider = '';
 
       if (groups.length && !group && groups[0].id === item.id) {
         divider = <p className={classes.divider}>Groups</p>
@@ -134,6 +137,7 @@ const CustomFilterDropdown = props => {
       isCloseEvent={isCloseEvent}
       onCloseEvent={onCloseEventHandler}
       isBadgeCounter={isBadgeCounter}
+      classNameCustomDropdown={classNameCustomDropdown}
     >
       <div className={classes.inputWrapper}>
         <Input
@@ -146,14 +150,14 @@ const CustomFilterDropdown = props => {
           autofocus={true}/>
       </div>
       <div className={classes.scrollableItem}>
-        <div className={classes.dropdownMenuWrapper}>
+        {isDropdownData && <div className={classes.dropdownMenuWrapper}>
           <p>Show</p>
           <DropdownMenu
             currentDropdownLabel={currentDropdownLabelVal}
             className={classes.filterDropdownButton}
             dropdownMenuData={currentDropdownData}
             onChangeSelectVal={onChangeActive}/>
-        </div>
+        </div>}
         {
           newItemsList?.length === 0 ? <p className={classes.noMemberLeft}>No members left</p> :
             <Fragment>

@@ -85,21 +85,6 @@
   max-width: 340px;
 }
 
-.upgradeProLink {
-  color: #fff;
-  background-color: #03a9f4;
-  border-color: #03a9f4;
-  margin: 0 10px;
-  text-decoration: none;
-  padding: 5px 9px;
-  transition: all 0.2s ease;
-}
-
-.upgradeProLink:hover {
-  color: #ffffff;
-  background-color: #028cc9;
-}
-
 .addMoreFieldsDropdown button {
   pointer-events: none;
 }

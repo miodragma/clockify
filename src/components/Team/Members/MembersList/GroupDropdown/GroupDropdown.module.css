@@ -1,0 +1,56 @@
+.groupsCustomDropdown {
+  width: 220px;
+}
+
+.addGroups {
+  width: 220px;
+}
+
+.addGroupsLabelSubWrapper {
+  width: max-content;
+  color: #03a9f4;
+  margin-left: 0;
+}
+
+.addGroupsLabelSubWrapper p {
+  color: #03a9f4;
+  margin-left: 10px;
+  transition: all 0.2s ease;
+}
+
+.addGroupsLabelSubWrapper p:hover {
+  text-decoration: underline;
+  color: #0a58ca;
+}
+
+.addGroupsLabelSubWrapper div i {
+  display: none;
+}
+
+.groups {
+  width: 220px;
+}
+
+.groupsLabelSubWrapper {
+  width: max-content;
+  color: #02587f;
+  height: 20px !important;
+  background: #E1F5FE;
+  transition: all 0.3s ease;
+}
+
+.groupsLabelSubWrapper:hover {
+  background: #abe5f5;
+}
+
+.groupsLabelSubWrapper p {
+  color: #02587f;
+  font-size: 12px;
+  padding: 1px 6px 1px 10px;
+}
+
+.groupsLabelSubWrapper div i {
+  left: 0;
+  border: solid 4px transparent;
+  border-top: solid 4px #02587f;
+}

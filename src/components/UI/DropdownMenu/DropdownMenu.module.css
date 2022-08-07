@@ -1,3 +1,7 @@
+.dropdownButton div {
+  padding: 0;
+}
+
 .dropdownButton button {
   background-color: #ffffff !important;
   color: #666666 !important;
@@ -6,6 +10,7 @@
 }
 
 .optionsWrapper {
+  padding: 8px 0 !important;
   box-shadow: 0 5px 10px #0000001a;
 }
 
