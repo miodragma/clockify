@@ -8,35 +8,14 @@
   flex-direction: column;
 }
 
-.inputWrapper div label {
-  margin-bottom: 7px;
-  color: #333333;
-  font-size: 14px;
-}
-
-.inputWrapper div input {
-  border-top: 1px solid #ced4da;
-  border-bottom: 1px solid #ced4da;
-  border-left: 1px solid #ced4da;
-  border-right: unset;
-  height: 39px;
-  border-top-right-radius: 0;
-  border-bottom-right-radius: 0;
-  padding: 8px 10px;
-  font-size: 14px;
-}
-
-.inputWrapper div input:hover, .inputWrapper div input:focus {
-  border-top: 1px solid #ced4da !important;
-  border-bottom: 1px solid #ced4da !important;
-  border-left: 1px solid #ced4da !important;
+.readOnlyInput {
   border-right: unset !important;
 }
 
 .inputWrapper button {
-  height: 39px;
+  /*height: 39px;*/
   background-color: #ffffff;
-  font-size: 14px;
+  /*font-size: 14px;*/
   color: #03a9f4;
   padding: 0 11px;
   border: 1px solid #ced4da;

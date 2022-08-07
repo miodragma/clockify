@@ -1,10 +1,5 @@
 import { useCallback, useState } from 'react';
-
-import CustomDropdown from '../CustomDropdown/CustomDropdown';
-
-import ellipsisIcon from '../../../assets/ellipsis-icon.svg';
-
-import classes from './ProjectEditActionsDropdown.module.css';
+import EditButton from '../EditButton/EditButton';
 
 const ProjectEditActionsDropdown = props => {
 
@@ -20,9 +15,9 @@ const ProjectEditActionsDropdown = props => {
 
   const [isOpenActions, setIsOpenActions] = useState(false);
 
-  const onOpenItemActions = () => {
+  const onOpenItemActions = useCallback(() => {
     setIsOpenActions(true)
-  }
+  }, []);
 
   const onCloseActions = useCallback(() => {
     setIsOpenActions(false)
@@ -50,12 +45,12 @@ const ProjectEditActionsDropdown = props => {
   }
 
   return (
-    <button className={`${className ? className : ''} editItemIconWrapper `}>
-      <img onClick={onOpenItemActions} className={classes.editIcon} src={ellipsisIcon} alt="edit-icon"/>
-      <CustomDropdown isOpenDropdown={isOpenActions} closeDropdown={onCloseActions}>
-        {actions}
-      </CustomDropdown>
-    </button>
+    <EditButton
+      className={className}
+      isOpenActions={isOpenActions}
+      onCloseActions={onCloseActions}
+      actions={actions}
+      onOpenItemActions={onOpenItemActions}/>
   )
 
 }

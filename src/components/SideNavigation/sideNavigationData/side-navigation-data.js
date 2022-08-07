@@ -27,7 +27,7 @@ export const sideNavigationData = [
     type: 'link',
     label: 'Team',
     icon: teamIcon,
-    path: `/${routeConstants.TEAMS}`
+    path: `/${routeConstants.TEAMS}#members`
   },
   {
     type: 'link',

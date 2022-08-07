@@ -6,7 +6,7 @@ import classes from './CustomDropdown.module.css';
 
 const CustomDropdown = props => {
 
-  const {isOpenDropdown, className, closeDropdown, position} = props;
+  const { isOpenDropdown, classNameCustomDropdown, closeDropdown, position } = props;
 
   const actionsRef = useRef(null);
 
@@ -20,7 +20,7 @@ const CustomDropdown = props => {
     <Fragment>
       {isOpenDropdown && <div
         ref={actionsRef}
-        className={`${className || classes.defaultActionsList} ${position ? classes.left : classes.right}`}>
+        className={`${classes.defaultActionsList} ${classNameCustomDropdown ? classNameCustomDropdown : ''} ${position ? classes.left : classes.right}`}>
         {props.children}
       </div>}
     </Fragment>

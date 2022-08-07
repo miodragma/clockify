@@ -11,8 +11,9 @@ const ReadonlyInputWithSetButton = props => {
   return (
     <div className={`${classes.inputWrapper} ${className ? className : '`'}`}>
       <div>
-        {label && <label>{label}</label>}
+        {label && <label className='standardLabel'>{label}</label>}
         <input
+          className={`${classes.readOnlyInput} standardInput`}
           readOnly={true}
           value={amount === 0 ? '—' : amount / 100}/>
       </div>

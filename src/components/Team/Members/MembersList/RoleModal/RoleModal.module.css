@@ -1,0 +1,36 @@
+.roleModalCheckboxWrapper {
+  margin: 10px 20px;
+  padding-bottom: 14px;
+  opacity: 0.8;
+}
+
+.roleModalCheckboxWrapperProjectManager {
+  margin-top: 0;
+}
+
+.roleModalCheckboxWrapperPadding {
+  border-bottom: 1px solid #dee2e6;
+}
+
+.infoWrapper {
+  margin: 14px 20px 0 20px;
+}
+
+.checkboxButtonWrapper {
+  padding: 0;
+}
+
+.checkboxButtonWrapper label:hover {
+  cursor: alias;
+}
+
+.checkboxButtonWrapper:hover {
+  background: unset;
+  cursor: alias;
+}
+
+.checkboxInfo {
+  font-size: 14px;
+  color: #999999;
+  margin: 0 0 0 21px;
+}

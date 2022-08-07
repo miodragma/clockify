@@ -5,7 +5,7 @@ import Input from '../Input/Input';
 
 import classes from './ShortActions.module.css';
 
-/* Clients, Tags, ProjectsEdit, above table actions */
+/* Clients, Tags, ProjectsEdit, TeamMembers above table actions */
 
 const ShortActions = props => {
 
@@ -18,7 +18,13 @@ const ShortActions = props => {
     onAddNew,
     inputValIsEmpty,
     onClickAdd,
-    isNewVal
+    isNewVal,
+    isAddInput = true,
+    searchInputPlaceholder = 'Search by name',
+    buttonLabel = 'Add',
+    inputFieldClassName,
+    currentDropdownLabel,
+    currentValue
   } = props;
 
   return (
@@ -26,29 +32,31 @@ const ShortActions = props => {
 
       <div className={classes.partSection}>
         <DropdownMenu
+          currentDropdownLabel={currentDropdownLabel}
           dropdownMenuData={dropdownData}
           onChangeSelectVal={onShowBy}/>
         <Input
-          className={classes.inputFiled}
+          currentValue={currentValue}
+          className={`${classes.inputFiled} ${inputFieldClassName ? inputFieldClassName : ''}`}
           isDebounce={true}
           type='text'
-          placeholder='Search by name'
+          placeholder={searchInputPlaceholder}
           onChangeInputVal={onSearchByName}/>
       </div>
 
       <div className={classes.partSection}>
-        <Input
+        {isAddInput && <Input
           className={classes.inputFiled}
           isDebounce={false}
           isNewAdded={isNewAdded}
           type='text'
           placeholder={addNewLabel}
           onChangeInputVal={onAddNew}
-          inputValIsEmpty={inputValIsEmpty}/>
+          inputValIsEmpty={inputValIsEmpty}/>}
         <Button
           onClick={onClickAdd}
           className={`${classes.addButton} primary`}
-          disabled={!isNewVal}>Add
+          disabled={!isNewVal}>{buttonLabel}
         </Button>
       </div>
 

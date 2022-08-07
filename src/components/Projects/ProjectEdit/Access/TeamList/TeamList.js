@@ -16,6 +16,7 @@ import { updateProject } from '../../../store/projects-actions';
 
 import classes from './TeamList.module.css';
 import DeleteItemModal from '../../../../UI/DeleteItemModal/DeleteItemModal';
+import { billableRateValue } from '../../../../Utils/billableRateValue';
 
 const TeamList = props => {
 
@@ -67,17 +68,7 @@ const TeamList = props => {
   }, [amountInModal]);
 
   const onSubmitBillableRateHandler = useCallback(() => {
-    let val = '';
-    if (rateVal.includes('.')) {
-      const rateValDecimal = rateVal.substring(rateVal?.indexOf('.') + 1);
-      if (rateValDecimal.length === 1) {
-        val = `${rateVal.replaceAll('.', '')}0`
-      } else {
-        val = rateVal.replaceAll('.', '')
-      }
-    } else {
-      val = `${rateVal}00`;
-    }
+    let val = billableRateValue(rateVal)
     dispatch(updateProject({
       actionType: 'billableRate',
       dataToUpdate: { amount: +val },

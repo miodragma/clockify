@@ -1,7 +1,7 @@
 .nameItemWrapper {
-  padding-left: 0;
-  cursor: unset;
-  background: unset;
+  padding-left: 0 !important;
+  cursor: unset !important;
+  background: unset !important;
 }
 
 .icon {

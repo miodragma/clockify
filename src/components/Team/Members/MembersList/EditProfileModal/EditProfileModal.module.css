@@ -1,0 +1,72 @@
+.editProfileSection:not(:last-child) {
+  border-bottom: 1px solid #E4EAEE;
+}
+
+.editProfileSection:not(:first-child) {
+  margin-top: 14px;
+}
+
+.editProfileSectionTitle {
+  margin: 0;
+  font-weight: 500;
+  font-size: 18px;
+}
+
+.editProfileSectionSubtitle {
+  font-size: 14px;
+  color: #999999;
+  margin: 0;
+}
+
+.avatarWrapper {
+  padding: 20px 0;
+  display: flex;
+  align-items: center;
+}
+
+.avatar {
+  margin-right: 35px;
+  display: flex;
+  justify-content: center;
+  text-transform: uppercase;
+  align-items: center;
+  color: #fff;
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  background: #009688;
+}
+
+.avatar span {
+  font-size: 260%;
+  text-transform: uppercase;
+}
+
+.uploadImageButton {
+  text-transform: uppercase;
+}
+
+.editProfileEmailSection {
+  display: flex;
+}
+
+.editProfileEmailSection button {
+  background-color: #f2f6f8;
+  color: #03a9f4;
+  padding: 0 11px;
+  border: 1px solid #ced4da;
+  transition: 0.2s ease;
+  height: 39px;
+  font-size: 14px;
+}
+
+.editProfileEmailSection input, .editProfileEmailSection input:hover, .editProfileEmailSection input:focus {
+  width: 100%;
+  background: #f2f6f8;
+  border-right: unset !important;
+}
+
+.blockWrapper {
+  pointer-events: none;
+  opacity: 0.5;
+}

@@ -1,5 +1,8 @@
-import MainCard from '../../components/UI/MainCard/MainCard';
 import { Col, Row } from 'react-bootstrap';
+
+import MainCard from '../../components/UI/MainCard/MainCard';
+
+import Team from '../../components/Team/Team';
 
 const TeamPage = () => {
   return (
@@ -9,6 +12,7 @@ const TeamPage = () => {
           <h1 className='pageTitle'>Team</h1>
         </Col>
       </Row>
+      <Team/>
     </MainCard>
   )
 }

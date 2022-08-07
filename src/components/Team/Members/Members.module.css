@@ -1,0 +1,17 @@
+.inputField {
+  min-width: 350px;
+}
+
+.addNewMemberInput {
+  max-width: 100%;
+}
+
+.checkboxButtonWrapper {
+  padding-left: 0;
+  margin-top: 14px;
+}
+
+.checkboxButtonWrapper:hover {
+  background: unset;
+  cursor: alias;
+}
