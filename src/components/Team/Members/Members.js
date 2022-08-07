@@ -4,6 +4,9 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import ShortActions from '../../UI/ShortActions/ShortActions';
 import MembersList from './MembersList/MembersList';
+import ModalWrapper from '../../UI/ModalWrapper/ModalWrapper';
+import Input from '../../UI/Input/Input';
+import CustomCheckButton from '../../UI/CustomCheckButton/CustomCheckButton';
 
 import { dropdownData } from './dropdownData/dropdown-data';
 
@@ -12,9 +15,6 @@ import { addNewMember, fetchAllGroups, fetchAllUsers } from '../store/teams-acti
 import { mapQueryParams } from '../../Utils/mapQueryParams';
 
 import classes from './Members.module.css';
-import ModalWrapper from '../../UI/ModalWrapper/ModalWrapper';
-import Input from '../../UI/Input/Input';
-import CustomCheckButton from '../../UI/CustomCheckButton/CustomCheckButton';
 
 const Members = () => {
 

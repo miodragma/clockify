@@ -1,9 +1,9 @@
 import { useCallback } from 'react';
+import { Button } from 'react-bootstrap';
 
 import ModalWrapper from '../../../../UI/ModalWrapper/ModalWrapper';
 
 import classes from './EditProfileModal.module.css';
-import { Button } from 'react-bootstrap';
 
 const EditProfileModal = props => {
 
